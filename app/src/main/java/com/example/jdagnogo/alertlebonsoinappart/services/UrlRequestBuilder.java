@@ -1,5 +1,6 @@
 package com.example.jdagnogo.alertlebonsoinappart.services;
 
+import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
 
 public class UrlRequestBuilder {
@@ -12,6 +13,10 @@ public class UrlRequestBuilder {
 
     private static String generateRequestOptions(RequestItems requestItems) {
         StringBuilder stringBuilder = new StringBuilder();
+        // cities
+        for (City city :requestItems.getCities()){
+            stringBuilder.append(city.getCityName())
+        }
         return stringBuilder.toString();
     }
 }

@@ -1,8 +1,8 @@
 package com.example.jdagnogo.alertlebonsoinappart.models;
 
+import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
-import com.example.jdagnogo.alertlebonsoinappart.enums.Ville;
 
 import org.parceler.Parcel;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Parcel
 public class RequestItems {
-    List<Ville> ville;
+    List<City> cities;
     int loyerMin;
     int loyerMax;
     int surfaceMin;
@@ -29,7 +29,7 @@ public class RequestItems {
     @Override
     public String toString() {
         return "RequestItems{" +
-                "ville=" + ville +
+                "cities=" + cities +
                 ", loyerMin=" + loyerMin +
                 ", loyerMax=" + loyerMax +
                 ", surfaceMin=" + surfaceMin +
@@ -43,12 +43,12 @@ public class RequestItems {
                 '}';
     }
 
-    public List<Ville> getVille() {
-        return ville;
+    public List<City> getCities() {
+        return cities;
     }
 
-    public void setVille(List<Ville> ville) {
-        this.ville = ville;
+    public void setCities(List<City> cities) {
+        this.cities = cities;
     }
 
     public int getLoyerMin() {
