@@ -6,39 +6,57 @@ import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
 
 import org.parceler.Parcel;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_RENT_MAX;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_RENT_MIN;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_ROOM_MAX;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_ROOM_MIN;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_SURFACE_MAX;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_SURFACE_MIN;
 
 @Parcel
 public class RequestItems {
     List<City> cities;
-    int loyerMin;
-    int loyerMax;
+    int rentMin;
+    int rentMax;
     int surfaceMin;
     int surfaceMax;
-    int nbPieceMin;
-    int nbPieceMax;
+    int roomMin;
+    int roomMax;
     Type type;
     Meuble meuble;
-    String motCle;
+    String keyWord;
     boolean urgente;
 
 
     public RequestItems() {
+        this.cities = new ArrayList<>();
+        this.meuble = Meuble.MEUBLE_DEFAULT;
+        this.type = Type.APPARTEMENT_DEFAULT;
+        this.rentMin = DEFAULT_RENT_MIN;
+        this.rentMax = DEFAULT_RENT_MAX;
+        this.surfaceMin = DEFAULT_SURFACE_MIN;
+        this.surfaceMax = DEFAULT_SURFACE_MAX;
+        this.roomMin = DEFAULT_ROOM_MIN;
+        this.roomMax =DEFAULT_ROOM_MAX;
+        this.keyWord = "";
     }
 
     @Override
     public String toString() {
         return "RequestItems{" +
                 "cities=" + cities +
-                ", loyerMin=" + loyerMin +
-                ", loyerMax=" + loyerMax +
+                ", rentMin=" + rentMin +
+                ", rentMax=" + rentMax +
                 ", surfaceMin=" + surfaceMin +
                 ", surfaceMax=" + surfaceMax +
-                ", nbPieceMin=" + nbPieceMin +
-                ", nbPieceMax=" + nbPieceMax +
+                ", roomMin=" + roomMin +
+                ", roomMax=" + roomMax +
                 ", type=" + type +
                 ", meuble=" + meuble +
-                ", motCle='" + motCle + '\'' +
+                ", keyWord='" + keyWord + '\'' +
                 ", urgente=" + urgente +
                 '}';
     }
@@ -51,20 +69,20 @@ public class RequestItems {
         this.cities = cities;
     }
 
-    public int getLoyerMin() {
-        return loyerMin;
+    public int getRentMin() {
+        return rentMin;
     }
 
-    public void setLoyerMin(int loyerMin) {
-        this.loyerMin = loyerMin;
+    public void setRentMin(int rentMin) {
+        this.rentMin = rentMin;
     }
 
-    public int getLoyerMax() {
-        return loyerMax;
+    public int getRentMax() {
+        return rentMax;
     }
 
-    public void setLoyerMax(int loyerMax) {
-        this.loyerMax = loyerMax;
+    public void setRentMax(int rentMax) {
+        this.rentMax = rentMax;
     }
 
     public int getSurfaceMin() {
@@ -83,20 +101,20 @@ public class RequestItems {
         this.surfaceMax = surfaceMax;
     }
 
-    public int getNbPieceMin() {
-        return nbPieceMin;
+    public int getRoomMin() {
+        return roomMin;
     }
 
-    public void setNbPieceMin(int nbPieceMin) {
-        this.nbPieceMin = nbPieceMin;
+    public void setRoomMin(int roomMin) {
+        this.roomMin = roomMin;
     }
 
-    public int getNbPieceMax() {
-        return nbPieceMax;
+    public int getRoomMax() {
+        return roomMax;
     }
 
-    public void setNbPieceMax(int nbPieceMax) {
-        this.nbPieceMax = nbPieceMax;
+    public void setRoomMax(int roomMax) {
+        this.roomMax = roomMax;
     }
 
     public Type getType() {
@@ -115,12 +133,12 @@ public class RequestItems {
         this.meuble = meuble;
     }
 
-    public String getMotCle() {
-        return motCle;
+    public String getKeyWord() {
+        return keyWord;
     }
 
-    public void setMotCle(String motCle) {
-        this.motCle = motCle;
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
     }
 
     public boolean isUrgente() {
