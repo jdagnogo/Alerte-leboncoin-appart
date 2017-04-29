@@ -17,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MainActivity">
+
+        </activity>
+
+        <activity android:name=".activities.NewSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
