@@ -6,5 +6,8 @@
     <string name="surface">Surface</string>
     <string name="nb_room">Nombre de pièces</string>
     <string name="validate">Valider</string>
+    <string name="no_answer">\???</string>
+    <string name="between">Entre</string>
     <string name="type">Type</string>
+    <string name="meuble">Appartement</string>
 </resources>

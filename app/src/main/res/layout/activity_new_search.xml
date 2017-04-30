@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:lineSpacingExtra="8dp"
+                
                 android:maxLines="1"
                 android:paddingLeft="@dimen/app_dimen_padding"
                 android:paddingTop="@dimen/app_dimen_padding"
@@ -124,21 +125,21 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="\??" />
+                        android:text="@string/no_answer" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Entre" />
+                        android:text="@string/between" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="\??" />
+                        android:text="@string/no_answer" />
 
 
                 </LinearLayout>
@@ -173,21 +174,21 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="\???"/>
+                        android:text="@string/no_answer"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Entre" />
+                        android:text="@string/between" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="\???" />
+                        android:text="@string/no_answer" />
 
 
                 </LinearLayout>
@@ -222,7 +223,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="0" />
+                        android:text="@string/no_answer" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -236,7 +237,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="500" />
+                        android:text="@string/no_answer" />
 
 
                 </LinearLayout>
@@ -308,6 +309,80 @@
 
                         <com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox
                             android:id="@+id/house"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_margin="5dp"
+                            android:paddingTop="10dp"
+                            app:color_checked="@color/colorPrimary" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingExtra="8dp"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/app_dimen_padding"
+                android:paddingTop="@dimen/app_dimen_padding"
+                android:text="@string/meuble"
+                android:textSize="18sp" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="30dp"
+                            android:gravity="center_vertical"
+                            android:text="Meublé" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30dp"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Non meublé" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox
+                            android:id="@+id/meuble"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_margin="5dp"
+                            android:paddingTop="10dp"
+                            app:color_checked="@color/colorPrimary" />
+
+
+                        <com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox
+                            android:id="@+id/non_meuble"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_margin="5dp"
