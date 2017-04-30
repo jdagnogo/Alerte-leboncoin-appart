@@ -56,12 +56,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:lineSpacingExtra="8dp"
                 android:maxLines="1"
                 android:paddingLeft="@dimen/app_dimen_padding"
                 android:paddingTop="@dimen/app_dimen_padding"
                 android:text="@string/cities"
                 android:textSize="18sp" />
+
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cv_cities"
@@ -97,11 +99,61 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:lineSpacingExtra="8dp"
                 android:maxLines="1"
                 android:paddingLeft="@dimen/app_dimen_padding"
                 android:paddingTop="@dimen/app_dimen_padding"
                 android:text="@string/rent"
+                android:textSize="18sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_rent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="\??" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Entre" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="\??" />
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingExtra="8dp"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/app_dimen_padding"
+                android:paddingTop="@dimen/app_dimen_padding"
+                android:text="@string/surface"
                 android:textSize="18sp" />
 
             <android.support.v7.widget.CardView
@@ -113,30 +165,15 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="60dp"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <com.webianks.library.scroll_choice.ScrollChoice
-                            android:id="@+id/scroll_choice"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:scroll_atmospheric="true"
-                            app:scroll_indicator="true"
-                            app:scroll_background_color="@android:color/transparent"
-                            app:scroll_item_text_size="10dp"
-                            app:theme="@style/AppTheme"
-                            app:scroll_indicator_color="#000000"
-                            app:scroll_item_align="center"
-                            app:scroll_item_text_color="#000000"
-                            app:scroll_selected_item_background="#000000"
-                            app:scroll_selected_item_text_color="@color/colorAccent" />
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="\???"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -145,31 +182,153 @@
                         android:gravity="center"
                         android:text="Entre" />
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <com.webianks.library.scroll_choice.ScrollChoice
-                            android:id="@+id/scroll_choice2"
-                            android:layout_width="match_parent"
-                            app:scroll_background_color="@android:color/transparent"
-                            android:layout_height="match_parent"
-                            app:scroll_atmospheric="true"
-                            app:scroll_indicator="true"
-                            app:scroll_item_text_size="10dp"
-                            app:theme="@style/AppTheme"
-                            app:scroll_indicator_color="#000000"
-                            app:scroll_item_align="center"
-                            app:scroll_item_text_color="#000000"
-                            app:scroll_selected_item_background="@color/colorPrimary"
-                            app:scroll_selected_item_text_color="@android:color/white" />
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="\???" />
 
 
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingExtra="8dp"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/app_dimen_padding"
+                android:paddingTop="@dimen/app_dimen_padding"
+                android:text="@string/nb_room"
+                android:textSize="18sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/nb_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="0" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Entre" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="500" />
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingExtra="8dp"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/app_dimen_padding"
+                android:paddingTop="@dimen/app_dimen_padding"
+                android:text="@string/type"
+                android:textSize="18sp" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="30dp"
+                            android:gravity="center_vertical"
+                            android:text="Appartement" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30dp"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Maison" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox
+                            android:id="@+id/appart"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_margin="5dp"
+                            android:paddingTop="10dp"
+                            app:color_checked="@color/colorPrimary" />
+
+
+                        <com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox
+                            android:id="@+id/house"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_margin="5dp"
+                            android:paddingTop="10dp"
+                            app:color_checked="@color/colorPrimary" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/colorPrimary"
+                android:elevation="12dp"
+                android:gravity="center"
+                android:text="@string/validate"
+                android:textColor="@android:color/white" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

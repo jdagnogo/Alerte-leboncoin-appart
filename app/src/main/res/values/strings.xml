@@ -3,4 +3,8 @@
     <string name="new_search">Nouvelle recherche</string>
     <string name="cities">Villes</string>
     <string name="rent">Loyer</string>
+    <string name="surface">Surface</string>
+    <string name="nb_room">Nombre de pièces</string>
+    <string name="validate">Valider</string>
+    <string name="type">Type</string>
 </resources>
