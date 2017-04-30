@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">AlertLebonsoinAppart</string>
     <string name="new_search">Nouvelle recherche</string>
+    <string name="cities">Villes</string>
+    <string name="rent">Loyer</string>
 </resources>

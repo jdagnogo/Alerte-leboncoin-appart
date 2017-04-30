@@ -1,5 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,36 +10,36 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:fitsSystemWindows="true"
         android:minHeight="0dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:fitsSystemWindows="true">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            app:contentScrim="?attr/colorPrimary"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:fitsSystemWindows="true"
-            app:expandedTitleMarginStart="18dp"
+            app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="14dp"
+            app:expandedTitleMarginStart="18dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:title="@string/new_search">
 
             <ImageView
-                android:src="@drawable/victoire"
-                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="100dp"
                 android:scaleType="centerCrop"
+                android:src="@drawable/victoire"
                 app:layout_collapseMode="parallax"
-                android:minHeight="100dp"/>
+                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -49,13 +48,129 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="28sp"
-            android:lineSpacingExtra="8dp"
-            android:text="toto"
-            android:padding="12dp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="8dp"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/app_dimen_padding"
+                android:paddingTop="@dimen/app_dimen_padding"
+                android:text="@string/cities"
+                android:textSize="18sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_cities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="Aucune ville sélectionnée" />
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="5dp"
+                        android:background="@color/colorPrimary"
+                        android:src="@drawable/add"
+                        app:rippleColor="@color/colorPrimary" />
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="8dp"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/app_dimen_padding"
+                android:paddingTop="@dimen/app_dimen_padding"
+                android:text="@string/rent"
+                android:textSize="18sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <com.webianks.library.scroll_choice.ScrollChoice
+                            android:id="@+id/scroll_choice"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:scroll_atmospheric="true"
+                            app:scroll_indicator="true"
+                            app:scroll_background_color="@android:color/transparent"
+                            app:scroll_item_text_size="10dp"
+                            app:theme="@style/AppTheme"
+                            app:scroll_indicator_color="#000000"
+                            app:scroll_item_align="center"
+                            app:scroll_item_text_color="#000000"
+                            app:scroll_selected_item_background="#000000"
+                            app:scroll_selected_item_text_color="@color/colorAccent" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Entre" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <com.webianks.library.scroll_choice.ScrollChoice
+                            android:id="@+id/scroll_choice2"
+                            android:layout_width="match_parent"
+                            app:scroll_background_color="@android:color/transparent"
+                            android:layout_height="match_parent"
+                            app:scroll_atmospheric="true"
+                            app:scroll_indicator="true"
+                            app:scroll_item_text_size="10dp"
+                            app:theme="@style/AppTheme"
+                            app:scroll_indicator_color="#000000"
+                            app:scroll_item_align="center"
+                            app:scroll_item_text_color="#000000"
+                            app:scroll_selected_item_background="@color/colorPrimary"
+                            app:scroll_selected_item_text_color="@android:color/white" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
