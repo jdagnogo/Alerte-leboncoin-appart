@@ -6,9 +6,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.jdagnogo.alertlebonsoinappart.R;
-import com.example.jdagnogo.alertlebonsoinappart.models.DialogMinMaxBeans;
+import com.example.jdagnogo.alertlebonsoinappart.utils.Constants;
 import com.example.jdagnogo.alertlebonsoinappart.utils.MinMaxAlertDialog;
-import com.roughike.swipeselector.SwipeItem;
 
 import butterknife.ButterKnife;
 
@@ -24,24 +23,13 @@ public class NewSearchActivity extends AppCompatActivity {
         rentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(fake(),NewSearchActivity.this);
+                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(Constants.rentDialogMinBean(),NewSearchActivity.this);
                 minMaxAlertDialog.createDialogMinRent();
             }
         });
 
     }
 
-    private DialogMinMaxBeans fake() {
-        DialogMinMaxBeans fake = new DialogMinMaxBeans();
-        fake.setTitle("Loyer");
-        SwipeItem[] swipeItem = new SwipeItem[]{new SwipeItem(0, "Slide one", "Description for slide one."),
-                new SwipeItem(1, "Slide two", "Description for slide two."),
-                new SwipeItem(2, "Slide three", "Description for slide three.")
-        };
-        fake.setSwipeMin(swipeItem);
-        fake.setSwipeMax(swipeItem);
-        return fake;
-    }
 
 
 
