@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:lineSpacingExtra="8dp"
-                
+
                 android:maxLines="1"
                 android:paddingLeft="@dimen/app_dimen_padding"
                 android:paddingTop="@dimen/app_dimen_padding"
@@ -118,14 +118,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
+                    android:id="@+id/rent"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:id="@+id/rent_min"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@android:color/transparent"
                         android:gravity="center"
-                        android:text="@string/no_answer" />
+                        android:text="@string/min" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -136,10 +140,11 @@
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:background="@android:color/transparent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/no_answer" />
+                        android:text="@string/max" />
 
 
                 </LinearLayout>
@@ -169,12 +174,13 @@
                     android:layout_height="60dp"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@android:color/transparent"
                         android:gravity="center"
-                        android:text="@string/no_answer"/>
+                        android:text="@string/no_answer" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -183,10 +189,11 @@
                         android:gravity="center"
                         android:text="@string/between" />
 
-                    <TextView
+                    <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="@string/no_answer" />
 
@@ -218,10 +225,11 @@
                     android:layout_height="60dp"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="@string/no_answer" />
 
@@ -231,11 +239,11 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Entre" />
-
-                    <TextView
+                    <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="@string/no_answer" />
 

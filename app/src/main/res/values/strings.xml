@@ -10,4 +10,6 @@
     <string name="between">Entre</string>
     <string name="type">Type</string>
     <string name="meuble">Appartement</string>
+    <string name="min">Min</string>
+    <string name="max">max</string>
 </resources>
