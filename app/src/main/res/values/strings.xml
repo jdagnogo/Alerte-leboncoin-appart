@@ -12,7 +12,13 @@
     <string name="meuble">Appartement</string>
     <string name="min">Min</string>
     <string name="max">max</string>
-    <string name="rent_title">Loyer</string>
+
     <string name="rent_title_min">Loyer minimum</string>
     <string name="rent_title_max">Loyer maximal</string>
+
+    <string name="surface_title_min">Surface minimum</string>
+    <string name="surface_title_max">Surface maximal</string>
+
+    <string name="nb_room_title_min">Nombre de pièces minimum</string>
+    <string name="nb_room_title_max">Nombre de pièces maximal</string>
 </resources>

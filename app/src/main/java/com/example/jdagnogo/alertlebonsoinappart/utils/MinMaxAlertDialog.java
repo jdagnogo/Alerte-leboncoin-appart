@@ -80,9 +80,9 @@ public class MinMaxAlertDialog {
                 int min = (Integer) selectorMin.getSelectedItem().value;
                 int max = (Integer) selectorMax.getSelectedItem().value;
                 if (min > max ) {
-                   // selectorMin.setOnItemSelectedListener(null);
-                    selectorMin.selectItemAt(8);
-                    //selectorMin.setOnItemSelectedListener(minSwipe);
+                    selectorMin.setOnItemSelectedListener(null);
+                    selectorMin.selectItemAt(max);
+                    selectorMin.setOnItemSelectedListener(minSwipe);
                 }
             }
         };
@@ -95,9 +95,9 @@ public class MinMaxAlertDialog {
                 int min = (Integer) selectorMin.getSelectedItem().value;
                 int max = (Integer) selectorMax.getSelectedItem().value;
                 if (min > max ) {
-                   // selectorMax.setOnItemSelectedListener(null);
+                    selectorMax.setOnItemSelectedListener(null);
                     selectorMax.selectItemAt(min );
-                    //selectorMax.setOnItemSelectedListener(maxSwipe);
+                    selectorMax.setOnItemSelectedListener(maxSwipe);
                 }
             }
         };
