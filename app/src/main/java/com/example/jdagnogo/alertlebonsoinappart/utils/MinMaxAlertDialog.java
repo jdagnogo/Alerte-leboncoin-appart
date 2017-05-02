@@ -2,14 +2,16 @@ package com.example.jdagnogo.alertlebonsoinappart.utils;
 
 import android.app.Activity;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.jdagnogo.alertlebonsoinappart.R;
+import com.example.jdagnogo.alertlebonsoinappart.enums.SwipeItemEnum;
 import com.example.jdagnogo.alertlebonsoinappart.models.DialogMinMaxBeans;
+import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
+import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateSwipeViewBus;
 import com.roughike.swipeselector.OnSwipeItemSelectedListener;
 import com.roughike.swipeselector.SwipeItem;
 import com.roughike.swipeselector.SwipeSelector;
@@ -66,7 +68,11 @@ public class MinMaxAlertDialog {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("toto", "id : " + (int) selectorMin.getSelectedItem().value);
+                int min = (int) selectorMin.getSelectedItem().value;
+                int max = (Integer) selectorMax.getSelectedItem().value;
+                UpdateSwipeViewBus updateSwipeViewBus =
+                        new UpdateSwipeViewBus(SwipeItemEnum.RENT,min,max);
+                GlobalBus.getBus().post(updateSwipeViewBus);
                 alertDialog.dismiss();
             }
         });

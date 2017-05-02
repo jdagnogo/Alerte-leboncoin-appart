@@ -143,6 +143,7 @@
                         android:background="@android:color/transparent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:id="@+id/rent_max"
                         android:gravity="center"
                         android:text="@string/max" />
 
@@ -181,6 +182,7 @@
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:gravity="center"
+                        android:id="@+id/surface_min"
                         android:text="@string/min" />
 
                     <TextView
@@ -196,6 +198,7 @@
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:gravity="center"
+                        android:id="@+id/surface_max"
                         android:text="@string/max" />
 
 
@@ -233,6 +236,7 @@
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:gravity="center"
+                        android:id="@+id/nb_room_min"
                         android:text="@string/min" />
 
                     <TextView
@@ -245,6 +249,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:id="@+id/nb_room_max"
                         android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="@string/max" />
