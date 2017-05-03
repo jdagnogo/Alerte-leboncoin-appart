@@ -4,15 +4,17 @@ import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
 
+import org.parceler.Parcel;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Jeff on 02/05/2017.
  */
-
+@Parcel
 public class NewSearchView {
     List<City> cities;
-    List<SwipeItemView> swipeItemViews;
     Type type;
     Meuble meuble;
     Rent rent;
@@ -21,6 +23,9 @@ public class NewSearchView {
 
     public NewSearchView() {
         this.rent = new Rent();
+        this.cities = new ArrayList<>();
+        this.nbRoom = new NbRoom();
+        this.surface = new Surface();
     }
 
     public List<City> getCities() {
@@ -31,13 +36,6 @@ public class NewSearchView {
         this.cities = cities;
     }
 
-    public List<SwipeItemView> getSwipeItemViews() {
-        return swipeItemViews;
-    }
-
-    public void setSwipeItemViews(List<SwipeItemView> swipeItemViews) {
-        this.swipeItemViews = swipeItemViews;
-    }
 
     public Type getType() {
         return type;

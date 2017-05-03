@@ -5,8 +5,8 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_
 
 public enum City {
 
-    BORDEAUX_CENTRE("Bordeaux centre","Bordeaux",  33000),
-    TALENCE("Talence", "Talence", 33400),
+    BORDEAUX_CENTRE("Bordeaux centre","Bordeaux",  "33000"),
+    TALENCE("Talence", "Talence", "33400"),
     //BEGLE("Bègles",  33130),
     //MERIGNAC("Mérignac",  33700),
     //PESSAC("Pessac",  33600),
@@ -18,7 +18,7 @@ public enum City {
         return cityName;
     }
 
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
 
@@ -26,11 +26,11 @@ public enum City {
         return code;
     }
     String cityName;
-    int codePostal;
+    String codePostal;
     String code;
 
 
-    City(String cityName, String code, int codePostal){
+    City(String cityName, String code, String codePostal){
         this.cityName =cityName;
         this.codePostal =codePostal;
         this.code = code;

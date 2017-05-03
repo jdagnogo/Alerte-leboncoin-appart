@@ -7,6 +7,7 @@ package com.example.jdagnogo.alertlebonsoinappart.enums;
 public enum  SwipeItemEnum {
 
     RENT((int)0),
+    SURFACE((int)2),
     NB_ROOM((int)1)
     ;
 

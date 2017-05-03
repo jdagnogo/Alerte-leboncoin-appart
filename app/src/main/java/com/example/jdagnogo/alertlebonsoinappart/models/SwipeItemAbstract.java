@@ -5,22 +5,29 @@ package com.example.jdagnogo.alertlebonsoinappart.models;
  */
 
 public abstract class SwipeItemAbstract {
-    protected int min;
-    protected int max;
+    protected String min;
+    protected String max;
 
-    public int getMin() {
+    public String getMin() {
         return min;
     }
 
-    public void setMin(int min) {
+    public void setMin(String min) {
         this.min = min;
     }
 
-    public int getMax() {
+    public String getMax() {
         return max;
     }
 
-    public void setMax(int max) {
+    public void setMax(String max) {
         this.max = max;
+    }
+    public SwipeItemAbstract(String min, String max){
+        this.min = min;
+        this.max = max;
+    }
+    public SwipeItemAbstract(){
+
     }
 }

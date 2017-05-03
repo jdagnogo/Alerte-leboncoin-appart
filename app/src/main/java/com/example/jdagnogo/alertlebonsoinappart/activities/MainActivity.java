@@ -1,10 +1,9 @@
 package com.example.jdagnogo.alertlebonsoinappart.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.evernote.android.job.JobManager;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
@@ -34,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         cities.add(City.TALENCE);
         requestItems.setCities(cities);
         requestItems.setMeuble(Meuble.MEUBLE);
-        requestItems.setRentMin(600);
-        requestItems.setSurfaceMax(11);
-        requestItems.setRoomMin(2);
+        requestItems.getSurface().setMin("600");
+        requestItems.getSurface().setMax("11");
+        requestItems.getNbRoom().setMin("2");
 
 
         String url = UrlRequestBuilder.createUrl(requestItems);

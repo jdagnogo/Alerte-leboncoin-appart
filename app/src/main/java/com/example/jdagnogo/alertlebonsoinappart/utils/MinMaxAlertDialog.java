@@ -27,16 +27,18 @@ public class MinMaxAlertDialog {
     private  static DialogMinMaxBeans dialogMinMaxBeans;
     private static OnSwipeItemSelectedListener minSwipe;
     private static OnSwipeItemSelectedListener maxSwipe;
+    private static SwipeItemEnum swipeItemEnum;
 
-    public MinMaxAlertDialog(DialogMinMaxBeans dialogMinMaxBeans,Activity activity){
+    public MinMaxAlertDialog(DialogMinMaxBeans dialogMinMaxBeans,Activity activity,SwipeItemEnum swipeItemEnum){
        this.activity =activity;
         this.dialogMinMaxBeans = dialogMinMaxBeans;
         minSwipe = minOnSwipeItemSelectedListener();
         maxSwipe = maxOnSwipeItemSelectedListener();
+        this.swipeItemEnum = swipeItemEnum;
     }
 
 
-    public void createDialogMinRent() {
+    public void createDialog() {
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.min_max_alert_dialog, null);
@@ -68,10 +70,10 @@ public class MinMaxAlertDialog {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int min = (int) selectorMin.getSelectedItem().value;
-                int max = (Integer) selectorMax.getSelectedItem().value;
+                String min = selectorMin.getSelectedItem().description;
+                String max = selectorMax.getSelectedItem().description;
                 UpdateSwipeViewBus updateSwipeViewBus =
-                        new UpdateSwipeViewBus(SwipeItemEnum.RENT,min,max);
+                        new UpdateSwipeViewBus(swipeItemEnum,min,max);
                 GlobalBus.getBus().post(updateSwipeViewBus);
                 alertDialog.dismiss();
             }

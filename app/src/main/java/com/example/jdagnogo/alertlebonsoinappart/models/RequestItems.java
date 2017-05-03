@@ -19,12 +19,9 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_
 @Parcel
 public class RequestItems {
     List<City> cities;
-    int rentMin;
-    int rentMax;
-    int surfaceMin;
-    int surfaceMax;
-    int roomMin;
-    int roomMax;
+    Rent rent;
+    Surface surface;
+    NbRoom nbRoom;
     Type type;
     Meuble meuble;
     String keyWord;
@@ -35,31 +32,12 @@ public class RequestItems {
         this.cities = new ArrayList<>();
         this.meuble = Meuble.MEUBLE_DEFAULT;
         this.type = Type.APPARTEMENT_DEFAULT;
-        this.rentMin = DEFAULT_RENT_MIN;
-        this.rentMax = DEFAULT_RENT_MAX;
-        this.surfaceMin = DEFAULT_SURFACE_MIN;
-        this.surfaceMax = DEFAULT_SURFACE_MAX;
-        this.roomMin = DEFAULT_ROOM_MIN;
-        this.roomMax =DEFAULT_ROOM_MAX;
+        this.rent = new Rent(DEFAULT_RENT_MIN,DEFAULT_RENT_MAX);
+        this.surface = new Surface(DEFAULT_SURFACE_MIN,DEFAULT_SURFACE_MAX);
+        this.nbRoom = new NbRoom(DEFAULT_ROOM_MIN,DEFAULT_ROOM_MAX);
         this.keyWord = "";
     }
 
-    @Override
-    public String toString() {
-        return "RequestItems{" +
-                "cities=" + cities +
-                ", rentMin=" + rentMin +
-                ", rentMax=" + rentMax +
-                ", surfaceMin=" + surfaceMin +
-                ", surfaceMax=" + surfaceMax +
-                ", roomMin=" + roomMin +
-                ", roomMax=" + roomMax +
-                ", type=" + type +
-                ", meuble=" + meuble +
-                ", keyWord='" + keyWord + '\'' +
-                ", urgente=" + urgente +
-                '}';
-    }
 
     public List<City> getCities() {
         return cities;
@@ -69,52 +47,28 @@ public class RequestItems {
         this.cities = cities;
     }
 
-    public int getRentMin() {
-        return rentMin;
+    public Rent getRent() {
+        return rent;
     }
 
-    public void setRentMin(int rentMin) {
-        this.rentMin = rentMin;
+    public void setRent(Rent rent) {
+        this.rent = rent;
     }
 
-    public int getRentMax() {
-        return rentMax;
+    public Surface getSurface() {
+        return surface;
     }
 
-    public void setRentMax(int rentMax) {
-        this.rentMax = rentMax;
+    public void setSurface(Surface surface) {
+        this.surface = surface;
     }
 
-    public int getSurfaceMin() {
-        return surfaceMin;
+    public NbRoom getNbRoom() {
+        return nbRoom;
     }
 
-    public void setSurfaceMin(int surfaceMin) {
-        this.surfaceMin = surfaceMin;
-    }
-
-    public int getSurfaceMax() {
-        return surfaceMax;
-    }
-
-    public void setSurfaceMax(int surfaceMax) {
-        this.surfaceMax = surfaceMax;
-    }
-
-    public int getRoomMin() {
-        return roomMin;
-    }
-
-    public void setRoomMin(int roomMin) {
-        this.roomMin = roomMin;
-    }
-
-    public int getRoomMax() {
-        return roomMax;
-    }
-
-    public void setRoomMax(int roomMax) {
-        this.roomMax = roomMax;
+    public void setNbRoom(NbRoom nbRoom) {
+        this.nbRoom = nbRoom;
     }
 
     public Type getType() {

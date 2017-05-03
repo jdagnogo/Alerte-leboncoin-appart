@@ -12,12 +12,12 @@ import com.roughike.swipeselector.SwipeItem;
 public class RentSwipeItem{
 
     private static SwipeItem[] createSwipeItem(String title) {
-        return new SwipeItem[]{new SwipeItem(0, title, "0 €"),
-                new SwipeItem(1, title, "100 €"),
-                new SwipeItem(2, title, "200 €"),
-                new SwipeItem(3, title, "300 €"),
-                new SwipeItem(4, title, "400 €"),
-                new SwipeItem(5, title, "500 €")
+        return new SwipeItem[]{new SwipeItem(0, title, "0"),
+                new SwipeItem(1, title, "100"),
+                new SwipeItem(2, title, "200"),
+                new SwipeItem(3, title, "300"),
+                new SwipeItem(4, title, "400"),
+                new SwipeItem(5, title, "500")
         };
     }
 
@@ -27,7 +27,7 @@ public class RentSwipeItem{
 
     public static DialogMinMaxBeans rentDialogMinBean() {
         DialogMinMaxBeans fake = new DialogMinMaxBeans();
-        fake.setTitle(AlertLEboncoinApplication.getContext().getString(R.string.rent));
+        fake.setTitle(AlertLEboncoinApplication.getContext().getString(R.string.rent_title));
         String minTitle = AlertLEboncoinApplication.getContext().getString(R.string.rent_title_min);
         String maxTitle = AlertLEboncoinApplication.getContext().getString(R.string.rent_title_max);
         fake.setSwipeMin(createSwipeItem(minTitle));

@@ -1,10 +1,17 @@
 package com.example.jdagnogo.alertlebonsoinappart.models;
 
+import org.parceler.Parcel;
+
 /**
  * Created by Jeff on 02/05/2017.
  */
-
+@Parcel
 public class Rent extends SwipeItemAbstract {
-    public Rent() {
+
+    public Rent(String min, String max) {
+        super(min, max);
     }
+    public Rent(){
+    }
+
 }

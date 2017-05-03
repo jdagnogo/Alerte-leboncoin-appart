@@ -70,30 +70,30 @@ public class UrlRequestBuilder {
         }
         // Rent
         //min
-        if (requestItems.getRentMin() != DEFAULT_RENT_MIN){
-            stringBuilder.append(generateRightFormatRequest(RENT_MIN_KEY,requestItems.getRentMin()));
+        if (requestItems.getRent().getMin() != DEFAULT_RENT_MIN){
+            stringBuilder.append(generateRightFormatRequest(RENT_MIN_KEY,requestItems.getRent().getMin()));
         }
         //max
-        if (requestItems.getRentMax() != DEFAULT_RENT_MAX){
-            stringBuilder.append(generateRightFormatRequest(RENT_MAX_KEY,requestItems.getRentMax()));
+        if (requestItems.getRent().getMax() != DEFAULT_RENT_MAX){
+            stringBuilder.append(generateRightFormatRequest(RENT_MAX_KEY,requestItems.getRent().getMax()));
         }
         // Surface
         //min
-        if (requestItems.getSurfaceMin() != DEFAULT_SURFACE_MIN){
-            stringBuilder.append(generateRightFormatRequest(SURFACE_MIN_KEY,requestItems.getSurfaceMin()));
+        if (requestItems.getSurface().getMin() != DEFAULT_SURFACE_MIN){
+            stringBuilder.append(generateRightFormatRequest(SURFACE_MIN_KEY,requestItems.getSurface().getMin()));
         }
         //max
-        if (requestItems.getSurfaceMax() != DEFAULT_SURFACE_MAX){
-            stringBuilder.append(generateRightFormatRequest(SURFACE_MAX_KEY,requestItems.getSurfaceMax()));
+        if (requestItems.getSurface().getMax() != DEFAULT_SURFACE_MAX){
+            stringBuilder.append(generateRightFormatRequest(SURFACE_MAX_KEY,requestItems.getSurface().getMax()));
         }
         // Room
         //min
-        if (requestItems.getRoomMin() != DEFAULT_ROOM_MIN){
-            stringBuilder.append(generateRightFormatRequest(ROOM_MIN_KEY,requestItems.getRoomMin()));
+        if (requestItems.getNbRoom().getMin() != DEFAULT_ROOM_MIN){
+            stringBuilder.append(generateRightFormatRequest(ROOM_MIN_KEY,requestItems.getNbRoom().getMin()));
         }
         //max
-        if (requestItems.getRoomMax() != DEFAULT_ROOM_MAX){
-            stringBuilder.append(generateRightFormatRequest(ROOM_MAX_KEY,requestItems.getRoomMax()));
+        if (requestItems.getNbRoom().getMax() != DEFAULT_ROOM_MAX){
+            stringBuilder.append(generateRightFormatRequest(ROOM_MAX_KEY,requestItems.getNbRoom().getMax()));
         }
         return stringBuilder.toString();
     }

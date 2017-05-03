@@ -8,11 +8,13 @@ import com.example.jdagnogo.alertlebonsoinappart.enums.*;
 
 public class UpdateSwipeViewBus {
         private SwipeItemEnum swipeItemEnum;
-    private int min;
-    private int max;
+    private String min;
+    private String max;
 
-        public UpdateSwipeViewBus(SwipeItemEnum swipeItemEnum, int min, int max) {
+        public UpdateSwipeViewBus(SwipeItemEnum swipeItemEnum,String min , String max) {
             this.swipeItemEnum = swipeItemEnum;
+            this.min = min;
+            this.max = max;
         }
 
         public SwipeItemEnum getSwipeItemEnum() {
@@ -23,19 +25,19 @@ public class UpdateSwipeViewBus {
         this.swipeItemEnum = swipeItemEnum;
     }
 
-    public int getMin() {
+    public String getMin() {
         return min;
     }
 
-    public void setMin(int min) {
+    public void setMin(String min) {
         this.min = min;
     }
 
-    public int getMax() {
+    public String getMax() {
         return max;
     }
 
-    public void setMax(int max) {
+    public void setMax(String max) {
         this.max = max;
     }
 }

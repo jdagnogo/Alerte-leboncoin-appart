@@ -10,12 +10,12 @@ import com.roughike.swipeselector.SwipeItem;
  */
 public class NbRoomSwipeItem  {
     private static SwipeItem[] createSwipeItem(String title) {
-        return new SwipeItem[]{new SwipeItem(0, title, "0 pièces"),
-                new SwipeItem(1, title, "1 pièces"),
-                new SwipeItem(2, title, "2 pièces"),
-                new SwipeItem(3, title, "3 pièces"),
-                new SwipeItem(4, title, "4 pièces"),
-                new SwipeItem(5, title, "5 pièces")
+        return new SwipeItem[]{new SwipeItem(0, title, "0"),
+                new SwipeItem(1, title, "1"),
+                new SwipeItem(2, title, "2"),
+                new SwipeItem(3, title, "3"),
+                new SwipeItem(4, title, "4"),
+                new SwipeItem(5, title, "5")
         };
     }
 

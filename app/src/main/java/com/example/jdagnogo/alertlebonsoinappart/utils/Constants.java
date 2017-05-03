@@ -1,9 +1,5 @@
 package com.example.jdagnogo.alertlebonsoinappart.utils;
 
-import com.example.jdagnogo.alertlebonsoinappart.models.DialogMinMaxBeans;
-import com.roughike.swipeselector.SwipeItem;
-import com.example.jdagnogo.alertlebonsoinappart.*;
-
 public class Constants {
 
     //...........// UrlRequest   //....................//
@@ -29,13 +25,13 @@ public class Constants {
 
     //...........// enums   //....................//
 
-    public final static int DEFAULT_CODE_POSTAL = 0;
-    public final static int DEFAULT_RENT_MIN = 0;
-    public final static int DEFAULT_RENT_MAX = 9999;
-    public final static int DEFAULT_SURFACE_MIN = 0;
-    public final static int DEFAULT_SURFACE_MAX = 9999;
-    public final static int DEFAULT_ROOM_MIN = 0;
-    public final static int DEFAULT_ROOM_MAX = 9999;
+    public final static String DEFAULT_CODE_POSTAL = "0";
+    public final static String DEFAULT_RENT_MIN = "0";
+    public final static String DEFAULT_RENT_MAX = "9999";
+    public final static String DEFAULT_SURFACE_MIN = "0";
+    public final static String DEFAULT_SURFACE_MAX = "9999";
+    public final static String DEFAULT_ROOM_MIN = "0";
+    public final static String DEFAULT_ROOM_MAX = "9999";
     //...........// models   //....................//
 
 
