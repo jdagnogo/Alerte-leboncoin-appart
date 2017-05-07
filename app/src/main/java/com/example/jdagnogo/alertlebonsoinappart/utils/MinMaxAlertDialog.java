@@ -10,12 +10,12 @@ import android.widget.TextView;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.enums.SwipeItemEnum;
 import com.example.jdagnogo.alertlebonsoinappart.models.DialogMinMaxBeans;
+import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.SwipeItemAbstract;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateSwipeViewBus;
 import com.roughike.swipeselector.OnSwipeItemSelectedListener;
 import com.roughike.swipeselector.SwipeItem;
 import com.roughike.swipeselector.SwipeSelector;
-
 /**
  * Created by Jeff on 01/05/2017.
  */
@@ -27,9 +27,11 @@ public class MinMaxAlertDialog {
     private  static DialogMinMaxBeans dialogMinMaxBeans;
     private static OnSwipeItemSelectedListener minSwipe;
     private static OnSwipeItemSelectedListener maxSwipe;
+    private static int positionMin;
+    private static int positionMax;
     private static SwipeItemEnum swipeItemEnum;
 
-    public MinMaxAlertDialog(DialogMinMaxBeans dialogMinMaxBeans,Activity activity,SwipeItemEnum swipeItemEnum){
+    public MinMaxAlertDialog(DialogMinMaxBeans dialogMinMaxBeans,Activity activity,SwipeItemEnum swipeItemEnum,SwipeItemAbstract swipeItemAbstract){
        this.activity =activity;
         this.dialogMinMaxBeans = dialogMinMaxBeans;
         minSwipe = minOnSwipeItemSelectedListener();
@@ -50,11 +52,14 @@ public class MinMaxAlertDialog {
         selectorMax = (SwipeSelector) dialogView.findViewById(R.id.max);
 
         selectorMin.setItems(dialogMinMaxBeans.getSwipeMin());
+        selectorMin.selectItemAt(positionMin);
         selectorMin.setOnItemSelectedListener(minSwipe);
 
 
         selectorMax.setItems(dialogMinMaxBeans.getSwipeMax());
+        selectorMax.selectItemAt(positionMin);
         selectorMax.setOnItemSelectedListener(maxSwipe);
+
 
 
         Button ok = (Button) dialogView.findViewById(R.id.ok);
@@ -70,8 +75,8 @@ public class MinMaxAlertDialog {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String min = selectorMin.getSelectedItem().description;
-                String max = selectorMax.getSelectedItem().description;
+                int min = (Integer) selectorMin.getSelectedItem().value;
+                int max = (Integer) selectorMax.getSelectedItem().value;
                 UpdateSwipeViewBus updateSwipeViewBus =
                         new UpdateSwipeViewBus(swipeItemEnum,min,max);
                 GlobalBus.getBus().post(updateSwipeViewBus);
@@ -104,7 +109,7 @@ public class MinMaxAlertDialog {
                 int max = (Integer) selectorMax.getSelectedItem().value;
                 if (min > max ) {
                     selectorMax.setOnItemSelectedListener(null);
-                    selectorMax.selectItemAt(min );
+                    selectorMax.selectItemAt(min);
                     selectorMax.setOnItemSelectedListener(maxSwipe);
                 }
             }

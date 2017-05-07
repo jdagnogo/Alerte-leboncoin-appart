@@ -4,19 +4,10 @@ import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
 
-import org.parceler.Parcel;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_RENT_MAX;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_RENT_MIN;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_ROOM_MAX;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_ROOM_MIN;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_SURFACE_MAX;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_SURFACE_MIN;
 
-@Parcel
 public class RequestItems {
     List<City> cities;
     Rent rent;
@@ -32,9 +23,9 @@ public class RequestItems {
         this.cities = new ArrayList<>();
         this.meuble = Meuble.MEUBLE_DEFAULT;
         this.type = Type.APPARTEMENT_DEFAULT;
-        this.rent = new Rent(DEFAULT_RENT_MIN,DEFAULT_RENT_MAX);
-        this.surface = new Surface(DEFAULT_SURFACE_MIN,DEFAULT_SURFACE_MAX);
-        this.nbRoom = new NbRoom(DEFAULT_ROOM_MIN,DEFAULT_ROOM_MAX);
+        this.rent = new Rent();
+        this.surface = new Surface();
+        this.nbRoom = new NbRoom();
         this.keyWord = "";
     }
 

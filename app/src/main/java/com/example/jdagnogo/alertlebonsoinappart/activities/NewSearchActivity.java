@@ -9,12 +9,12 @@ import android.widget.TextView;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.enums.SwipeItemEnum;
 import com.example.jdagnogo.alertlebonsoinappart.models.NewSearchView;
+import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.NbRoomSwipeItem;
+import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.RentSwipeItem;
+import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.SurfaceSwipeItem;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateSwipeViewBus;
 import com.example.jdagnogo.alertlebonsoinappart.utils.MinMaxAlertDialog;
-import com.example.jdagnogo.alertlebonsoinappart.utils.swipeItem.NbRoomSwipeItem;
-import com.example.jdagnogo.alertlebonsoinappart.utils.swipeItem.RentSwipeItem;
-import com.example.jdagnogo.alertlebonsoinappart.utils.swipeItem.SurfaceSwipeItem;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -57,7 +57,8 @@ public class NewSearchActivity extends AppCompatActivity {
         rentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(RentSwipeItem.createBeans(0), NewSearchActivity.this, SwipeItemEnum.RENT);
+                RentSwipeItem rentSwipeItem = new RentSwipeItem();
+                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(rentSwipeItem.createBeans(), NewSearchActivity.this, SwipeItemEnum.RENT,newSearchView.getRent());
                 minMaxAlertDialog.createDialog();
             }
         });
@@ -66,7 +67,8 @@ public class NewSearchActivity extends AppCompatActivity {
         surfaceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(SurfaceSwipeItem.createBeans(0), NewSearchActivity.this,SwipeItemEnum.SURFACE);
+                SurfaceSwipeItem surfaceSwipeItem = new SurfaceSwipeItem();
+                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(surfaceSwipeItem.createBeans(), NewSearchActivity.this,SwipeItemEnum.SURFACE,newSearchView.getSurface());
                 minMaxAlertDialog.createDialog();
             }
         });
@@ -75,38 +77,36 @@ public class NewSearchActivity extends AppCompatActivity {
         nbRoomLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(NbRoomSwipeItem.createBeans(0), NewSearchActivity.this,SwipeItemEnum.NB_ROOM);
+                NbRoomSwipeItem nbRoomSwipeItem = new NbRoomSwipeItem();
+                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(nbRoomSwipeItem.createBeans(), NewSearchActivity.this,SwipeItemEnum.NB_ROOM,newSearchView.getNbRoom());
                 minMaxAlertDialog.createDialog();
             }
         });
-    }
-    private void updateView(){
-
-        rentMin.setText(newSearchView.getRent().getMin());
-        rentMax.setText(newSearchView.getRent().getMax());
-        surfaceMin.setText(newSearchView.getSurface().getMin());
-        surfaceMax.setText(newSearchView.getSurface().getMax());
-        nbRoomMin.setText(newSearchView.getNbRoom().getMin());
-        nbRoomMax.setText(newSearchView.getNbRoom().getMax());
     }
 
     @Subscribe
     public void getMessage(UpdateSwipeViewBus updateSwipeViewBus) {
         switch (updateSwipeViewBus.getSwipeItemEnum()){
             case RENT:
-                newSearchView.getRent().setMax(updateSwipeViewBus.getMax());
-                newSearchView.getRent().setMin(updateSwipeViewBus.getMin());
-                updateView();
+                newSearchView.getRent().setPositionMax(updateSwipeViewBus.getMax());
+                newSearchView.getRent().setPostitonMin(updateSwipeViewBus.getMin());
+                rentMin.setText(newSearchView.getRent().getDescriptionMin());
+                rentMax.setText(newSearchView.getRent().getDescriptionMax());
+
                 break;
             case NB_ROOM:
-                newSearchView.getNbRoom().setMax(updateSwipeViewBus.getMax());
-                newSearchView.getNbRoom().setMin(updateSwipeViewBus.getMin());
+                newSearchView.getNbRoom().setPositionMax(updateSwipeViewBus.getMax());
+                newSearchView.getNbRoom().setPostitonMin(updateSwipeViewBus.getMin());
+                nbRoomMin.setText(newSearchView.getNbRoom().getDescriptionMin());
+                nbRoomMax.setText(newSearchView.getNbRoom().getDescriptionMax());
                 break;
             default:
-                newSearchView.getSurface().setMax(updateSwipeViewBus.getMax());
-                newSearchView.getSurface().setMin(updateSwipeViewBus.getMin());
+                newSearchView.getSurface().setPositionMax(updateSwipeViewBus.getMax());
+                surfaceMin.setText(newSearchView.getSurface().getDescriptionMin() );
+                surfaceMax.setText(newSearchView.getSurface().getDescriptionMax());
+                newSearchView.getSurface().setPostitonMin(updateSwipeViewBus.getMin());
                 break;
         }
-       updateView();
+
     }
 }

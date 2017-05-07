@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         cities.add(City.TALENCE);
         requestItems.setCities(cities);
         requestItems.setMeuble(Meuble.MEUBLE);
-        requestItems.getSurface().setMin("600");
-        requestItems.getSurface().setMax("11");
-        requestItems.getNbRoom().setMin("2");
+        //requestItems.getSurface().setMin("600");
+        //requestItems.getSurface().setMax("11");
+        //requestItems.getNbRoom().setMin("2");
 
 
         String url = UrlRequestBuilder.createUrl(requestItems);

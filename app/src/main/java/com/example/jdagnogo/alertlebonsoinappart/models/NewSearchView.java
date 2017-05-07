@@ -3,8 +3,9 @@ package com.example.jdagnogo.alertlebonsoinappart.models;
 import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
-
-import org.parceler.Parcel;
+import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.NbRoomSwipeItem;
+import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.RentSwipeItem;
+import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.SurfaceSwipeItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,20 +13,20 @@ import java.util.List;
 /**
  * Created by Jeff on 02/05/2017.
  */
-@Parcel
+
 public class NewSearchView {
     List<City> cities;
     Type type;
     Meuble meuble;
-    Rent rent;
-    NbRoom nbRoom;
-    Surface surface;
+    RentSwipeItem rent;
+    NbRoomSwipeItem nbRoom;
+    SurfaceSwipeItem surface;
 
     public NewSearchView() {
-        this.rent = new Rent();
+        this.rent = new RentSwipeItem();
         this.cities = new ArrayList<>();
-        this.nbRoom = new NbRoom();
-        this.surface = new Surface();
+        this.nbRoom = new NbRoomSwipeItem();
+        this.surface = new SurfaceSwipeItem();
     }
 
     public List<City> getCities() {
@@ -53,27 +54,27 @@ public class NewSearchView {
         this.meuble = meuble;
     }
 
-    public Rent getRent() {
+    public RentSwipeItem getRent() {
         return rent;
     }
 
-    public void setRent(Rent rent) {
+    public void setRent(RentSwipeItem rent) {
         this.rent = rent;
     }
 
-    public NbRoom getNbRoom() {
+    public NbRoomSwipeItem getNbRoom() {
         return nbRoom;
     }
 
-    public void setNbRoom(NbRoom nbRoom) {
+    public void setNbRoom(NbRoomSwipeItem nbRoom) {
         this.nbRoom = nbRoom;
     }
 
-    public Surface getSurface() {
+    public SurfaceSwipeItem getSurface() {
         return surface;
     }
 
-    public void setSurface(Surface surface) {
+    public void setSurface(SurfaceSwipeItem surface) {
         this.surface = surface;
     }
 }

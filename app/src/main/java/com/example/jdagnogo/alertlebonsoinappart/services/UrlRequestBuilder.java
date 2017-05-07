@@ -9,26 +9,14 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.BASE_URL
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.BASE_URL_FORMAT;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.CODE_POSTAL_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_CODE_POSTAL;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_RENT_MAX;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_RENT_MIN;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_ROOM_MAX;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_ROOM_MIN;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_SURFACE_MAX;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_SURFACE_MIN;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.KEY_WORD_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.LOCATION_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.MEUBLE_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.MORE_CITIES_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.MORE_OPTIONS;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.MORE_OPTIONS_FORMAT;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.RENT_MAX_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.RENT_MIN_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.ROOM_MAX_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.ROOM_MIN_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.SPACE;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.SPACE_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.SURFACE_MAX_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.SURFACE_MIN_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.TYPE_KEY;
 
 
@@ -70,7 +58,7 @@ public class UrlRequestBuilder {
         }
         // Rent
         //min
-        if (requestItems.getRent().getMin() != DEFAULT_RENT_MIN){
+       /* if (requestItems.getRent().getMin() != DEFAULT_RENT_MIN){
             stringBuilder.append(generateRightFormatRequest(RENT_MIN_KEY,requestItems.getRent().getMin()));
         }
         //max
@@ -94,7 +82,7 @@ public class UrlRequestBuilder {
         //max
         if (requestItems.getNbRoom().getMax() != DEFAULT_ROOM_MAX){
             stringBuilder.append(generateRightFormatRequest(ROOM_MAX_KEY,requestItems.getNbRoom().getMax()));
-        }
+        }*/
         return stringBuilder.toString();
     }
 
