@@ -28,7 +28,7 @@ public class RentSwipeItem extends SwipeItemAbstract {
                 put(5, "Max");
             }
         };
-        this.positionMax =map.size();
+        this.positionMax =map.size()-1;
     }
 
 }

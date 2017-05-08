@@ -31,11 +31,13 @@ public class MinMaxAlertDialog {
     private static int positionMax;
     private static SwipeItemEnum swipeItemEnum;
 
-    public MinMaxAlertDialog(DialogMinMaxBeans dialogMinMaxBeans,Activity activity,SwipeItemEnum swipeItemEnum,SwipeItemAbstract swipeItemAbstract){
+    public MinMaxAlertDialog(DialogMinMaxBeans dialogMinMaxBeans,Activity activity,SwipeItemEnum swipeItemEnum,SwipeItemAbstract swipeItemAbstract,int positionMin,int positionMax){
        this.activity =activity;
         this.dialogMinMaxBeans = dialogMinMaxBeans;
         minSwipe = minOnSwipeItemSelectedListener();
         maxSwipe = maxOnSwipeItemSelectedListener();
+        this.positionMin = positionMin;
+        this.positionMax = positionMax;
         this.swipeItemEnum = swipeItemEnum;
     }
 
@@ -57,7 +59,7 @@ public class MinMaxAlertDialog {
 
 
         selectorMax.setItems(dialogMinMaxBeans.getSwipeMax());
-        selectorMax.selectItemAt(positionMin);
+        selectorMax.selectItemAt(positionMax);
         selectorMax.setOnItemSelectedListener(maxSwipe);
 
 
