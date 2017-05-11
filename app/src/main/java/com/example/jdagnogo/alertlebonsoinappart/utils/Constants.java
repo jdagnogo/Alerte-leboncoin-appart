@@ -4,6 +4,7 @@ public class Constants {
 
     //...........// UrlRequest   //....................//
     public final static String BASE_URL = "www.leboncoin.fr/locations/offres/ile_de_france/occasions/?th=1&parrot=0&";
+    public final static String SITE_URL="https://www.leboncoin.fr";
     public final static String BASE_URL_FORMAT = "%s%s";
     public final static String MORE_OPTIONS_FORMAT = "%s%s%s";
     public final static String CODE_POSTAL_KEY = "%20";
