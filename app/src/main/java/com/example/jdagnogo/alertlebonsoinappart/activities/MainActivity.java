@@ -9,16 +9,18 @@ import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
-import com.example.jdagnogo.alertlebonsoinappart.services.RetrofitNetworkInterface;
+import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
 import com.example.jdagnogo.alertlebonsoinappart.services.UrlRequestBuilder;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoSyncJob;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,14 +39,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void test() {
-        RequestItems requestItems = new RequestItems();
+        final RequestItems requestItems = new RequestItems();
         List<City> cities = new ArrayList<>();
         cities.add(City.BORDEAUX_ALL);
         cities.add(City.TALENCE);
         requestItems.setCities(cities);
         requestItems.setMeuble(Meuble.MEUBLE);
-
-
 
         String url = UrlRequestBuilder.createUrl(requestItems);
         Log.d(TAG, "URL : " + url);
@@ -54,20 +54,29 @@ public class MainActivity extends AppCompatActivity {
         DemoSyncJob demoSyncJob = new DemoSyncJob();
         demoSyncJob.scheduleJob();
 
-        ((AlertLEboncoinApplication)getApplication()).getNetworkComponent().inject(MainActivity.this);
-        RetrofitNetworkInterface mService = retrofit.create(RetrofitNetworkInterface.class);
-        Call<String> mSong = mService.allappart();
-        mSong.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.d(TAG, "Result " + response.body());
+       // ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(MainActivity.this);
+        //getAppart();
 
-            }
+
+    }
+
+    private void getAppart() {
+        RetrofitNetworkInterface mService = retrofit.create(RetrofitNetworkInterface.class);
+        Call<ResponseBody> mSong = mService.allAppart("");
+        mSong.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    Log.d(TAG, "Result " + response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d(TAG, "Display error code " + t.toString());
             }
         });
-
     }
 }
