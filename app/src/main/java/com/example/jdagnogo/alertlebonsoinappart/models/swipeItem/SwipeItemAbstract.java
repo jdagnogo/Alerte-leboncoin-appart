@@ -1,5 +1,8 @@
 package com.example.jdagnogo.alertlebonsoinappart.models.swipeItem;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.jdagnogo.alertlebonsoinappart.models.DialogMinMaxBeans;
 import com.example.jdagnogo.alertlebonsoinappart.models.MinMaxItemAbstract;
 import com.roughike.swipeselector.SwipeItem;
@@ -10,7 +13,7 @@ import java.util.Map;
  * Created by Jeff on 04/05/2017.
  */
 
-public abstract class SwipeItemAbstract {
+public abstract class SwipeItemAbstract implements Parcelable{
     protected MinMaxItemAbstract minMaxItemAbstract;
     int postitonMin;
     int positionMax;
@@ -96,6 +99,27 @@ public abstract class SwipeItemAbstract {
 
     public void setPositionMax(int positionMax) {
         this.positionMax = positionMax;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.minMaxItemAbstract, flags);
+        dest.writeInt(this.postitonMin);
+        dest.writeInt(this.positionMax);
+        dest.writeString(this.description);
+    }
+
+    protected SwipeItemAbstract(Parcel in) {
+        this.minMaxItemAbstract = in.readParcelable(MinMaxItemAbstract.class.getClassLoader());
+        this.postitonMin = in.readInt();
+        this.positionMax = in.readInt();
+        this.description = in.readString();
     }
 
 

@@ -1,8 +1,10 @@
 package com.example.jdagnogo.alertlebonsoinappart.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -10,8 +12,12 @@ import android.widget.TextView;
 
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox;
-import com.example.jdagnogo.alertlebonsoinappart.enums.*;
-import com.example.jdagnogo.alertlebonsoinappart.models.NewSearchView;
+import com.example.jdagnogo.alertlebonsoinappart.enums.City;
+import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
+import com.example.jdagnogo.alertlebonsoinappart.enums.SwipeItemEnum;
+import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
+import com.example.jdagnogo.alertlebonsoinappart.models.*;
+import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
 import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.NbRoomSwipeItem;
 import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.RentSwipeItem;
 import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.SurfaceSwipeItem;
@@ -30,7 +36,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
+
 public class NewSearchActivity extends AppCompatActivity {
+    private final String TAG = NewSearchActivity.this.getPackageName();
     @Bind(R.id.rent_min)
     TextView rentMin;
     @Bind(R.id.rent_max)
@@ -76,7 +85,7 @@ public class NewSearchActivity extends AppCompatActivity {
 
     @OnClick(R.id.add_cities_button)
     public void setAddCitiesButton() {
-        AddCitiesDialog.createDialog(this,cities);
+        AddCitiesDialog.createDialog(this, cities);
     }
 
     @OnClick(R.id.validate)
@@ -100,6 +109,29 @@ public class NewSearchActivity extends AppCompatActivity {
         } else {
             newSearchView.setMeuble(Meuble.MEUBLE);
         }
+        Log.d(TAG, "résultat : " + newSearchView);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        Bundle args = new Bundle();
+        args.putParcelable(NEW_RESEARCH, createRequestItem());
+        intent.putExtras(args);
+        startActivity(intent);
+    }
+
+    private RequestItems createRequestItem() {
+        final RequestItems requestItems = new RequestItems();
+
+        requestItems.setType(newSearchView.getType());
+        requestItems.setMeuble(newSearchView.getMeuble());
+        requestItems.setCities(newSearchView.getCities());
+        Rent rent = new Rent(newSearchView.getRent().getPostitonMin(),newSearchView.getRent().getPositionMax());
+        requestItems.setRent(rent);
+        NbRoom nbRoom = new NbRoom(newSearchView.getNbRoom().getPostitonMin(),newSearchView.getNbRoom().getPositionMax());
+        requestItems.setNbRoom(nbRoom);
+        Surface surface = new Surface(newSearchView.getSurface().getPostitonMin(),newSearchView.getSurface().getPositionMax());
+        requestItems.setSurface(surface);
+
+        return  requestItems;
     }
 
     @Override
