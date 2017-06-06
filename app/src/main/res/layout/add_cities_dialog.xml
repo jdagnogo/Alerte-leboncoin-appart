@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:id="@+id/title"
+        android:background="@color/colorPrimary"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="10dp"
+        android:text="Loyer" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:gravity="center_vertical"
+                android:text="Bordeaux centre" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:gravity="center_vertical"
+                android:text="Talence" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:gravity="center_vertical"
+                android:text="Mérignac" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="Pessac" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox
+                android:id="@+id/bdx_centre"
+                android:layout_width="30dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:paddingTop="10dp"
+                app:color_checked="@color/colorPrimary" />
+            <com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox
+                android:id="@+id/talence"
+                android:layout_width="30dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:paddingTop="10dp"
+                app:color_checked="@color/colorPrimary" />
+            <com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox
+                android:id="@+id/merignac"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                app:color_checked="@color/colorPrimary" />
+
+            <com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox
+                android:id="@+id/pessac"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                app:color_checked="@color/colorPrimary" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/cancel"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:text="Annuler"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/ok"
+            android:background="@color/colorPrimary"
+            android:text="Ok"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

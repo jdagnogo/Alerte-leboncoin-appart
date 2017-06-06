@@ -8,8 +8,8 @@ public enum City {
     BORDEAUX_CENTRE("Bordeaux centre","Bordeaux",  "33000"),
     TALENCE("Talence", "Talence", "33400"),
     //BEGLE("Bègles",  33130),
-    //MERIGNAC("Mérignac",  33700),
-    //PESSAC("Pessac",  33600),
+    MERIGNAC("Mérignac", "Mérignac", "33700"),
+    PESSAC("Pessac", "Pessac", "33600"),
     BORDEAUX_ALL("Bordeaux (Toute la ville)","Bordeaux",  DEFAULT_CODE_POSTAL), // 0 means don t put it in the request
     //TOULOUSE_ALL("Toulouse (Toute la ville)",  0),
     ;

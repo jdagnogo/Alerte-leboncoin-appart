@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         DemoSyncJob demoSyncJob = new DemoSyncJob();
         demoSyncJob.scheduleJob();
 
-       // ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(MainActivity.this);
-        //getAppart();
+        ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(MainActivity.this);
+         getAppart();
 
 
     }

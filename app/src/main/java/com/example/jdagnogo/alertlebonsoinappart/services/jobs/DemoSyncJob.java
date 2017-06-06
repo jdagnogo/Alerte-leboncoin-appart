@@ -45,7 +45,6 @@ public class DemoSyncJob extends Job {
                 Context context = AlertLEboncoinApplication.getContext();
                 ((AlertLEboncoinApplication) context).getNetworkComponent().inject(DemoSyncJob.this);
 // use System.currentTimeMillis() to have a unique ID for the pending intent
-
                 getAppart();
 
 // build notification

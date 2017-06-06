@@ -1,6 +1,7 @@
 package com.example.jdagnogo.alertlebonsoinappart.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +16,15 @@ import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.NbRoomSwipeIte
 import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.RentSwipeItem;
 import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.SurfaceSwipeItem;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
+import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateCitiesViewBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateSwipeViewBus;
+import com.example.jdagnogo.alertlebonsoinappart.utils.AddCitiesDialog;
 import com.example.jdagnogo.alertlebonsoinappart.utils.MinMaxAlertDialog;
 
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,12 +41,17 @@ public class NewSearchActivity extends AppCompatActivity {
     TextView surfaceMax;
     @Bind(R.id.nb_room_min)
     TextView nbRoomMin;
+    @Bind(R.id.add_cities_text)
+    TextView addCitiesText;
     @Bind(R.id.nb_room_max)
     TextView nbRoomMax;
     private NewSearchView newSearchView;
     @Bind(R.id.validate)
     Button validate;
-    SmoothCheckBox appart,house,meuble,nonMeuble;
+    @Bind(R.id.add_cities_button)
+    FloatingActionButton addCitiesButton;
+    SmoothCheckBox appart, house, meuble, nonMeuble;
+    List<City> cities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +59,7 @@ public class NewSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_search);
         ButterKnife.bind(this);
         newSearchView = new NewSearchView();
+        cities = new ArrayList<>();
         GlobalBus.getBus().register(this);
         initLayout();
         initCheckBoxes();
@@ -62,25 +74,30 @@ public class NewSearchActivity extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.add_cities_button)
+    public void setAddCitiesButton() {
+        AddCitiesDialog.createDialog(this,cities);
+    }
+
     @OnClick(R.id.validate)
-    public void setOnclickValidate(){
-       // save
-        if (house.isChecked()){
-            if (appart.isChecked()){
+    public void setOnclickValidate() {
+        // save
+        if (house.isChecked()) {
+            if (appart.isChecked()) {
                 newSearchView.setType(Type.APPARTEMENT_DEFAULT);
-            }else {
+            } else {
                 newSearchView.setType(Type.MAISON);
             }
-        }else {
+        } else {
             newSearchView.setType(Type.APPARTEMENT);
         }
-        if (nonMeuble.isChecked()){
-            if (appart.isChecked()){
+        if (nonMeuble.isChecked()) {
+            if (appart.isChecked()) {
                 newSearchView.setMeuble(Meuble.MEUBLE_DEFAULT);
-            }else {
+            } else {
                 newSearchView.setMeuble(Meuble.NON_MEUBLE);
             }
-        }else {
+        } else {
             newSearchView.setMeuble(Meuble.MEUBLE);
         }
     }
@@ -97,8 +114,8 @@ public class NewSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RentSwipeItem rentSwipeItem = new RentSwipeItem();
-                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(rentSwipeItem.createBeans(), NewSearchActivity.this, SwipeItemEnum.RENT,newSearchView.getRent(),
-                        rentSwipeItem.getPostitonMin(),rentSwipeItem.getPositionMax());
+                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(rentSwipeItem.createBeans(), NewSearchActivity.this, SwipeItemEnum.RENT, newSearchView.getRent(),
+                        rentSwipeItem.getPostitonMin(), rentSwipeItem.getPositionMax());
                 minMaxAlertDialog.createDialog();
             }
         });
@@ -108,8 +125,8 @@ public class NewSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SurfaceSwipeItem surfaceSwipeItem = new SurfaceSwipeItem();
-                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(surfaceSwipeItem.createBeans(), NewSearchActivity.this,SwipeItemEnum.SURFACE,newSearchView.getSurface()
-                ,surfaceSwipeItem.getPostitonMin(),surfaceSwipeItem.getPositionMax());
+                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(surfaceSwipeItem.createBeans(), NewSearchActivity.this, SwipeItemEnum.SURFACE, newSearchView.getSurface()
+                        , surfaceSwipeItem.getPostitonMin(), surfaceSwipeItem.getPositionMax());
                 minMaxAlertDialog.createDialog();
             }
         });
@@ -119,8 +136,8 @@ public class NewSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 NbRoomSwipeItem nbRoomSwipeItem = new NbRoomSwipeItem();
-                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(nbRoomSwipeItem.createBeans(), NewSearchActivity.this,SwipeItemEnum.NB_ROOM,newSearchView.getNbRoom(),
-                nbRoomSwipeItem.getPostitonMin(),nbRoomSwipeItem.getPositionMax());
+                MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(nbRoomSwipeItem.createBeans(), NewSearchActivity.this, SwipeItemEnum.NB_ROOM, newSearchView.getNbRoom(),
+                        nbRoomSwipeItem.getPostitonMin(), nbRoomSwipeItem.getPositionMax());
                 minMaxAlertDialog.createDialog();
             }
         });
@@ -128,7 +145,7 @@ public class NewSearchActivity extends AppCompatActivity {
 
     @Subscribe
     public void getMessage(UpdateSwipeViewBus updateSwipeViewBus) {
-        switch (updateSwipeViewBus.getSwipeItemEnum()){
+        switch (updateSwipeViewBus.getSwipeItemEnum()) {
             case RENT:
                 newSearchView.getRent().setPositionMax(updateSwipeViewBus.getMax());
                 newSearchView.getRent().setPostitonMin(updateSwipeViewBus.getMin());
@@ -144,11 +161,26 @@ public class NewSearchActivity extends AppCompatActivity {
                 break;
             default:
                 newSearchView.getSurface().setPositionMax(updateSwipeViewBus.getMax());
-                surfaceMin.setText(newSearchView.getSurface().getDescriptionMin() );
+                surfaceMin.setText(newSearchView.getSurface().getDescriptionMin());
                 surfaceMax.setText(newSearchView.getSurface().getDescriptionMax());
                 newSearchView.getSurface().setPostitonMin(updateSwipeViewBus.getMin());
                 break;
         }
 
+    }
+
+    @Subscribe
+    public void getCities(UpdateCitiesViewBus updateCitiesViewBus) {
+        cities = updateCitiesViewBus.getCities();
+        newSearchView.setCities(cities);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < cities.size(); i++) {
+            sb.append(cities.get(i).getCityName());
+            sb.append("\n\n");
+        }
+        int last = sb.lastIndexOf("\n\n");
+        sb.delete(last, sb.length());
+
+        addCitiesText.setText(sb);
     }
 }

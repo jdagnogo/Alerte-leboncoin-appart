@@ -55,4 +55,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okio:okio:1.7.0'
 
+    //Jsoup
+    compile 'org.jsoup:jsoup:1.10.2'
+
 }

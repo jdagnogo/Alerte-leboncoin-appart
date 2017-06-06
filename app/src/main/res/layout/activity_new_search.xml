@@ -75,18 +75,21 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp">
+                    android:layout_height="150dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="100dp"
+                        android:id="@+id/add_cities_text"
                         android:layout_centerInParent="true"
-                        android:gravity="center"
+
                         android:text="Aucune ville sélectionnée" />
 
                     <android.support.design.widget.FloatingActionButton
                         android:layout_width="45dp"
                         android:layout_height="45dp"
+                        android:id="@+id/add_cities_button"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:layout_margin="5dp"
