@@ -5,7 +5,6 @@ import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
 import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
 
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.BASE_URL;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.BASE_URL_FORMAT;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.CODE_POSTAL_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_CODE_POSTAL;
@@ -23,7 +22,7 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.TYPE_KEY
 public class UrlRequestBuilder {
 
     public static String createUrl(RequestItems requestItems) {
-        return String.format(BASE_URL_FORMAT, BASE_URL, generateRequestOptions(requestItems));
+        return String.format(BASE_URL_FORMAT,generateRequestOptions(requestItems));
     }
 
     private static String generateRightFormatRequest(String key, Object val){

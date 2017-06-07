@@ -1,10 +1,13 @@
 package com.example.jdagnogo.alertlebonsoinappart.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Jeff on 02/05/2017.
  */
 
-public abstract class MinMaxItemAbstract {
+public abstract class MinMaxItemAbstract implements Parcelable{
     protected int positionMin;
     protected int positionMax;
 
@@ -33,4 +36,22 @@ public abstract class MinMaxItemAbstract {
         this.positionMax = 0;
         this.positionMin = 0;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.positionMin);
+        dest.writeInt(this.positionMax);
+    }
+
+    protected MinMaxItemAbstract(Parcel in) {
+        this.positionMin = in.readInt();
+        this.positionMax = in.readInt();
+    }
+
+
 }

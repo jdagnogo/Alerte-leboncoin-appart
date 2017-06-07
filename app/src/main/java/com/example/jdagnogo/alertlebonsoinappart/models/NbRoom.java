@@ -1,5 +1,7 @@
 package com.example.jdagnogo.alertlebonsoinappart.models;
 
+import android.os.Parcel;
+
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.roughike.swipeselector.SwipeItem;
@@ -39,4 +41,34 @@ public class NbRoom extends MinMaxItemAbstract {
         fake.setSwipeMax(createSwipeItem(maxTitle));
         return fake;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(this.positionMin);
+        dest.writeInt(this.positionMax);
+    }
+
+    protected NbRoom(Parcel in) {
+        super(in);
+        this.positionMin = in.readInt();
+        this.positionMax = in.readInt();
+    }
+
+    public static final Creator<NbRoom> CREATOR = new Creator<NbRoom>() {
+        @Override
+        public NbRoom createFromParcel(Parcel source) {
+            return new NbRoom(source);
+        }
+
+        @Override
+        public NbRoom[] newArray(int size) {
+            return new NbRoom[size];
+        }
+    };
 }
