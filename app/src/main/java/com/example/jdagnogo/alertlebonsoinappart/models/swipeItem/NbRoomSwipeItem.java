@@ -20,9 +20,9 @@ public class NbRoomSwipeItem extends SwipeItemAbstract implements Parcelable{
 
         this.postitonMin=0;
         this.unite = "";
-        this.minTitle = AlertLEboncoinApplication.getContext().getString(R.string.nb_room);
+        this.minTitle = AlertLEboncoinApplication.getContext().getString(R.string.nb_room_title_min);
         this.maxTitle =AlertLEboncoinApplication.getContext().getString(R.string.nb_room_title_max);
-        this.title =  AlertLEboncoinApplication.getContext().getString(R.string.nb_room_title_min);
+        this.title =  AlertLEboncoinApplication.getContext().getString(R.string.nb_room);
         map = new HashMap<Integer, String>() {
             {
                 put(0, "Min");

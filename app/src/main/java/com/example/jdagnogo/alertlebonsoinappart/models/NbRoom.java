@@ -11,7 +11,7 @@ import com.roughike.swipeselector.SwipeItem;
  */
 
 public class NbRoom extends MinMaxItemAbstract {
-    public NbRoom(int min, int max) {
+    public NbRoom(String min, String max) {
         super(min, max);
     }
     public NbRoom(){
@@ -50,14 +50,14 @@ public class NbRoom extends MinMaxItemAbstract {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.positionMin);
-        dest.writeInt(this.positionMax);
+        dest.writeString(this.positionMin);
+        dest.writeString(this.positionMax);
     }
 
     protected NbRoom(Parcel in) {
         super(in);
-        this.positionMin = in.readInt();
-        this.positionMax = in.readInt();
+        this.positionMin = in.readString();
+        this.positionMax = in.readString();
     }
 
     public static final Creator<NbRoom> CREATOR = new Creator<NbRoom>() {

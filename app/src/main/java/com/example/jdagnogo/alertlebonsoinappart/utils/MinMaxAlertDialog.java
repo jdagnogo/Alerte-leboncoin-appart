@@ -16,23 +16,24 @@ import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateSwipeVi
 import com.roughike.swipeselector.OnSwipeItemSelectedListener;
 import com.roughike.swipeselector.SwipeItem;
 import com.roughike.swipeselector.SwipeSelector;
+
 /**
  * Created by Jeff on 01/05/2017.
  */
 
 public class MinMaxAlertDialog {
-    private  static SwipeSelector selectorMin;
-    private static SwipeSelector selectorMax;
+    private SwipeSelector selectorMin;
+    private SwipeSelector selectorMax;
     private Activity activity;
-    private  static DialogMinMaxBeans dialogMinMaxBeans;
-    private static OnSwipeItemSelectedListener minSwipe;
-    private static OnSwipeItemSelectedListener maxSwipe;
-    private static int positionMin;
-    private static int positionMax;
-    private static SwipeItemEnum swipeItemEnum;
+    private DialogMinMaxBeans dialogMinMaxBeans;
+    private OnSwipeItemSelectedListener minSwipe;
+    private OnSwipeItemSelectedListener maxSwipe;
+    private int positionMin;
+    private int positionMax;
+    private SwipeItemEnum swipeItemEnum;
 
-    public MinMaxAlertDialog(DialogMinMaxBeans dialogMinMaxBeans,Activity activity,SwipeItemEnum swipeItemEnum,SwipeItemAbstract swipeItemAbstract,int positionMin,int positionMax){
-       this.activity =activity;
+    public MinMaxAlertDialog(DialogMinMaxBeans dialogMinMaxBeans, Activity activity, SwipeItemEnum swipeItemEnum, SwipeItemAbstract swipeItemAbstract, int positionMin, int positionMax) {
+        this.activity = activity;
         this.dialogMinMaxBeans = dialogMinMaxBeans;
         minSwipe = minOnSwipeItemSelectedListener();
         maxSwipe = maxOnSwipeItemSelectedListener();
@@ -63,7 +64,6 @@ public class MinMaxAlertDialog {
         selectorMax.setOnItemSelectedListener(maxSwipe);
 
 
-
         Button ok = (Button) dialogView.findViewById(R.id.ok);
         dialogBuilder.setView(dialogView);
         final AlertDialog alertDialog = dialogBuilder.create();
@@ -80,7 +80,7 @@ public class MinMaxAlertDialog {
                 int min = (Integer) selectorMin.getSelectedItem().value;
                 int max = (Integer) selectorMax.getSelectedItem().value;
                 UpdateSwipeViewBus updateSwipeViewBus =
-                        new UpdateSwipeViewBus(swipeItemEnum,min,max);
+                        new UpdateSwipeViewBus(swipeItemEnum, min, max);
                 GlobalBus.getBus().post(updateSwipeViewBus);
                 alertDialog.dismiss();
             }
@@ -88,13 +88,13 @@ public class MinMaxAlertDialog {
         alertDialog.show();
     }
 
-    private static OnSwipeItemSelectedListener maxOnSwipeItemSelectedListener() {
+    private OnSwipeItemSelectedListener maxOnSwipeItemSelectedListener() {
         return new OnSwipeItemSelectedListener() {
             @Override
             public void onItemSelected(SwipeItem item) {
                 int min = (Integer) selectorMin.getSelectedItem().value;
                 int max = (Integer) selectorMax.getSelectedItem().value;
-                if (min > max ) {
+                if (min > max) {
                     selectorMin.setOnItemSelectedListener(null);
                     selectorMin.selectItemAt(max);
                     selectorMin.setOnItemSelectedListener(minSwipe);
@@ -103,13 +103,13 @@ public class MinMaxAlertDialog {
         };
     }
 
-    private static OnSwipeItemSelectedListener minOnSwipeItemSelectedListener() {
+    private OnSwipeItemSelectedListener minOnSwipeItemSelectedListener() {
         return new OnSwipeItemSelectedListener() {
             @Override
             public void onItemSelected(SwipeItem item) {
                 int min = (Integer) selectorMin.getSelectedItem().value;
                 int max = (Integer) selectorMax.getSelectedItem().value;
-                if (min > max ) {
+                if (min > max) {
                     selectorMax.setOnItemSelectedListener(null);
                     selectorMax.selectItemAt(min);
                     selectorMax.setOnItemSelectedListener(maxSwipe);

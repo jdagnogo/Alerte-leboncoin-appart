@@ -8,10 +8,24 @@ import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_MAX;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_MIN;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_SURFACE_MAX;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_SURFACE_MIN;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.MEUBLE_KEY;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.RENT_MAX_KEY;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.RENT_MIN_KEY;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.ROOM_MAX_KEY;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.ROOM_MIN_KEY;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.SURFACE_MAX_KEY;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.SURFACE_MIN_KEY;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.TYPE_KEY;
 
-public class RequestItems implements Parcelable{
+
+public class RequestItems implements Parcelable {
     List<City> cities;
     Rent rent;
     Surface surface;
@@ -32,6 +46,45 @@ public class RequestItems implements Parcelable{
         this.keyWord = "";
     }
 
+    public HashMap<String, String> createHashMap() {
+    HashMap<String,String> maps = new HashMap<>();
+        //meuble
+        if (!meuble.getMeubleName().equals(Meuble.MEUBLE_DEFAULT)) {
+           maps.put(MEUBLE_KEY,String.valueOf(meuble.getValue()));
+        }
+        // Type
+        if (!type.getTypeName().equals(Type.APPARTEMENT_DEFAULT)){
+            maps.put(TYPE_KEY,String.valueOf(type.getValue()));
+        }
+        // Rent
+        //min
+        if (!rent.getPositionMin().equals(DEFAULT_MIN)){
+           maps.put(RENT_MIN_KEY,rent.getPositionMin());
+        }
+        //max
+        if (!rent.getPositionMax().equals(DEFAULT_MAX)){
+            maps.put(RENT_MAX_KEY,rent.getPositionMax());
+        }
+        // Nb room
+        //min
+        if (!nbRoom.getPositionMin().equals(DEFAULT_MIN)){
+            maps.put(ROOM_MIN_KEY,nbRoom.getPositionMin());
+        }
+        //max
+        if (!nbRoom.getPositionMax().equals(DEFAULT_MAX)){
+            maps.put(ROOM_MAX_KEY,nbRoom.getPositionMax());
+        }
+        // surface
+        //min
+        if (!surface.getPositionMin().equals(DEFAULT_SURFACE_MIN)){
+            maps.put(SURFACE_MIN_KEY,surface.getPositionMin());
+        }
+        //max
+        if (!surface.getPositionMax().equals(DEFAULT_SURFACE_MAX)){
+            maps.put(SURFACE_MAX_KEY,surface.getPositionMax());
+        }
+        return maps;
+    }
 
     public List<City> getCities() {
         return cities;

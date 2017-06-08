@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class Rent extends MinMaxItemAbstract implements Parcelable {
 
-    public Rent(int min, int max) {
+    public Rent(String min, String max) {
         super(min, max);
     }
     public Rent(){
@@ -19,6 +19,7 @@ public class Rent extends MinMaxItemAbstract implements Parcelable {
         return "";
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -27,14 +28,14 @@ public class Rent extends MinMaxItemAbstract implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.positionMin);
-        dest.writeInt(this.positionMax);
+        dest.writeString(this.positionMin);
+        dest.writeString(this.positionMax);
     }
 
     protected Rent(Parcel in) {
         super(in);
-        this.positionMin = in.readInt();
-        this.positionMax = in.readInt();
+        this.positionMin = in.readString();
+        this.positionMax = in.readString();
     }
 
     public static final Creator<Rent> CREATOR = new Creator<Rent>() {

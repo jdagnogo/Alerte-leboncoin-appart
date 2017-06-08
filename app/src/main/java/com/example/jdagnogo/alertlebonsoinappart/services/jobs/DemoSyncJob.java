@@ -65,7 +65,7 @@ public class DemoSyncJob extends Job {
 
     private void getAppart() {
         RetrofitNetworkInterface mService = retrofit.create(RetrofitNetworkInterface.class);
-        Call<ResponseBody> mSong = mService.allAppart("");
+        Call<ResponseBody> mSong = mService.getApparts(null);
         mSong.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

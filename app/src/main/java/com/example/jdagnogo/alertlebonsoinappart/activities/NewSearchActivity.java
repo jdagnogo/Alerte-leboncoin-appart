@@ -124,11 +124,12 @@ public class NewSearchActivity extends AppCompatActivity {
         requestItems.setType(newSearchView.getType());
         requestItems.setMeuble(newSearchView.getMeuble());
         requestItems.setCities(newSearchView.getCities());
-        Rent rent = new Rent(newSearchView.getRent().getPostitonMin(),newSearchView.getRent().getPositionMax());
+        Rent rent = new Rent(newSearchView.getRent().getDescriptionMin(),newSearchView.getRent().getDescriptionMax());
         requestItems.setRent(rent);
-        NbRoom nbRoom = new NbRoom(newSearchView.getNbRoom().getPostitonMin(),newSearchView.getNbRoom().getPositionMax());
+        NbRoom nbRoom = new NbRoom(newSearchView.getNbRoom().getDescriptionMin(),newSearchView.getNbRoom().getDescriptionMax());
         requestItems.setNbRoom(nbRoom);
-        Surface surface = new Surface(newSearchView.getSurface().getPostitonMin(),newSearchView.getSurface().getPositionMax());
+        Surface surface = new Surface(String.valueOf(newSearchView.getSurface().getPostitonMin())
+                ,String.valueOf(newSearchView.getSurface().getPositionMax()));
         requestItems.setSurface(surface);
 
         return  requestItems;
@@ -181,21 +182,22 @@ public class NewSearchActivity extends AppCompatActivity {
             case RENT:
                 newSearchView.getRent().setPositionMax(updateSwipeViewBus.getMax());
                 newSearchView.getRent().setPostitonMin(updateSwipeViewBus.getMin());
-                rentMin.setText(newSearchView.getRent().getDescriptionMin());
-                rentMax.setText(newSearchView.getRent().getDescriptionMax());
+                rentMin.setText(newSearchView.getRent().getDescriptionMinWithUnity());
+                rentMax.setText(newSearchView.getRent().getDescriptionMaxWithUnity());
 
                 break;
             case NB_ROOM:
                 newSearchView.getNbRoom().setPositionMax(updateSwipeViewBus.getMax());
                 newSearchView.getNbRoom().setPostitonMin(updateSwipeViewBus.getMin());
-                nbRoomMin.setText(newSearchView.getNbRoom().getDescriptionMin());
-                nbRoomMax.setText(newSearchView.getNbRoom().getDescriptionMax());
+                nbRoomMin.setText(newSearchView.getNbRoom().getDescriptionMinWithUnity());
+                nbRoomMax.setText(newSearchView.getNbRoom().getDescriptionMaxWithUnity());
                 break;
             default:
                 newSearchView.getSurface().setPositionMax(updateSwipeViewBus.getMax());
-                surfaceMin.setText(newSearchView.getSurface().getDescriptionMin());
-                surfaceMax.setText(newSearchView.getSurface().getDescriptionMax());
                 newSearchView.getSurface().setPostitonMin(updateSwipeViewBus.getMin());
+                surfaceMin.setText(newSearchView.getSurface().getDescriptionMinWithUnity());
+                surfaceMax.setText(newSearchView.getSurface().getDescriptionMaxWithUnity());
+
                 break;
         }
 

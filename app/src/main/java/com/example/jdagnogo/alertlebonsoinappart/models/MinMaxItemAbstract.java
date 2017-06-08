@@ -8,34 +8,35 @@ import android.os.Parcelable;
  */
 
 public abstract class MinMaxItemAbstract implements Parcelable{
-    protected int positionMin;
-    protected int positionMax;
+    protected String positionMin;
+    protected String positionMax;
 
-    public int getPositionMin() {
+    public String getPositionMin() {
         return positionMin;
     }
 
-    public void setPositionMin(int positionMin) {
+    public void setPositionMin(String positionMin) {
         this.positionMin = positionMin;
     }
 
-    public int getPositionMax() {
+    public String getPositionMax() {
         return positionMax;
     }
 
-    public void setPositionMax(int positionMax) {
+    public void setPositionMax(String positionMax) {
         this.positionMax = positionMax;
     }
 
-    public MinMaxItemAbstract(int positionMin, int positionMax) {
+    public MinMaxItemAbstract(String positionMin, String positionMax) {
         this.positionMin = positionMin;
         this.positionMax = positionMax;
     }
 
     public MinMaxItemAbstract() {
-        this.positionMax = 0;
-        this.positionMin = 0;
+        this.positionMax = "0";
+        this.positionMin = "0";
     }
+
 
     @Override
     public int describeContents() {
@@ -44,14 +45,13 @@ public abstract class MinMaxItemAbstract implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.positionMin);
-        dest.writeInt(this.positionMax);
+        dest.writeString(this.positionMin);
+        dest.writeString(this.positionMax);
     }
 
     protected MinMaxItemAbstract(Parcel in) {
-        this.positionMin = in.readInt();
-        this.positionMax = in.readInt();
+        this.positionMin = in.readString();
+        this.positionMax = in.readString();
     }
-
 
 }

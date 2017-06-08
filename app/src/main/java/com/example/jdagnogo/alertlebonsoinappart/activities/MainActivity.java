@@ -16,6 +16,7 @@ import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetwo
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,10 +42,11 @@ public class MainActivity extends AppCompatActivity {
         if(getIntent() != null)
         {
             requestItems = getIntent().getParcelableExtra(NEW_RESEARCH);
-            String url = UrlRequestBuilder.createUrl(requestItems);
+            //String url = UrlRequestBuilder.createUrl(requestItems);
 
             ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(MainActivity.this);
-            getAppart(url);
+
+            getAppart(requestItems.createHashMap());
         }
 
     }
@@ -65,22 +67,16 @@ public class MainActivity extends AppCompatActivity {
         DemoSyncJob demoSyncJob = new DemoSyncJob();
         demoSyncJob.scheduleJob();
 
-        ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(MainActivity.this);
-         getAppart("");
 
     }
 
-    private void getAppart(String url) {
+    private void getAppart(HashMap<String,String> params) {
         RetrofitNetworkInterface mService = retrofit.create(RetrofitNetworkInterface.class);
-        Call<ResponseBody> mSong = mService.allAppart(url);
+        Call<ResponseBody> mSong = mService.getApparts(params);
         mSong.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    Log.d(TAG, "Result " + response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                    Log.d(TAG, "Result " + call.request().url());
             }
 
             @Override

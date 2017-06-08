@@ -22,7 +22,7 @@ public abstract class SwipeItemAbstract implements Parcelable{
     static String title;
     static String minTitle;
     static String maxTitle;
-    static Map<Integer, String> map;
+     Map<Integer, String> map;
 
     public SwipeItemAbstract(MinMaxItemAbstract minMaxItemAbstract, int postitonMin, int positionMax, String description) {
         this.minMaxItemAbstract = minMaxItemAbstract;
@@ -31,7 +31,7 @@ public abstract class SwipeItemAbstract implements Parcelable{
         this.description = description;
     }
 
-    private static SwipeItem[] createSwipeItem(String title) {
+    private  SwipeItem[] createSwipeItem(String title) {
         SwipeItem[] swipeItems = new SwipeItem[map.size()];
         for (int i = 0; i < map.size(); i++) {
             swipeItems[i] = new SwipeItem(i, title, map.get(i) + unite);
@@ -78,15 +78,27 @@ public abstract class SwipeItemAbstract implements Parcelable{
         return positionMax;
     }
 
-    public String getDescriptionMin() {
+    public String getDescriptionMinWithUnity() {
         if (postitonMin != 0) {
 
             return map.get(postitonMin)+getUnite();
         }else return map.get(postitonMin);
 
     }
+    public String getDescriptionMin() {
+        if (postitonMin != 0) {
 
+            return map.get(postitonMin);
+        }else return map.get(postitonMin);
+
+    }
     public String getDescriptionMax() {
+        if (positionMax != map.size()) {
+
+            return map.get(positionMax);
+        }else return map.get(positionMax);
+    }
+    public String getDescriptionMaxWithUnity() {
         if (positionMax != map.size()) {
 
             return map.get(positionMax)+getUnite();

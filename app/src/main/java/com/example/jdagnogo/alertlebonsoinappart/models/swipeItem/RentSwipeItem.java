@@ -18,17 +18,26 @@ public class RentSwipeItem extends SwipeItemAbstract {
 
         this.postitonMin=0;
         this.unite = " €";
-        this.minTitle = AlertLEboncoinApplication.getContext().getString(R.string.rent_title);
+        this.minTitle = AlertLEboncoinApplication.getContext().getString(R.string.rent_title_min);
         this.maxTitle =AlertLEboncoinApplication.getContext().getString(R.string.rent_title_max);
-        this.title =  AlertLEboncoinApplication.getContext().getString(R.string.rent_title_min);
+        this.title =  AlertLEboncoinApplication.getContext().getString(R.string.rent_title);
          map = new HashMap<Integer, String>() {
             {
                 put(0, "Min");
-                put(1, "100");
-                put(2, "200");
+                put(1, "200");
+                put(2, "250");
                 put(3, "300");
-                put(4, "400");
-                put(5, "Max");
+                put(4, "350");
+                put(5, "400");
+                put(6, "450");
+                put(7, "500");
+                put(8, "550");
+                put(9, "600");
+                put(10, "650");
+                put(11, "700");
+                put(12, "750");
+                put(13, "800");
+                put(14, "Max");
             }
         };
         this.positionMax =map.size()-1;
