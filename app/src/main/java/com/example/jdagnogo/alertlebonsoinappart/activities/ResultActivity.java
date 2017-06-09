@@ -12,7 +12,13 @@ import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
 import com.example.jdagnogo.alertlebonsoinappart.services.UrlRequestBuilder;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoSyncJob;
+import com.example.jdagnogo.alertlebonsoinappart.services.jobs.ParseHtmlJob;
 import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,8 +35,8 @@ import retrofit2.Retrofit;
 
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
 
-public class MainActivity extends AppCompatActivity {
-    private final static String TAG = MainActivity.class.getCanonicalName();
+public class ResultActivity extends AppCompatActivity {
+    private final static String TAG = ResultActivity.class.getCanonicalName();
     @Inject
     Retrofit retrofit;
 
@@ -42,9 +48,8 @@ public class MainActivity extends AppCompatActivity {
         if(getIntent() != null)
         {
             requestItems = getIntent().getParcelableExtra(NEW_RESEARCH);
-            //String url = UrlRequestBuilder.createUrl(requestItems);
 
-            ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(MainActivity.this);
+            ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(ResultActivity.this);
 
             getAppart(requestItems.createHashMap());
         }
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         String url = UrlRequestBuilder.createUrl(requestItems);
         Log.d(TAG, "URL : " + url);
 
-        DemoJobCreator demoJobCreator = new DemoJobCreator();
+        DemoJobCreator demoJobCreator = AlertLEboncoinApplication.getDemoJobCreator();
         demoJobCreator.create(DemoSyncJob.TAG);
         DemoSyncJob demoSyncJob = new DemoSyncJob();
         demoSyncJob.scheduleJob();
@@ -70,13 +75,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getAppart(HashMap<String,String> params) {
+    private void getAppart(final HashMap<String,String> params) {
         RetrofitNetworkInterface mService = retrofit.create(RetrofitNetworkInterface.class);
         Call<ResponseBody> mSong = mService.getApparts(params);
         mSong.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    Log.d(TAG, "Result " + call.request().url());
+                try {
+                    Document document = Jsoup.parse(response.body().string());
+                    Elements ensemble = document.getElementsByClass("list_item");
+                  String imageUrl =ensemble.get(1).getElementsByClass("item_image").get(0).getElementsByClass("lazyload").get(0).attr("data-imgsrc");
+
+                    Log.d(TAG, "Result " + response.body().string());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

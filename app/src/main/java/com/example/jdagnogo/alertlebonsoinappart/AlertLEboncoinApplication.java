@@ -11,23 +11,35 @@ import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Constants;
 
 public class AlertLEboncoinApplication extends Application {
-private static Context context;
     private NetworkComponent networkComponent;
+    private static AlertLEboncoinApplication instance;
+    private DemoJobCreator demoJobCreator;
+
+
     @Override
     public void onCreate() {
         super.onCreate();
-        context = this;
+        instance = this;
         JobManager.create(this).addJobCreator(new DemoJobCreator());
 
         networkComponent = DaggerNetworkComponent.builder()
                 .networkModule(new NetworkModule(Constants.SITE_URL))
                 .build();
-    }
-    public static Context getContext(){
-        return context;
+
+        demoJobCreator = new DemoJobCreator();
     }
 
-    public NetworkComponent getNetworkComponent(){
+    public static Context getContext() {
+        return instance.getBaseContext();
+    }
+
+    public NetworkComponent getNetworkComponent() {
         return networkComponent;
+    }
+
+    public static DemoJobCreator getDemoJobCreator() {
+        if (instance.getDemoJobCreator() == null) {
+            return new DemoJobCreator();
+        } else return instance.getDemoJobCreator();
     }
 }

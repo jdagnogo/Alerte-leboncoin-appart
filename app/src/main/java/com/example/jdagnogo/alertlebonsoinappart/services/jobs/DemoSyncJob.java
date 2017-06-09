@@ -35,6 +35,7 @@ public class DemoSyncJob extends Job {
     @Inject
     Retrofit retrofit;
     String result = "";
+
     @Override
     @NonNull
     protected Result onRunJob(Params params) {
@@ -44,11 +45,11 @@ public class DemoSyncJob extends Job {
 
                 Context context = AlertLEboncoinApplication.getContext();
                 ((AlertLEboncoinApplication) context).getNetworkComponent().inject(DemoSyncJob.this);
-// use System.currentTimeMillis() to have a unique ID for the pending intent
+                // use System.currentTimeMillis() to have a unique ID for the pending intent
                 getAppart();
 
-// build notification
-// the addAction re-use the same intent to keep the example short
+                // build notification
+                // the addAction re-use the same intent to keep the example short
 
             }
         });
@@ -71,7 +72,7 @@ public class DemoSyncJob extends Job {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     Log.d(TAG, "Result " + response.body().string());
-                    result = "" +response.code();
+                    result = "" + response.code();
                     Context context = AlertLEboncoinApplication.getContext();
                     Intent intent = new Intent();
                     PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);

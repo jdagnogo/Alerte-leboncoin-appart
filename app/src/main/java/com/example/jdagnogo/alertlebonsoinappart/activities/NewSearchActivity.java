@@ -111,7 +111,7 @@ public class NewSearchActivity extends AppCompatActivity {
         }
         Log.d(TAG, "résultat : " + newSearchView);
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ResultActivity.class);
         Bundle args = new Bundle();
         args.putParcelable(NEW_RESEARCH, createRequestItem());
         intent.putExtras(args);
