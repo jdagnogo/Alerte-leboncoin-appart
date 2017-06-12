@@ -124,15 +124,15 @@ public class NewSearchActivity extends AppCompatActivity {
         requestItems.setType(newSearchView.getType());
         requestItems.setMeuble(newSearchView.getMeuble());
         requestItems.setCities(newSearchView.getCities());
-        Rent rent = new Rent(newSearchView.getRent().getDescriptionMin(),newSearchView.getRent().getDescriptionMax());
+        Rent rent = new Rent(newSearchView.getRent().getDescriptionMin(), newSearchView.getRent().getDescriptionMax());
         requestItems.setRent(rent);
-        NbRoom nbRoom = new NbRoom(newSearchView.getNbRoom().getDescriptionMin(),newSearchView.getNbRoom().getDescriptionMax());
+        NbRoom nbRoom = new NbRoom(newSearchView.getNbRoom().getDescriptionMin(), newSearchView.getNbRoom().getDescriptionMax());
         requestItems.setNbRoom(nbRoom);
         Surface surface = new Surface(String.valueOf(newSearchView.getSurface().getPostitonMin())
-                ,String.valueOf(newSearchView.getSurface().getPositionMax()));
+                , String.valueOf(newSearchView.getSurface().getPositionMax()));
         requestItems.setSurface(surface);
 
-        return  requestItems;
+        return requestItems;
     }
 
     @Override

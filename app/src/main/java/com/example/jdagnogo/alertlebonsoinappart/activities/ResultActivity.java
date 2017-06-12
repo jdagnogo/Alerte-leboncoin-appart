@@ -105,6 +105,7 @@ public class ResultActivity extends AppCompatActivity {
                 try {
                     Document document = Jsoup.parse(response.body().string());
                     Elements ensemble = document.getElementsByClass("list_item");
+                    Log.d(TAG, "Url " + call.request().url());
                     List<Appart> apparts = new ArrayList<Appart>();
                     for (int i = 0; i < MAX_NB_APPART; i++) {
 
@@ -123,7 +124,7 @@ public class ResultActivity extends AppCompatActivity {
                         apparts.add(appart);
                     }
 
-                    Log.d(TAG, "Result " + response.body().string());
+
                     UpdateAppartsBus event = new UpdateAppartsBus(apparts);
                     GlobalBus.getBus().post(event);
 

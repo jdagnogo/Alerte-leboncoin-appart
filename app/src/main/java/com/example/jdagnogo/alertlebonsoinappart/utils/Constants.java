@@ -3,7 +3,7 @@ package com.example.jdagnogo.alertlebonsoinappart.utils;
 public class Constants {
 
     //...........// UrlRequest   //....................//
-    public final static String BASE_URL = "/locations/offres/ile_de_france/occasions/?th=1&parrot=0";
+    public final static String BASE_URL = "/locations/offres/aquitaine/occasions/?th=1&parrot=0";
     public final static String SITE_URL="https://www.leboncoin.fr";
     public final static String BASE_URL_FORMAT = "%s";
     public final static String MORE_OPTIONS_FORMAT = "%s%s%s";
