@@ -1,5 +1,6 @@
 package com.example.jdagnogo.alertlebonsoinappart.activities;
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,9 @@ import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoSyncJob;
 import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Parser;
+import com.willowtreeapps.spruce.Spruce;
+import com.willowtreeapps.spruce.animation.DefaultAnimations;
+import com.willowtreeapps.spruce.sort.DefaultSort;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.jsoup.Jsoup;
@@ -158,6 +162,11 @@ public class ResultActivity extends AppCompatActivity {
     public void getMessage(UpdateAppartsBus updateSwipeViewBus) {
         apparts = updateSwipeViewBus.getApparts();
         initRecycler();
+        Animator spruceAnimator = new Spruce
+                .SpruceBuilder(recycleListView)
+                .sortWith(new DefaultSort(/*interObjectDelay=*/50L))
+                .animateWith(new Animator[] {DefaultAnimations.shrinkAnimator(recycleListView, /*duration=*/800)})
+                .start();
         Search search = new Search("toto", new Date(), apparts.get(0), requestItemsRealm);
         addSearchToDb(search);
 

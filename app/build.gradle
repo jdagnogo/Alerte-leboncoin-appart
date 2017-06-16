@@ -59,7 +59,12 @@ dependencies {
     //Jsoup
     compile 'org.jsoup:jsoup:1.10.2'
 
-    compile 'org.parceler:parceler-api:1.1.8'
-    annotationProcessor 'org.parceler:parceler:1.1.8'
+//glide
+    compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
+    compile 'com.android.support:support-v4:25.3.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 
+    //spruce
+
+    compile 'com.willowtreeapps.spruce:spruce-android:1.0.1'
 }

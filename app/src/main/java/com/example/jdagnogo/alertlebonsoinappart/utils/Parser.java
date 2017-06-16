@@ -26,6 +26,8 @@ public class Parser {
             String imageUrl = "";
             if (0 == ensemble.get(i).getElementsByClass("item_image").get(0).getElementsByClass("lazyload").size()) {
                 continue;
+            }else {
+                imageUrl = ensemble.get(i).getElementsByClass("item_image").get(0).getElementsByClass("lazyload").get(0).attr("data-imgsrc");
             }
             String price = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_price").get(0).text();
             if (0 == ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_absolute").size()) {

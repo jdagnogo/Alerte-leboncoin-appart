@@ -4,8 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.models.*;
 
@@ -31,6 +34,9 @@ public class ResultResearchAppartAdapter extends RecyclerView.Adapter<ResultRese
         holder.title.setText(data.get(position).getTitle());
         holder.price.setText(data.get(position).getPrice());
         holder.date.setText(data.get(position).getDate());
+        Glide.with(AlertLEboncoinApplication.getContext())
+                .load("http:"+data.get(position).getImage())
+                .into(holder.imageView);
     }
 
     public void setData(List<Appart> apparts) {
@@ -45,12 +51,14 @@ public class ResultResearchAppartAdapter extends RecyclerView.Adapter<ResultRese
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, date, price;
+        public ImageView imageView;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             date = (TextView) view.findViewById(R.id.date);
             price = (TextView) view.findViewById(R.id.price);
+            imageView = (ImageView) view.findViewById(R.id.image);
 
         }
     }
