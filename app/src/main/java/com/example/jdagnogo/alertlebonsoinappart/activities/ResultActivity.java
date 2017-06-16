@@ -61,8 +61,6 @@ public class ResultActivity extends AppCompatActivity {
     private RequestItemsRealm requestItemsRealm;
     @Bind(R.id.alarm)
     FloatingActionButton alarm;
-
-
     @Inject
     Retrofit retrofit;
     DemoSyncJob demoSyncJob;
@@ -72,12 +70,12 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         apparts = new ArrayList<>();
-        DemoJobCreator demoJobCreator = new DemoJobCreator();
-        demoJobCreator.create(DemoSyncJob.TAG);
-        demoSyncJob = new DemoSyncJob();
+        initJob();
         GlobalBus.getBus().register(this);
         RequestItems requestItems;
+
         if (getIntent() != null) {
             requestItems = getIntent().getParcelableExtra(NEW_RESEARCH);
 
@@ -93,9 +91,14 @@ public class ResultActivity extends AppCompatActivity {
 
     @OnClick(R.id.alarm)
     public void setOnAlarmClick() {
-        Number nextID =  (realm.where(Search.class).max("id"));
+        Number nextID = (realm.where(Search.class).max("id"));
+        demoSyncJob.scheduleJob(nextID.intValue());
+    }
 
-        demoSyncJob.scheduleJob(nextID.intValue()+1);
+    private void initJob() {
+        DemoJobCreator demoJobCreator = new DemoJobCreator();
+        demoJobCreator.create(DemoSyncJob.TAG);
+        demoSyncJob = new DemoSyncJob();
     }
 
     private void initRecycler() {
@@ -115,9 +118,8 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    Document document = Jsoup.parse(response.body().string());
-                    Elements ensemble = document.getElementsByClass("list_item");
-                    List<Appart> apparts = Parser.parseHtml(ensemble);
+
+                    List<Appart> apparts = Parser.parseHtml(response);
                     UpdateAppartsBus event = new UpdateAppartsBus(apparts);
                     GlobalBus.getBus().post(event);
 
@@ -132,14 +134,15 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
     }
-private void addSearchToDb(Search search){
-    realm = ((AlertLEboncoinApplication) getApplication()).getRealm();
-    realm.beginTransaction();
-    Number nextID =  (realm.where(Search.class).max("id"));
-    search.setId(nextID.intValue()+1);
-    realm.copyToRealm(search);
-    realm.commitTransaction();
-}
+
+    private void addSearchToDb(Search search) {
+        realm = ((AlertLEboncoinApplication) getApplication()).getRealm();
+        realm.beginTransaction();
+        Number nextID = (realm.where(Search.class).max("id"));
+        search.setId(nextID.intValue() + 1);
+        realm.copyToRealm(search);
+        realm.commitTransaction();
+    }
 
     @Override
     protected void onDestroy() {
@@ -155,7 +158,7 @@ private void addSearchToDb(Search search){
     public void getMessage(UpdateAppartsBus updateSwipeViewBus) {
         apparts = updateSwipeViewBus.getApparts();
         initRecycler();
-        Search search = new Search("toto",new Date(),apparts.get(0),requestItemsRealm);
+        Search search = new Search("toto", new Date(), apparts.get(0), requestItemsRealm);
         addSearchToDb(search);
 
     }

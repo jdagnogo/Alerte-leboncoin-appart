@@ -26,6 +26,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -76,7 +77,10 @@ public class DemoSyncJob extends Job {
         extras.putInt("id", id);
 
         new JobRequest.Builder(DemoSyncJob.TAG)
-                .setExecutionWindow(10_000L, 15_000L)
+                .setPeriodic(TimeUnit.MINUTES.toMillis(15), TimeUnit.MINUTES.toMillis(5))
+                .setPersisted(true)
+                .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
+                .setExtras(extras)
                 .build()
                 .schedule();
     }
@@ -87,7 +91,7 @@ public class DemoSyncJob extends Job {
         RetrofitNetworkInterface mService = retrofit.create(RetrofitNetworkInterface.class);
         //realm
         Realm.init(context);
-        Realm realm = Realm.getInstance(getRealmConfig());
+        final Realm realm = Realm.getInstance(getRealmConfig());
         RealmQuery<Search> query = realm.where(Search.class).equalTo("id", id);
         final RealmResults<Search> result = query.findAll();
 
@@ -96,11 +100,7 @@ public class DemoSyncJob extends Job {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    Document document = Jsoup.parse(response.body().string());
-                    Elements ensemble = document.getElementsByClass("list_item");
-                    List<Appart> apparts = Parser.parseHtml(ensemble);
-
-
+                    List<Appart> apparts = Parser.parseHtml(response);
                     if (!result.get(0).getLastAppart().getTitle().equals(apparts.get(0).getTitle())) {
                         Intent intent = new Intent();
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
@@ -119,6 +119,9 @@ public class DemoSyncJob extends Job {
                                 (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 
                         notificationManager.notify(0, n);
+
+                        result.get(0).setLastAppart(apparts.get(0));
+                        realm.copyFromRealm(result);
                     } else {
                         Intent intent = new Intent();
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
