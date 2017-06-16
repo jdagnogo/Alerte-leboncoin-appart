@@ -3,6 +3,8 @@ package com.example.jdagnogo.alertlebonsoinappart.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Jeff on 02/05/2017.
  */

@@ -15,6 +15,7 @@ import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
 import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
 import com.example.jdagnogo.alertlebonsoinappart.models.Search;
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.RequestItemsRealm;
 import com.example.jdagnogo.alertlebonsoinappart.services.UrlRequestBuilder;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateAppartsBus;
@@ -57,6 +58,7 @@ public class ResultActivity extends AppCompatActivity {
     private ResultResearchAppartAdapter adapter;
     private Realm realm;
     private HashMap<String, String> map;
+    private RequestItemsRealm requestItemsRealm;
     @Bind(R.id.alarm)
     FloatingActionButton alarm;
 
@@ -81,6 +83,8 @@ public class ResultActivity extends AppCompatActivity {
 
             ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(ResultActivity.this);
             map = requestItems.createHashMap();
+
+            requestItemsRealm = new RequestItemsRealm(requestItems);
             getAppart(map);
 
 
@@ -89,8 +93,9 @@ public class ResultActivity extends AppCompatActivity {
 
     @OnClick(R.id.alarm)
     public void setOnAlarmClick() {
+        Number nextID =  (realm.where(Search.class).max("id"));
 
-        demoSyncJob.scheduleJob(map);
+        demoSyncJob.scheduleJob(nextID.intValue()+1);
     }
 
     private void initRecycler() {
@@ -112,7 +117,6 @@ public class ResultActivity extends AppCompatActivity {
                 try {
                     Document document = Jsoup.parse(response.body().string());
                     Elements ensemble = document.getElementsByClass("list_item");
-                    Log.d(TAG, "Url " + call.request().url());
                     List<Appart> apparts = Parser.parseHtml(ensemble);
                     UpdateAppartsBus event = new UpdateAppartsBus(apparts);
                     GlobalBus.getBus().post(event);
@@ -131,6 +135,8 @@ public class ResultActivity extends AppCompatActivity {
 private void addSearchToDb(Search search){
     realm = ((AlertLEboncoinApplication) getApplication()).getRealm();
     realm.beginTransaction();
+    Number nextID =  (realm.where(Search.class).max("id"));
+    search.setId(nextID.intValue()+1);
     realm.copyToRealm(search);
     realm.commitTransaction();
 }
@@ -149,7 +155,7 @@ private void addSearchToDb(Search search){
     public void getMessage(UpdateAppartsBus updateSwipeViewBus) {
         apparts = updateSwipeViewBus.getApparts();
         initRecycler();
-        Search search = new Search("toto",new Date(),apparts.get(0));
+        Search search = new Search("toto",new Date(),apparts.get(0),requestItemsRealm);
         addSearchToDb(search);
 
     }

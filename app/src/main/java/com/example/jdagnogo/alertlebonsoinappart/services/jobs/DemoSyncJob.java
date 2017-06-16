@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.evernote.android.job.Job;
 import com.evernote.android.job.JobRequest;
+import com.evernote.android.job.util.support.PersistableBundleCompat;
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
@@ -24,9 +25,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -47,12 +46,12 @@ public class DemoSyncJob extends Job {
     public static final String TAG = "job_demo_tag";
     @Inject
     Retrofit retrofit;
-    private  HashMap<String, String> map;
-    String result = "";
+    private int id;
+
 
     @Override
     @NonNull
-    protected Result onRunJob(Params params) {
+    protected Result onRunJob(final Params params) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
@@ -60,6 +59,7 @@ public class DemoSyncJob extends Job {
                 Context context = AlertLEboncoinApplication.getContext();
                 ((AlertLEboncoinApplication) context).getNetworkComponent().inject(DemoSyncJob.this);
                 // use System.currentTimeMillis() to have a unique ID for the pending intent
+                id = params.getExtras().getInt("id", 33);
                 getAppart();
 
                 // build notification
@@ -70,11 +70,13 @@ public class DemoSyncJob extends Job {
         return Result.SUCCESS;
     }
 
-    public  void scheduleJob(HashMap<String, String> map) {
-        this.map = map;
+    public void scheduleJob(int id) {
+        this.id = id;
+        PersistableBundleCompat extras = new PersistableBundleCompat();
+        extras.putInt("id", id);
+
         new JobRequest.Builder(DemoSyncJob.TAG)
-                .setPeriodic(TimeUnit.MINUTES.toMillis(15), TimeUnit.MINUTES.toMillis(5))
-                .setPersisted(true)
+                .setExecutionWindow(10_000L, 15_000L)
                 .build()
                 .schedule();
     }
@@ -83,29 +85,28 @@ public class DemoSyncJob extends Job {
         final Context context = AlertLEboncoinApplication.getContext();
 
         RetrofitNetworkInterface mService = retrofit.create(RetrofitNetworkInterface.class);
-        Call<ResponseBody> mSong = mService.getApparts(map);
+        //realm
+        Realm.init(context);
+        Realm realm = Realm.getInstance(getRealmConfig());
+        RealmQuery<Search> query = realm.where(Search.class).equalTo("id", id);
+        final RealmResults<Search> result = query.findAll();
+
+        Call<ResponseBody> mSong = mService.getApparts(result.get(0).getRequestItemsRealm().getRequestItem().createHashMap());
         mSong.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    Log.d(TAG, "Result " + response.body().string());
-                    result = "" + response.code();
                     Document document = Jsoup.parse(response.body().string());
                     Elements ensemble = document.getElementsByClass("list_item");
-                    List<Appart> apparts =Parser.parseHtml(ensemble);
+                    List<Appart> apparts = Parser.parseHtml(ensemble);
 
-                    //realm
-                    Realm.init(context);
-                    Realm realm = Realm.getInstance(getRealmConfig());
-                    RealmQuery<Search> query = realm.where(Search.class);
-                    RealmResults<Search> result = query.findAll();
 
-                    if (!result.get(0).getLastAppart().equals(apparts.get(0))){
+                    if (!result.get(0).getLastAppart().getTitle().equals(apparts.get(0).getTitle())) {
                         Intent intent = new Intent();
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
                         Notification n = new Notification.Builder(context)
                                 .setContentTitle("alerte lebon coin")
-                                .setContentText("new appart !!  "+result.get(0).getLastAppart().getTitle())
+                                .setContentText("new appart !!  " + result.get(0).getLastAppart().getTitle())
                                 .setSmallIcon(R.drawable.test)
                                 .setContentIntent(pIntent)
                                 .setAutoCancel(true)
@@ -118,12 +119,12 @@ public class DemoSyncJob extends Job {
                                 (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 
                         notificationManager.notify(0, n);
-                    }else {
+                    } else {
                         Intent intent = new Intent();
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
                         Notification n = new Notification.Builder(context)
                                 .setContentTitle("alerte lebon coin")
-                                .setContentText("pas de nouveautés... "+apparts.get(0).getTitle())
+                                .setContentText("pas de nouveautés... " + apparts.get(0).getTitle())
                                 .setSmallIcon(R.drawable.test)
                                 .setContentIntent(pIntent)
                                 .setAutoCancel(true)
@@ -151,7 +152,7 @@ public class DemoSyncJob extends Job {
     }
 
     public static RealmConfiguration getRealmConfig() {
-        return  new RealmConfiguration.Builder()
+        return new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
                 .build();
     }

@@ -4,7 +4,10 @@ import android.os.Parcel;
 
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.NbRoomRealm;
 import com.roughike.swipeselector.SwipeItem;
+
+import io.realm.RealmObject;
 
 /**
  * Created by Jeff on 02/05/2017.
@@ -15,6 +18,12 @@ public class NbRoom extends MinMaxItemAbstract {
         super(min, max);
     }
     public NbRoom(){
+
+    }
+
+    public NbRoom(NbRoomRealm nbRoomRealm){
+        this.positionMax= nbRoomRealm.getPositionMax();
+        this.positionMin = nbRoomRealm.getPositionMin();
 
     }
 

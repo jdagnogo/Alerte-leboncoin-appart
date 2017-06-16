@@ -2,6 +2,8 @@ package com.example.jdagnogo.alertlebonsoinappart.models;
 
 import android.os.Parcel;
 
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.SurfaceRealm;
+
 /**
  * Created by Jeff on 02/05/2017.
  */
@@ -14,7 +16,11 @@ public class Surface extends MinMaxItemAbstract {
 
     }
 
+    public Surface(SurfaceRealm surfaceRealm){
+        this.positionMax= surfaceRealm.getPositionMax();
+        this.positionMin = surfaceRealm.getPositionMin();
 
+    }
 
     @Override
     public int describeContents() {

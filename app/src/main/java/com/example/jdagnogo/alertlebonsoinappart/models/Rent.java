@@ -3,6 +3,8 @@ package com.example.jdagnogo.alertlebonsoinappart.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.RentRealm;
+
 /**
  * Created by Jeff on 02/05/2017.
  */
@@ -14,7 +16,11 @@ public class Rent extends MinMaxItemAbstract implements Parcelable {
     }
     public Rent(){
     }
+    public Rent(RentRealm rentRealm){
+        this.positionMax= rentRealm.getPositionMax();
+        this.positionMin = rentRealm.getPositionMin();
 
+    }
     public static String getDescription(){
         return "";
     }
