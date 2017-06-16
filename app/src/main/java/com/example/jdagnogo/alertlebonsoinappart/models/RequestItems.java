@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import io.realm.RealmObject;
+
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_CODE_POSTAL;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_MAX;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_MIN;
@@ -28,7 +30,7 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.SURFACE_
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.TYPE_KEY;
 
 
-public class RequestItems implements Parcelable {
+public class RequestItems  implements Parcelable  {
     List<City> cities;
     Rent rent;
     Surface surface;

@@ -4,22 +4,29 @@ import android.app.Application;
 import android.content.Context;
 
 import com.evernote.android.job.JobManager;
+
 import com.example.jdagnogo.alertlebonsoinappart.services.dagger.DaggerNetworkComponent;
 import com.example.jdagnogo.alertlebonsoinappart.services.dagger.NetworkComponent;
 import com.example.jdagnogo.alertlebonsoinappart.services.dagger.NetworkModule;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Constants;
 
-public class AlertLEboncoinApplication extends Application {
-    private NetworkComponent networkComponent;
-    private static AlertLEboncoinApplication instance;
-    private DemoJobCreator demoJobCreator;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
+public class AlertLEboncoinApplication extends Application {
+    private static Context context;
+    private NetworkComponent networkComponent;
+    private DemoJobCreator demoJobCreator;
+    private static AlertLEboncoinApplication instance;
+    private Realm realm;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        context = this;
+
         JobManager.create(this).addJobCreator(new DemoJobCreator());
 
         networkComponent = DaggerNetworkComponent.builder()
@@ -30,7 +37,17 @@ public class AlertLEboncoinApplication extends Application {
     }
 
     public static Context getContext() {
-        return instance.getBaseContext();
+        return context;
+    }
+
+    public Realm getRealm() {
+        if (realm != null) {
+            if (!realm.isClosed()) {
+                return realm;
+            }
+        }
+        realm.init(context);
+        return Realm.getInstance(getRealmConfig());
     }
 
     public NetworkComponent getNetworkComponent() {
@@ -41,5 +58,11 @@ public class AlertLEboncoinApplication extends Application {
         if (instance.getDemoJobCreator() == null) {
             return new DemoJobCreator();
         } else return instance.getDemoJobCreator();
+    }
+
+    public static RealmConfiguration getRealmConfig() {
+        return new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
     }
 }

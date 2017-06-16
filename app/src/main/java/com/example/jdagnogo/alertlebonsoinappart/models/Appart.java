@@ -1,16 +1,21 @@
 package com.example.jdagnogo.alertlebonsoinappart.models;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Jeff on 09/06/2017.
  */
 
-public class Appart {
+public class Appart  extends RealmObject {
     private String image;
     private String price;
     private String title;
     private String date;
     private boolean isPro;
 
+    public Appart(){
+
+    }
     public Appart(String image, String price, String title, String date, boolean isPro) {
         this.image = image;
         this.price = price;
