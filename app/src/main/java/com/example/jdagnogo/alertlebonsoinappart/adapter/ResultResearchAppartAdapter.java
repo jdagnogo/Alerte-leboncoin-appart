@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
-import com.example.jdagnogo.alertlebonsoinappart.models.*;
+import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
 
 import java.util.List;
 
