@@ -20,10 +20,6 @@ import com.example.jdagnogo.alertlebonsoinappart.models.Search;
 import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Parser;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -48,6 +44,7 @@ public class DemoSyncJob extends Job {
     @Inject
     Retrofit retrofit;
     private int id;
+    private int jobID;
 
 
     @Override
@@ -56,33 +53,32 @@ public class DemoSyncJob extends Job {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-
                 Context context = AlertLEboncoinApplication.getContext();
                 ((AlertLEboncoinApplication) context).getNetworkComponent().inject(DemoSyncJob.this);
-                // use System.currentTimeMillis() to have a unique ID for the pending intent
-                id = params.getExtras().getInt("id", 33);
+                id = params.getExtras().getInt("id", 0);
                 getAppart();
-
-                // build notification
-                // the addAction re-use the same intent to keep the example short
 
             }
         });
         return Result.SUCCESS;
     }
 
-    public void scheduleJob(int id) {
+    public int scheduleJob(int id) {
         this.id = id;
         PersistableBundleCompat extras = new PersistableBundleCompat();
         extras.putInt("id", id);
 
-        new JobRequest.Builder(DemoSyncJob.TAG)
+        int jobId =  new JobRequest.Builder(DemoSyncJob.TAG)
                 .setPeriodic(TimeUnit.MINUTES.toMillis(15), TimeUnit.MINUTES.toMillis(5))
                 .setPersisted(true)
                 .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
                 .setExtras(extras)
                 .build()
                 .schedule();
+
+        return jobId;
+
+
     }
 
     private void getAppart() {
@@ -120,8 +116,11 @@ public class DemoSyncJob extends Job {
 
                         notificationManager.notify(0, n);
 
-                        result.get(0).setLastAppart(apparts.get(0));
-                        realm.copyFromRealm(result);
+                        Search search = result.get(0);
+                        final Realm realm = Realm.getInstance(getRealmConfig());
+                        realm.beginTransaction();
+                        realm.copyToRealm(search);
+                        realm.commitTransaction();
                     } else {
                         Intent intent = new Intent();
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);

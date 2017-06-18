@@ -3,11 +3,9 @@ package com.example.jdagnogo.alertlebonsoinappart.models;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.RequestItemsRealm;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
 
 public class Search extends RealmObject {
     @PrimaryKey
@@ -16,8 +14,25 @@ public class Search extends RealmObject {
     private RequestItemsRealm requestItems;
     private Date majDate;
     private Appart lastAppart;
+    private int jobID ;
 
     public Search() {
+    }
+
+    public Search(int id, String title, RequestItemsRealm requestItems, Date majDate, Appart lastAppart) {
+        this.id = id;
+        this.title = title;
+        this.requestItems = requestItems;
+        this.majDate = majDate;
+        this.lastAppart = lastAppart;
+    }
+
+    public int getJobID() {
+        return jobID;
+    }
+
+    public void setJobID(int jobID) {
+        this.jobID = jobID;
     }
 
     public int getId() {

@@ -7,17 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.adapter.ResultResearchAppartAdapter;
-import com.example.jdagnogo.alertlebonsoinappart.enums.City;
-import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
 import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
 import com.example.jdagnogo.alertlebonsoinappart.models.Search;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.RequestItemsRealm;
-import com.example.jdagnogo.alertlebonsoinappart.services.UrlRequestBuilder;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateAppartsBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
@@ -29,9 +27,6 @@ import com.willowtreeapps.spruce.animation.DefaultAnimations;
 import com.willowtreeapps.spruce.sort.DefaultSort;
 
 import org.greenrobot.eventbus.Subscribe;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,7 +39,6 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 import io.realm.Realm;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -62,6 +56,7 @@ public class ResultActivity extends AppCompatActivity {
     private ResultResearchAppartAdapter adapter;
     private Realm realm;
     private HashMap<String, String> map;
+    private int jobId;
     private RequestItemsRealm requestItemsRealm;
     @Bind(R.id.alarm)
     FloatingActionButton alarm;
@@ -76,6 +71,8 @@ public class ResultActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         apparts = new ArrayList<>();
+        realm = ((AlertLEboncoinApplication) getApplication()).getRealm();
+        realm.beginTransaction();
         initJob();
         GlobalBus.getBus().register(this);
         RequestItems requestItems;
@@ -96,7 +93,15 @@ public class ResultActivity extends AppCompatActivity {
     @OnClick(R.id.alarm)
     public void setOnAlarmClick() {
         Number nextID = (realm.where(Search.class).max("id"));
-        demoSyncJob.scheduleJob(nextID.intValue());
+        int id = 0;
+        if (null != nextID){
+            id=nextID.intValue();
+        }
+        jobId =demoSyncJob.scheduleJob(id);
+        Search search = new Search("toto", new Date(), apparts.get(0), requestItemsRealm);
+        search.setJobID(jobId);
+        addSearchToDb(search);
+        alarm.setVisibility(View.GONE);
     }
 
     private void initJob() {
@@ -140,12 +145,16 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void addSearchToDb(Search search) {
-        realm = ((AlertLEboncoinApplication) getApplication()).getRealm();
-        realm.beginTransaction();
+
         Number nextID = (realm.where(Search.class).max("id"));
-        search.setId(nextID.intValue() + 1);
+        int id = 0;
+        if (null != nextID){
+            id=nextID.intValue();
+        }
+        search.setId(id + 1);
         realm.copyToRealm(search);
         realm.commitTransaction();
+        Log.d("toto","toto");
     }
 
     @Override
@@ -167,8 +176,7 @@ public class ResultActivity extends AppCompatActivity {
                 .sortWith(new DefaultSort(/*interObjectDelay=*/50L))
                 .animateWith(new Animator[] {DefaultAnimations.shrinkAnimator(recycleListView, /*duration=*/800)})
                 .start();
-        Search search = new Search("toto", new Date(), apparts.get(0), requestItemsRealm);
-        addSearchToDb(search);
+
 
     }
 }
