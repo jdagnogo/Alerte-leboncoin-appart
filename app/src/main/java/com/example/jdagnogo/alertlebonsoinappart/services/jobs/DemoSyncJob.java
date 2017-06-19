@@ -44,7 +44,6 @@ public class DemoSyncJob extends Job {
     @Inject
     Retrofit retrofit;
     private int id;
-    private int jobID;
 
 
     @Override
@@ -55,7 +54,8 @@ public class DemoSyncJob extends Job {
             public void run() {
                 Context context = AlertLEboncoinApplication.getContext();
                 ((AlertLEboncoinApplication) context).getNetworkComponent().inject(DemoSyncJob.this);
-                id = params.getExtras().getInt("id", 0);
+                id = params.getExtras().getInt("id", 33);
+                Log.e("job : ","id récupéré : "+id);
                 getAppart();
 
             }
@@ -67,6 +67,7 @@ public class DemoSyncJob extends Job {
         this.id = id;
         PersistableBundleCompat extras = new PersistableBundleCompat();
         extras.putInt("id", id);
+        Log.e("job : ","id dans l extras : "+id);
 
         int jobId =  new JobRequest.Builder(DemoSyncJob.TAG)
                 .setPeriodic(TimeUnit.MINUTES.toMillis(15), TimeUnit.MINUTES.toMillis(5))
@@ -89,20 +90,22 @@ public class DemoSyncJob extends Job {
         Realm.init(context);
         final Realm realm = Realm.getInstance(getRealmConfig());
         RealmQuery<Search> query = realm.where(Search.class).equalTo("id", id);
-        final RealmResults<Search> result = query.findAll();
+        final RealmResults<Search> resultRealm = query.findAll();
+        Log.e("job : ","resultRealm last appart:"+resultRealm.get(0).getLastAppart().getTitle());
 
-        Call<ResponseBody> mSong = mService.getApparts(result.get(0).getRequestItemsRealm().getRequestItem().createHashMap());
+        Call<ResponseBody> mSong = mService.getApparts(resultRealm.get(0).getRequestItemsRealm().getRequestItem().createHashMap());
         mSong.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    List<Appart> apparts = Parser.parseHtml(response);
-                    if (!result.get(0).getLastAppart().getTitle().equals(apparts.get(0).getTitle())) {
+                    List<Appart> appartsFromHtml = Parser.parseHtml(response);
+                    if (!resultRealm.get(0).getLastAppart().getTitle().equals(appartsFromHtml.get(0).getTitle())) {
                         Intent intent = new Intent();
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
+
                         Notification n = new Notification.Builder(context)
                                 .setContentTitle("alerte lebon coin")
-                                .setContentText("new appart !!  " + result.get(0).getLastAppart().getTitle())
+                                .setContentText("new appart !!  " + appartsFromHtml.get(0).getTitle())
                                 .setSmallIcon(R.drawable.test)
                                 .setContentIntent(pIntent)
                                 .setAutoCancel(true)
@@ -116,29 +119,17 @@ public class DemoSyncJob extends Job {
 
                         notificationManager.notify(0, n);
 
-                        Search search = result.get(0);
-                        final Realm realm = Realm.getInstance(getRealmConfig());
+                        Search search = new Search(resultRealm.get(0).getId(),
+                                resultRealm.get(0).getTitle(),
+                                resultRealm.get(0).getRequestItemsRealm()
+                                ,resultRealm.get(0).getMajDate(), appartsFromHtml.get(0));
+
                         realm.beginTransaction();
-                        realm.copyToRealm(search);
+                        realm.copyToRealmOrUpdate(search);
                         realm.commitTransaction();
-                    } else {
-                        Intent intent = new Intent();
-                        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
-                        Notification n = new Notification.Builder(context)
-                                .setContentTitle("alerte lebon coin")
-                                .setContentText("pas de nouveautés... " + apparts.get(0).getTitle())
-                                .setSmallIcon(R.drawable.test)
-                                .setContentIntent(pIntent)
-                                .setAutoCancel(true)
-                                .addAction(R.drawable.test, "Call", pIntent)
-                                .addAction(R.drawable.test, "More", pIntent)
-                                .addAction(R.drawable.test, "And more", pIntent).build();
-
-
-                        NotificationManager notificationManager =
-                                (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-
-                        notificationManager.notify(0, n);
+                        realm.close();
+                    }else {
+                        Log.e("job : ","same, appartHtml last appart:"+appartsFromHtml.get(0).getTitle());
                     }
 
                 } catch (IOException e) {

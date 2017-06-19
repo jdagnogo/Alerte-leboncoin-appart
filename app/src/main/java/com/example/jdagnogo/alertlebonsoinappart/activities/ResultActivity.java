@@ -88,16 +88,19 @@ public class ResultActivity extends AppCompatActivity {
 
     @OnClick(R.id.alarm)
     public void setOnAlarmClick() {
+        Search search = new Search("toto", new Date(), apparts.get(0), requestItemsRealm);
+        //search.setJobID(jobId);
+        addSearchToDb(search);
         Number nextID = (realm.where(Search.class).max("id"));
         int id = 0;
         if (null != nextID){
             id=nextID.intValue();
         }
+        Log.e("job : ","nextID au job "+id);
         jobId =demoSyncJob.scheduleJob(id);
-        Search search = new Search("toto", new Date(), apparts.get(0), requestItemsRealm);
-        search.setJobID(jobId);
-        addSearchToDb(search);
+
         alarm.setVisibility(View.GONE);
+        realm.close();
     }
 
     private void initJob() {
@@ -147,9 +150,11 @@ public class ResultActivity extends AppCompatActivity {
         if (null != nextID){
             id=nextID.intValue();
         }
-        search.setId(id + 1);
+        search.setId(id+1);
+        Log.e("job : ","id dans la db "+id+1);
         realm.copyToRealm(search);
         realm.commitTransaction();
+
         Log.d("toto","toto");
     }
 
