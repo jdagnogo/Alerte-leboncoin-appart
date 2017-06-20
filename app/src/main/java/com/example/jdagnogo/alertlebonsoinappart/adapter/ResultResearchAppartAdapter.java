@@ -32,7 +32,7 @@ public class ResultResearchAppartAdapter extends RecyclerView.Adapter<ResultRese
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.title.setText(data.get(position).getTitle());
-        holder.price.setText(data.get(position).getPrice());
+        holder.price.setText(data.get(position).getPrice().substring(0,data.get(position).getPrice().length()-5));
         holder.date.setText(data.get(position).getDate());
         Glide.with(AlertLEboncoinApplication.getContext())
                 .load("http:"+data.get(position).getImage())

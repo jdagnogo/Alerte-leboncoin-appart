@@ -93,11 +93,11 @@ public class ResultActivity extends AppCompatActivity {
         addSearchToDb(search);
         Number nextID = (realm.where(Search.class).max("id"));
         int id = 0;
-        if (null != nextID){
-            id=nextID.intValue();
+        if (null != nextID) {
+            id = nextID.intValue();
         }
-        Log.e("job : ","nextID au job "+id);
-        jobId =demoSyncJob.scheduleJob(id);
+        Log.e("job : ", "nextID au job " + id);
+        jobId = demoSyncJob.scheduleJob(id);
 
         alarm.setVisibility(View.GONE);
         realm.close();
@@ -126,7 +126,7 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-
+                    Log.d("url", "url : " + call.request().url());
                     List<Appart> apparts = Parser.parseHtml(response);
                     UpdateAppartsBus event = new UpdateAppartsBus(apparts);
                     GlobalBus.getBus().post(event);
@@ -147,15 +147,15 @@ public class ResultActivity extends AppCompatActivity {
 
         Number nextID = (realm.where(Search.class).max("id"));
         int id = 0;
-        if (null != nextID){
-            id=nextID.intValue();
+        if (null != nextID) {
+            id = nextID.intValue();
         }
-        search.setId(id+1);
-        Log.e("job : ","id dans la db "+id+1);
+        search.setId(id + 1);
+        Log.e("job : ", "id dans la db " + id + 1);
         realm.copyToRealm(search);
         realm.commitTransaction();
 
-        Log.d("toto","toto");
+        Log.d("toto", "toto");
     }
 
     @Override

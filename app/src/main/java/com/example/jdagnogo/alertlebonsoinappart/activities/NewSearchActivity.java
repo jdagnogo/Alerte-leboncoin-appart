@@ -101,7 +101,7 @@ public class NewSearchActivity extends AppCompatActivity {
             newSearchView.setType(Type.APPARTEMENT);
         }
         if (nonMeuble.isChecked()) {
-            if (appart.isChecked()) {
+            if (meuble.isChecked()) {
                 newSearchView.setMeuble(Meuble.MEUBLE_DEFAULT);
             } else {
                 newSearchView.setMeuble(Meuble.NON_MEUBLE);
