@@ -21,6 +21,7 @@ import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetwo
 import com.example.jdagnogo.alertlebonsoinappart.utils.Parser;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -38,7 +39,7 @@ import retrofit2.Retrofit;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
-public class DemoSyncJob extends Job {
+public class GetLastAppartJob extends Job {
 
     public static final String TAG = "job_demo_tag";
     @Inject
@@ -53,7 +54,7 @@ public class DemoSyncJob extends Job {
             @Override
             public void run() {
                 Context context = AlertLEboncoinApplication.getContext();
-                ((AlertLEboncoinApplication) context).getNetworkComponent().inject(DemoSyncJob.this);
+                ((AlertLEboncoinApplication) context).getNetworkComponent().inject(GetLastAppartJob.this);
                 id = params.getExtras().getInt("id", 33);
                 Log.e("job : ","id récupéré : "+id);
                 getAppart();
@@ -69,7 +70,7 @@ public class DemoSyncJob extends Job {
         extras.putInt("id", id);
         Log.e("job : ","id dans l extras : "+id);
 
-        int jobId =  new JobRequest.Builder(DemoSyncJob.TAG)
+        int jobId =  new JobRequest.Builder(GetLastAppartJob.TAG)
                 .setPeriodic(TimeUnit.MINUTES.toMillis(15), TimeUnit.MINUTES.toMillis(5))
                 .setPersisted(true)
                 .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
@@ -119,15 +120,22 @@ public class DemoSyncJob extends Job {
 
                         notificationManager.notify(0, n);
 
-                        Search search = new Search(resultRealm.get(0).getId(),
+                       final Search search = new Search(resultRealm.get(0).getId(),
                                 resultRealm.get(0).getTitle(),
                                 resultRealm.get(0).getRequestItemsRealm()
-                                ,resultRealm.get(0).getMajDate(), appartsFromHtml.get(0));
-
-                        realm.beginTransaction();
-                        realm.copyToRealmOrUpdate(search);
-                        realm.commitTransaction();
-                        realm.close();
+                                ,new Date(), appartsFromHtml.get(0));
+                        try { // I could use try-with-resources here
+                            realm.executeTransaction(new Realm.Transaction() {
+                                @Override
+                                public void execute(Realm realm) {
+                                    realm.insertOrUpdate(search);
+                                }
+                            });
+                        } finally {
+                            if(realm != null) {
+                                realm.close();
+                            }
+                        }
                     }else {
                         Log.e("job : ","same, appartHtml last appart:"+appartsFromHtml.get(0).getTitle());
                     }

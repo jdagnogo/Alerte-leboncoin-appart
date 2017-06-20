@@ -8,8 +8,8 @@ public class DemoJobCreator implements JobCreator {
     @Override
     public Job create(String tag) {
         switch (tag) {
-            case DemoSyncJob.TAG:
-                return new DemoSyncJob();
+            case GetLastAppartJob.TAG:
+                return new GetLastAppartJob();
             default:
                 return null;
         }

@@ -18,7 +18,7 @@ import com.example.jdagnogo.alertlebonsoinappart.models.realm.RequestItemsRealm;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateAppartsBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
-import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoSyncJob;
+import com.example.jdagnogo.alertlebonsoinappart.services.jobs.GetLastAppartJob;
 import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Parser;
 
@@ -58,7 +58,7 @@ public class ResultActivity extends AppCompatActivity {
     FloatingActionButton alarm;
     @Inject
     Retrofit retrofit;
-    DemoSyncJob demoSyncJob;
+    GetLastAppartJob demoSyncJob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +105,8 @@ public class ResultActivity extends AppCompatActivity {
 
     private void initJob() {
         DemoJobCreator demoJobCreator = new DemoJobCreator();
-        demoJobCreator.create(DemoSyncJob.TAG);
-        demoSyncJob = new DemoSyncJob();
+        demoJobCreator.create(GetLastAppartJob.TAG);
+        demoSyncJob = new GetLastAppartJob();
     }
 
     private void initRecycler() {
