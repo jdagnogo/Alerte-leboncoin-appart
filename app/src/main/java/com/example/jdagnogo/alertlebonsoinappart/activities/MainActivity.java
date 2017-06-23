@@ -11,10 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.adapter.ResearchAdapter;
-import com.example.jdagnogo.alertlebonsoinappart.adapter.ResultResearchAppartAdapter;
-import com.example.jdagnogo.alertlebonsoinappart.models.NewSearchView;
 import com.example.jdagnogo.alertlebonsoinappart.models.Search;
-import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +31,7 @@ import io.realm.RealmResults;
 public class MainActivity extends Activity{
     private RecyclerView recycleListView;
     private ResearchAdapter adapter;
-    private List<Search>searches;
+    private List<Search> searches;
     private Realm realm;
 
     @Override
@@ -42,12 +40,10 @@ public class MainActivity extends Activity{
         searches = new ArrayList<>();
         realm = ((AlertLEboncoinApplication) getApplication()).getRealm();
         realm.beginTransaction();
-        RealmQuery<Search> query = realm.where(Search.class);
-        final RealmResults<Search> resultRealm = query.findAll();
-
-
+        RealmQuery<SearchRealm> query = realm.where(SearchRealm.class);
+        final RealmResults<SearchRealm> resultRealm = query.findAll();
         for (int i =0;i<resultRealm.size();i++){
-            searches.add(resultRealm.get(i));
+            searches.add(resultRealm.get(i).getSearch());
         }
         realm.commitTransaction();
         realm.close();

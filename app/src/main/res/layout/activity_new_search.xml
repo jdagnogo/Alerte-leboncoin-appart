@@ -318,7 +318,7 @@
                         android:orientation="vertical">
 
                         <com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox
-                            android:id="@+id/appart"
+                            android:id="@+id/appartRealm"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_margin="5dp"

@@ -1,61 +1,36 @@
 package com.example.jdagnogo.alertlebonsoinappart.models;
 
-import com.example.jdagnogo.alertlebonsoinappart.models.realm.RequestItemsRealm;
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
 
 import java.util.Date;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+public class Search {
 
-public class Search extends RealmObject {
-    @PrimaryKey
     private int id;
     private String title;
-    private RequestItemsRealm requestItems;
+    private RequestItems requestItems;
     private Date majDate;
-    private Appart lastAppart;
+    private Appart lastAppartRealm;
     private int jobID ;
 
     public Search() {
     }
 
-    public Search(int id, String title, RequestItemsRealm requestItems, Date majDate, Appart lastAppart) {
-        this.id = id;
-        this.title = title;
-        this.requestItems = requestItems;
-        this.majDate = majDate;
-        this.lastAppart = lastAppart;
-    }
 
-    public int getJobID() {
-        return jobID;
+    public Search(SearchRealm searchRealm) {
+        this.id = searchRealm.getId();
+        this.title = searchRealm.getTitle();
+        this.requestItems = searchRealm.getRequestItemsRealm().getRequestItem();
+        this.majDate =searchRealm.getMajDate();
+        this.lastAppartRealm = new Appart(searchRealm.getLastAppartRealm());
+        this.jobID =searchRealm.getJobID();
     }
-
-    public void setJobID(int jobID) {
-        this.jobID = jobID;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public RequestItemsRealm getRequestItemsRealm() {
-        return requestItems;
-    }
-
-    public void setRequestItems(RequestItemsRealm requestItems) {
-        this.requestItems = requestItems;
-    }
-
-    public Search(String title, Date majDate, Appart lastAppart, RequestItemsRealm requestItemsRealm) {
-        this.title = title;
-        this.requestItems = requestItemsRealm;
-        this.majDate = majDate;
-        this.lastAppart = lastAppart;
     }
 
     public String getTitle() {
@@ -66,6 +41,13 @@ public class Search extends RealmObject {
         this.title = title;
     }
 
+    public RequestItems getRequestItems() {
+        return requestItems;
+    }
+
+    public void setRequestItems(RequestItems requestItems) {
+        this.requestItems = requestItems;
+    }
 
     public Date getMajDate() {
         return majDate;
@@ -75,11 +57,19 @@ public class Search extends RealmObject {
         this.majDate = majDate;
     }
 
-    public Appart getLastAppart() {
-        return lastAppart;
+    public Appart getLastAppartRealm() {
+        return lastAppartRealm;
     }
 
-    public void setLastAppart(Appart lastAppart) {
-        this.lastAppart = lastAppart;
+    public void setLastAppartRealm(Appart lastAppartRealm) {
+        this.lastAppartRealm = lastAppartRealm;
+    }
+
+    public int getJobID() {
+        return jobID;
+    }
+
+    public void setJobID(int jobID) {
+        this.jobID = jobID;
     }
 }

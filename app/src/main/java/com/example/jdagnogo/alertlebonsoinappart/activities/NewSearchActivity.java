@@ -76,7 +76,7 @@ public class NewSearchActivity extends AppCompatActivity {
     }
 
     private void initCheckBoxes() {
-        appart = (SmoothCheckBox) findViewById(R.id.appart);
+        appart = (SmoothCheckBox) findViewById(R.id.appartRealm);
         house = (SmoothCheckBox) findViewById(R.id.house);
         meuble = (SmoothCheckBox) findViewById(R.id.meuble);
         nonMeuble = (SmoothCheckBox) findViewById(R.id.non_meuble);

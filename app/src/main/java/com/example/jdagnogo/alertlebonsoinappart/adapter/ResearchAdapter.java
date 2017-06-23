@@ -47,7 +47,7 @@ private List<Search>data;
             public void onClick(View view) {
                 Intent intent = new Intent(activity, ResultActivity.class);
                 Bundle args = new Bundle();
-                args.putParcelable(NEW_RESEARCH, data.get(position).getRequestItemsRealm().getRequestItem());
+                args.putParcelable(NEW_RESEARCH, data.get(position).getRequestItems());
                 intent.putExtras(args);
                 activity.startActivity(intent);
             }

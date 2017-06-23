@@ -15,8 +15,8 @@ import com.evernote.android.job.JobRequest;
 import com.evernote.android.job.util.support.PersistableBundleCompat;
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
-import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
-import com.example.jdagnogo.alertlebonsoinappart.models.Search;
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
 import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Parser;
 
@@ -90,17 +90,17 @@ public class GetLastAppartJob extends Job {
         //realm
         Realm.init(context);
         final Realm realm = Realm.getInstance(getRealmConfig());
-        RealmQuery<Search> query = realm.where(Search.class).equalTo("id", id);
-        final RealmResults<Search> resultRealm = query.findAll();
-        Log.e("job : ","resultRealm last appart:"+resultRealm.get(0).getLastAppart().getTitle());
+        RealmQuery<SearchRealm> query = realm.where(SearchRealm.class).equalTo("id", id);
+        final RealmResults<SearchRealm> resultRealm = query.findAll();
+        Log.e("job : ","resultRealm last appart:"+resultRealm.get(0).getLastAppartRealm().getTitle());
 
         Call<ResponseBody> mSong = mService.getApparts(resultRealm.get(0).getRequestItemsRealm().getRequestItem().createHashMap());
         mSong.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    List<Appart> appartsFromHtml = Parser.parseHtml(response);
-                    if (!resultRealm.get(0).getLastAppart().getTitle().equals(appartsFromHtml.get(0).getTitle())) {
+                    List<AppartRealm> appartsFromHtml = Parser.parseHtml(response);
+                    if (!resultRealm.get(0).getLastAppartRealm().getTitle().equals(appartsFromHtml.get(0).getTitle())) {
                         Intent intent = new Intent();
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
 
@@ -120,7 +120,7 @@ public class GetLastAppartJob extends Job {
 
                         notificationManager.notify(0, n);
 
-                       final Search search = new Search(resultRealm.get(0).getId(),
+                       final SearchRealm searchRealm = new SearchRealm(resultRealm.get(0).getId(),
                                 resultRealm.get(0).getTitle(),
                                 resultRealm.get(0).getRequestItemsRealm()
                                 ,new Date(), appartsFromHtml.get(0));
@@ -128,7 +128,7 @@ public class GetLastAppartJob extends Job {
                             realm.executeTransaction(new Realm.Transaction() {
                                 @Override
                                 public void execute(Realm realm) {
-                                    realm.insertOrUpdate(search);
+                                    realm.insertOrUpdate(searchRealm);
                                 }
                             });
                         } finally {

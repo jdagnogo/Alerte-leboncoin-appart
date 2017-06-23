@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.RequestItemsRealm;
 
 import java.util.ArrayList;
 import java.util.HashMap;

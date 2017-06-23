@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
-import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 public class ResultResearchAppartAdapter extends RecyclerView.Adapter<ResultResearchAppartAdapter.MyViewHolder> {
-    private List<Appart> data;
+    private List<AppartRealm> data;
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,8 +39,8 @@ public class ResultResearchAppartAdapter extends RecyclerView.Adapter<ResultRese
                 .into(holder.imageView);
     }
 
-    public void setData(List<Appart> apparts) {
-        data = apparts;
+    public void setData(List<AppartRealm> appartRealms) {
+        data = appartRealms;
         notifyDataSetChanged();
     }
 

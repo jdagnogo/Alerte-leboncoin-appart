@@ -1,25 +1,41 @@
-package com.example.jdagnogo.alertlebonsoinappart.models;
+package com.example.jdagnogo.alertlebonsoinappart.models.realm;
 
-import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
+import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
 
-public class Appart {
+import io.realm.RealmObject;
+
+/**
+ * Created by Jeff on 09/06/2017.
+ */
+
+public class AppartRealm extends RealmObject {
     private String image;
     private String price;
     private String title;
     private String date;
     private boolean isPro;
 
+    public AppartRealm(){
 
-    public Appart() {
+    }
+    public AppartRealm(String image, String price, String title, String date, boolean isPro) {
+        this.image = image;
+        this.price = price;
+        this.title = title;
+        this.date = date;
+        this.isPro = isPro;
     }
 
-    public Appart(AppartRealm appartRealm) {
-        this.image = appartRealm.getImage();
-        this.price = appartRealm.getPrice();
-        this.title = appartRealm.getTitle();
-        this.date = appartRealm.getDate();
-        this.isPro = appartRealm.isPro();
+    public Appart getAppart(){
+        Appart appart = new Appart();
+        appart.setDate(date);
+        appart.setImage(image);
+        appart.setPrice(price);
+        appart.setPro(isPro);
+        appart.setTitle(title);
+        return appart;
     }
+
     public String getImage() {
         return image;
     }
