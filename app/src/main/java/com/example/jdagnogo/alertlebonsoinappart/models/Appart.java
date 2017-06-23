@@ -13,6 +13,14 @@ public class Appart {
     public Appart() {
     }
 
+    public Appart(String image, String price, String title, String date, boolean isPro) {
+        this.image = image;
+        this.price = price;
+        this.title = title;
+        this.date = date;
+        this.isPro = isPro;
+    }
+
     public Appart(AppartRealm appartRealm) {
         this.image = appartRealm.getImage();
         this.price = appartRealm.getPrice();

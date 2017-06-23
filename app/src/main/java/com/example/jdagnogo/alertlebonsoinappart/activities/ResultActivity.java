@@ -11,6 +11,7 @@ import android.view.View;
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.adapter.ResultResearchAppartAdapter;
+import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
 import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
@@ -47,7 +48,7 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESE
 public class ResultActivity extends AppCompatActivity {
     private final static String TAG = ResultActivity.class.getCanonicalName();
 
-    private List<AppartRealm> appartRealms;
+    private List<Appart> appart;
     private RecyclerView recycleListView;
     private ResultResearchAppartAdapter adapter;
     private Realm realm;
@@ -66,7 +67,7 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         ButterKnife.bind(this);
 
-        appartRealms = new ArrayList<>();
+        appart = new ArrayList<>();
         realm = ((AlertLEboncoinApplication) getApplication()).getRealm();
         realm.beginTransaction();
         initJob();
@@ -88,7 +89,7 @@ public class ResultActivity extends AppCompatActivity {
 
     @OnClick(R.id.alarm)
     public void setOnAlarmClick() {
-        SearchRealm searchRealm = new SearchRealm("toto", new Date(), appartRealms.get(0), requestItemsRealm);
+        SearchRealm searchRealm = new SearchRealm("toto", new Date(), new AppartRealm(appart.get(0)), requestItemsRealm);
         //searchRealm.setJobID(jobId);
         addSearchToDb(searchRealm);
         Number nextID = (realm.where(SearchRealm.class).max("id"));
@@ -115,7 +116,7 @@ public class ResultActivity extends AppCompatActivity {
         recycleListView.setLayoutManager(mLayoutManager);
         adapter = new ResultResearchAppartAdapter();
         recycleListView.setAdapter(adapter);
-        adapter.setData(appartRealms);
+        adapter.setData(appart);
         adapter.notifyDataSetChanged();
     }
 
@@ -127,8 +128,8 @@ public class ResultActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     Log.d("url", "url : " + call.request().url());
-                    List<AppartRealm> appartRealms = Parser.parseHtml(response);
-                    UpdateAppartsBus event = new UpdateAppartsBus(appartRealms);
+                    List<Appart> appart = Parser.parseHtml(response);
+                    UpdateAppartsBus event = new UpdateAppartsBus(appart);
                     GlobalBus.getBus().post(event);
 
                 } catch (IOException e) {
@@ -170,7 +171,7 @@ public class ResultActivity extends AppCompatActivity {
 
     @Subscribe
     public void getMessage(UpdateAppartsBus updateSwipeViewBus) {
-        appartRealms = updateSwipeViewBus.getAppartRealms();
+        appart = updateSwipeViewBus.getApparts();
         initRecycler();
     }
 }

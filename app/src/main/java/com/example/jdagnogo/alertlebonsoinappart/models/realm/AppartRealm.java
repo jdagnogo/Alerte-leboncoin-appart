@@ -25,6 +25,13 @@ public class AppartRealm extends RealmObject {
         this.date = date;
         this.isPro = isPro;
     }
+    public AppartRealm(Appart appart){
+        this.image = appart.getImage();
+        this.price = appart.getPrice();
+        this.title = appart.getTitle();
+        this.date = appart.getDate();
+        this.isPro = appart.isPro();
+    }
 
     public Appart getAppart(){
         Appart appart = new Appart();

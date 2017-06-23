@@ -15,6 +15,7 @@ import com.evernote.android.job.JobRequest;
 import com.evernote.android.job.util.support.PersistableBundleCompat;
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
+import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
 import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
@@ -99,7 +100,7 @@ public class GetLastAppartJob extends Job {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    List<AppartRealm> appartsFromHtml = Parser.parseHtml(response);
+                    List<Appart> appartsFromHtml = Parser.parseHtml(response);
                     if (!resultRealm.get(0).getLastAppartRealm().getTitle().equals(appartsFromHtml.get(0).getTitle())) {
                         Intent intent = new Intent();
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
@@ -123,7 +124,7 @@ public class GetLastAppartJob extends Job {
                        final SearchRealm searchRealm = new SearchRealm(resultRealm.get(0).getId(),
                                 resultRealm.get(0).getTitle(),
                                 resultRealm.get(0).getRequestItemsRealm()
-                                ,new Date(), appartsFromHtml.get(0));
+                                ,new Date(), new AppartRealm(appartsFromHtml.get(0)));
                         try { // I could use try-with-resources here
                             realm.executeTransaction(new Realm.Transaction() {
                                 @Override

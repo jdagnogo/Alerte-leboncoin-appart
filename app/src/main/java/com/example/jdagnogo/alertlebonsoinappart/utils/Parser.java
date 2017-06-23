@@ -1,5 +1,6 @@
 package com.example.jdagnogo.alertlebonsoinappart.utils;
 
+import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
 
 import org.jsoup.Jsoup;
@@ -16,10 +17,10 @@ import retrofit2.Response;
 public class Parser {
     private final static int MAX_NB_APPART = 10;
 
-    public static List<AppartRealm> parseHtml(Response<ResponseBody> response) throws IOException {
+    public static List<Appart> parseHtml(Response<ResponseBody> response) throws IOException {
         Document document = Jsoup.parse(response.body().string());
         Elements ensemble = document.getElementsByClass("list_item");
-        List<AppartRealm> appartRealms = new ArrayList<AppartRealm>();
+        List<Appart> apparts = new ArrayList<Appart>();
         for (int i = 0; i < MAX_NB_APPART; i++) {
 
             String title = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_title").get(0).text();
@@ -35,9 +36,9 @@ public class Parser {
             }
             String date = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_absolute").get(0).getElementsByClass("item_supp").get(0).text();
 
-            AppartRealm appartRealm = new AppartRealm(imageUrl, price, title, date, false);
-            appartRealms.add(appartRealm);
+            Appart appart = new Appart(imageUrl, price, title, date, false);
+            apparts.add(appart);
         }
-        return appartRealms;
+        return apparts;
     }
 }
