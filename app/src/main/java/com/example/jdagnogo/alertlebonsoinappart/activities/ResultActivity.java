@@ -69,7 +69,7 @@ public class ResultActivity extends AppCompatActivity {
 
         appart = new ArrayList<>();
         realm = ((AlertLEboncoinApplication) getApplication()).getRealm();
-        realm.beginTransaction();
+
         initJob();
         GlobalBus.getBus().register(this);
         RequestItems requestItems;
@@ -145,7 +145,7 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void addSearchToDb(SearchRealm searchRealm) {
-
+        realm.beginTransaction();
         Number nextID = (realm.where(SearchRealm.class).max("id"));
         int id = 0;
         if (null != nextID) {
