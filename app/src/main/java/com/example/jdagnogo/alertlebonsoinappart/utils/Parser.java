@@ -21,23 +21,25 @@ public class Parser {
         Document document = Jsoup.parse(response.body().string());
         Elements ensemble = document.getElementsByClass("list_item");
         List<Appart> apparts = new ArrayList<Appart>();
-        for (int i = 0; i < MAX_NB_APPART; i++) {
+        if (ensemble.size()>0) {
+            for (int i = 0; i < MAX_NB_APPART; i++) {
 
-            String title = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_title").get(0).text();
-            String imageUrl = "";
-            if (0 == ensemble.get(i).getElementsByClass("item_image").get(0).getElementsByClass("lazyload").size()) {
-                continue;
-            }else {
-                imageUrl = ensemble.get(i).getElementsByClass("item_image").get(0).getElementsByClass("lazyload").get(0).attr("data-imgsrc");
-            }
-            String price = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_price").get(0).text();
-            if (0 == ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_absolute").size()) {
-                continue;
-            }
-            String date = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_absolute").get(0).getElementsByClass("item_supp").get(0).text();
+                String title = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_title").get(0).text();
+                String imageUrl = "";
+                if (0 == ensemble.get(i).getElementsByClass("item_image").get(0).getElementsByClass("lazyload").size()) {
+                    continue;
+                } else {
+                    imageUrl = ensemble.get(i).getElementsByClass("item_image").get(0).getElementsByClass("lazyload").get(0).attr("data-imgsrc");
+                }
+                String price = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_price").get(0).text();
+                if (0 == ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_absolute").size()) {
+                    continue;
+                }
+                String date = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_absolute").get(0).getElementsByClass("item_supp").get(0).text();
 
-            Appart appart = new Appart(imageUrl, price, title, date, false);
-            apparts.add(appart);
+                Appart appart = new Appart(imageUrl, price, title, date, false);
+                apparts.add(appart);
+            }
         }
         return apparts;
     }

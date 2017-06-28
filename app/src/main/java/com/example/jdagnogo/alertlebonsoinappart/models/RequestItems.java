@@ -22,6 +22,7 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.MEUBLE_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.LOCATION_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.MORE_CITIES_KEY;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.QUERY_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.RENT_MAX_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.RENT_MIN_KEY;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.ROOM_MAX_KEY;
@@ -104,6 +105,9 @@ public class RequestItems  implements Parcelable  {
         //max
         if (!surface.getPositionMax().equals(DEFAULT_SURFACE_MAX)) {
             maps.put(SURFACE_MAX_KEY, surface.getPositionMax());
+        }
+        if (!keyWord.isEmpty()){
+            maps.put(QUERY_KEY,keyWord);
         }
         return maps;
     }

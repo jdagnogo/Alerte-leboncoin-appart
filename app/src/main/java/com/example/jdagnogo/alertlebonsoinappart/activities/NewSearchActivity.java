@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NAME_RESEARCH;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
 
 public class NewSearchActivity extends AppCompatActivity {
@@ -59,6 +61,10 @@ public class NewSearchActivity extends AppCompatActivity {
     Button validate;
     @Bind(R.id.add_cities_button)
     FloatingActionButton addCitiesButton;
+    @Bind(R.id.input_query)
+    EditText query;
+    @Bind(R.id.input_name)
+    EditText name;
     SmoothCheckBox appart, house, meuble, nonMeuble;
     List<City> cities;
 
@@ -88,6 +94,7 @@ public class NewSearchActivity extends AppCompatActivity {
         AddCitiesDialog.createDialog(this, cities);
     }
 
+
     @OnClick(R.id.validate)
     public void setOnclickValidate() {
         // save
@@ -109,11 +116,14 @@ public class NewSearchActivity extends AppCompatActivity {
         } else {
             newSearchView.setMeuble(Meuble.MEUBLE);
         }
+        newSearchView.setName(name.getText().toString());
+        newSearchView.setQuery(query.getText().toString());
         Log.d(TAG, "résultat : " + newSearchView);
 
         Intent intent = new Intent(this, ResultActivity.class);
         Bundle args = new Bundle();
         args.putParcelable(NEW_RESEARCH, createRequestItem());
+        args.putString(NAME_RESEARCH,newSearchView.getName());
         intent.putExtras(args);
         startActivity(intent);
     }
@@ -131,7 +141,7 @@ public class NewSearchActivity extends AppCompatActivity {
         Surface surface = new Surface(String.valueOf(newSearchView.getSurface().getPostitonMin())
                 , String.valueOf(newSearchView.getSurface().getPositionMax()));
         requestItems.setSurface(surface);
-
+        requestItems.setKeyWord(newSearchView.getQuery());
         return requestItems;
     }
 

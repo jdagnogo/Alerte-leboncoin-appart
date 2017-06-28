@@ -64,11 +64,11 @@ public class RequestItemsRealm extends RealmObject {
         requestItems.setRent(rent);
 
         List<City> cities = new ArrayList<>();
-        for (int i = 0;i<this.cities.size();i++){
+        for (int i = 0; i < this.cities.size(); i++) {
             cities.add(this.cities.get(i).getEnum());
         }
         requestItems.setCities(cities);
-
+        requestItems.setKeyWord(keyWord);
 
         return requestItems;
     }
@@ -87,7 +87,6 @@ public class RequestItemsRealm extends RealmObject {
         type.saveEnum(requestItems.getType());
         meuble = new MeubleRealm();
         meuble.saveEnum(requestItems.getMeuble());
-
-
+        keyWord = requestItems.getKeyWord();
     }
 }

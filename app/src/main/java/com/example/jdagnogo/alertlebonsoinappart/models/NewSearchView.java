@@ -24,6 +24,8 @@ public class NewSearchView implements Parcelable{
     RentSwipeItem rent;
     NbRoomSwipeItem nbRoom;
     SurfaceSwipeItem surface;
+    String name;
+    String query;
 
     public NewSearchView() {
         this.rent = new RentSwipeItem();
@@ -40,6 +42,21 @@ public class NewSearchView implements Parcelable{
         this.cities = cities;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
 
     public Type getType() {
         return type;
@@ -94,6 +111,8 @@ public class NewSearchView implements Parcelable{
         dest.writeParcelable(this.rent, flags);
         dest.writeParcelable(this.nbRoom, flags);
         dest.writeParcelable(this.surface, flags);
+        dest.writeString(this.name);
+        dest.writeString(this.query);
     }
 
     protected NewSearchView(Parcel in) {
@@ -106,6 +125,8 @@ public class NewSearchView implements Parcelable{
         this.rent = in.readParcelable(RentSwipeItem.class.getClassLoader());
         this.nbRoom = in.readParcelable(NbRoomSwipeItem.class.getClassLoader());
         this.surface = in.readParcelable(SurfaceSwipeItem.class.getClassLoader());
+        this.name = in.readString();
+        this.query = in.readString();
     }
 
     public static final Creator<NewSearchView> CREATOR = new Creator<NewSearchView>() {

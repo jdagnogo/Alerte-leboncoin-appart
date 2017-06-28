@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
@@ -43,6 +44,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NAME_RESEARCH;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
 
 public class ResultActivity extends AppCompatActivity {
@@ -55,8 +57,11 @@ public class ResultActivity extends AppCompatActivity {
     private HashMap<String, String> map;
     private int jobId;
     private RequestItemsRealm requestItemsRealm;
+    private String searchName ="";
     @Bind(R.id.alarm)
     FloatingActionButton alarm;
+    @Bind(R.id.no_result)
+    LinearLayout noResult;
     @Inject
     Retrofit retrofit;
     GetLastAppartJob demoSyncJob;
@@ -76,6 +81,7 @@ public class ResultActivity extends AppCompatActivity {
 
         if (getIntent() != null) {
             requestItems = getIntent().getParcelableExtra(NEW_RESEARCH);
+            searchName = getIntent().getExtras().getString(NAME_RESEARCH);
 
             ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(ResultActivity.this);
             map = requestItems.createHashMap();
@@ -89,7 +95,7 @@ public class ResultActivity extends AppCompatActivity {
 
     @OnClick(R.id.alarm)
     public void setOnAlarmClick() {
-        SearchRealm searchRealm = new SearchRealm("toto", new Date(), new AppartRealm(appart.get(0)), requestItemsRealm);
+        SearchRealm searchRealm = new SearchRealm(searchName, new Date(), new AppartRealm(appart.get(0)), requestItemsRealm);
         //searchRealm.setJobID(jobId);
         addSearchToDb(searchRealm);
         Number nextID = (realm.where(SearchRealm.class).max("id"));
@@ -171,7 +177,15 @@ public class ResultActivity extends AppCompatActivity {
 
     @Subscribe
     public void getMessage(UpdateAppartsBus updateSwipeViewBus) {
-        appart = updateSwipeViewBus.getApparts();
-        initRecycler();
+        if (updateSwipeViewBus.getApparts().size()!=0) {
+            appart = updateSwipeViewBus.getApparts();
+            initRecycler();
+            noResult.setVisibility(View.GONE);
+            alarm.setVisibility(View.VISIBLE);
+
+        }else {
+            noResult.setVisibility(View.VISIBLE);
+            alarm.setVisibility(View.GONE);
+        }
     }
 }

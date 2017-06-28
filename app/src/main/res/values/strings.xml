@@ -23,4 +23,6 @@
 
     <string name="nb_room_title_min">Nombre de pièces minimum </string>
     <string name="nb_room_title_max">Nombre de pièces maximal</string>
+    <string name="name_search">Nom de votre recherche</string>
+    <string name="query">Que recherchez-vous?</string>
 </resources>

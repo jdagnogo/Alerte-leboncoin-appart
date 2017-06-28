@@ -19,6 +19,7 @@ public class Constants {
     public final static String ROOM_MAX_KEY = "roe";
     public final static String SPACE = " ";
     public final static String SPACE_KEY = "%20";
+    public final static String QUERY_KEY = "q";
     public final static String MEUBLE_KEY = "furn";
     public final static String MORE_CITIES_KEY = "%2C";
     public final static String MORE_OPTIONS = "&";
@@ -37,6 +38,7 @@ public class Constants {
     //...........// Activities   //....................//
 
 public final static String NEW_RESEARCH = "NEW_RESEARCH";
+    public final static String NAME_RESEARCH = "NAME_RESEARCH";
 
 
 

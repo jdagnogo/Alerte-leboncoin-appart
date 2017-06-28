@@ -8,11 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.activities.ResultActivity;
 import com.example.jdagnogo.alertlebonsoinappart.models.Search;
+import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.DeleteSearchBus;
+import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -25,9 +28,10 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESE
  */
 
 public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyViewHolder> {
-private List<Search>data;
+    private List<Search> data;
     private Activity activity;
     public static final SimpleDateFormat hourFormatter = new SimpleDateFormat("HH:mm", Locale.FRANCE);
+
     @Override
     public ResearchAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -52,7 +56,13 @@ private List<Search>data;
                 activity.startActivity(intent);
             }
         });
-
+      holder.delete.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              DeleteSearchBus deleteSearchBus = new DeleteSearchBus(data.get(position));
+              GlobalBus.getBus().post(deleteSearchBus);
+          }
+      });
     }
 
     public ResearchAdapter(Activity activity) {
@@ -68,16 +78,19 @@ private List<Search>data;
     public int getItemCount() {
         return data.size();
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView title, date;
         public CardView cardView;
+        public ImageView delete;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             date = (TextView) view.findViewById(R.id.date);
             cardView = (CardView) view.findViewById(R.id.card);
+            delete = (ImageView) view.findViewById(R.id.delete);
 
         }
     }

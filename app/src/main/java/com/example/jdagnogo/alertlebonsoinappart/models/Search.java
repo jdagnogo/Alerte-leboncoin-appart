@@ -65,6 +65,7 @@ public class Search {
         this.lastAppartRealm = lastAppartRealm;
     }
 
+
     public int getJobID() {
         return jobID;
     }

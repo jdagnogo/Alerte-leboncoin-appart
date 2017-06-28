@@ -26,6 +26,7 @@ public class SearchRealm extends RealmObject {
         search.setLastAppartRealm(lastAppartRealm.getAppart());
         search.setMajDate(majDate);
         search.setRequestItems(requestItems.getRequestItem());
+        search.setTitle(title);
         return search;
     }
 
