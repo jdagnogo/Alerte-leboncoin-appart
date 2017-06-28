@@ -17,8 +17,12 @@ import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
 import com.example.jdagnogo.alertlebonsoinappart.enums.SwipeItemEnum;
 import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
-import com.example.jdagnogo.alertlebonsoinappart.models.*;
+import com.example.jdagnogo.alertlebonsoinappart.models.NbRoom;
+import com.example.jdagnogo.alertlebonsoinappart.models.NewSearchView;
+import com.example.jdagnogo.alertlebonsoinappart.models.Rent;
 import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
+import com.example.jdagnogo.alertlebonsoinappart.models.Search;
+import com.example.jdagnogo.alertlebonsoinappart.models.Surface;
 import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.NbRoomSwipeItem;
 import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.RentSwipeItem;
 import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.SurfaceSwipeItem;
@@ -39,6 +43,7 @@ import butterknife.OnClick;
 
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NAME_RESEARCH;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.RESEARCH;
 
 public class NewSearchActivity extends AppCompatActivity {
     private final String TAG = NewSearchActivity.this.getPackageName();
@@ -67,17 +72,25 @@ public class NewSearchActivity extends AppCompatActivity {
     EditText name;
     SmoothCheckBox appart, house, meuble, nonMeuble;
     List<City> cities;
+    private Search search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_search);
         ButterKnife.bind(this);
-        newSearchView = new NewSearchView();
-        cities = new ArrayList<>();
         GlobalBus.getBus().register(this);
         initLayout();
         initCheckBoxes();
+        if (getIntent() != null) {
+            search = getIntent().getParcelableExtra(RESEARCH);
+            name.setText(search.getTitle());
+            query.setText(search.getRequestItems().getKeyWord());
+            // etc ....
+        }else {
+            newSearchView = new NewSearchView();
+            cities = new ArrayList<>();
+        }
 
     }
 

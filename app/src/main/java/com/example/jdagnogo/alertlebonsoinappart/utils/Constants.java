@@ -4,7 +4,7 @@ public class Constants {
 
     //...........// UrlRequest   //....................//
     public final static String BASE_URL = "/locations/offres/aquitaine/occasions/?th=1&parrot=0";
-    public final static String SITE_URL="https://www.leboncoin.fr";
+    public final static String SITE_URL = "https://www.leboncoin.fr";
     public final static String BASE_URL_FORMAT = "%s";
     public final static String MORE_OPTIONS_FORMAT = "%s%s%s";
     public final static String CODE_POSTAL_KEY = "%20";
@@ -37,9 +37,9 @@ public class Constants {
 
     //...........// Activities   //....................//
 
-public final static String NEW_RESEARCH = "NEW_RESEARCH";
+    public final static String NEW_RESEARCH = "NEW_RESEARCH";
+    public final static String RESEARCH = "RESEARCH";
     public final static String NAME_RESEARCH = "NAME_RESEARCH";
-
 
 
 }

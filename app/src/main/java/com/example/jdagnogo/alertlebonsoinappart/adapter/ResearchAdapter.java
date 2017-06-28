@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jdagnogo.alertlebonsoinappart.R;
+import com.example.jdagnogo.alertlebonsoinappart.activities.NewSearchActivity;
 import com.example.jdagnogo.alertlebonsoinappart.activities.ResultActivity;
+import com.example.jdagnogo.alertlebonsoinappart.models.NewSearchView;
 import com.example.jdagnogo.alertlebonsoinappart.models.Search;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.DeleteSearchBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
@@ -21,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NAME_RESEARCH;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
 
 /**
@@ -63,6 +66,16 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyView
               GlobalBus.getBus().post(deleteSearchBus);
           }
       });
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, NewSearchActivity.class);
+                Bundle args = new Bundle();
+                args.putParcelable(NEW_RESEARCH, data.get(position));
+                intent.putExtras(args);
+                activity.startActivity(intent);
+            }
+        });
     }
 
     public ResearchAdapter(Activity activity) {
@@ -83,7 +96,7 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyView
 
         public TextView title, date;
         public CardView cardView;
-        public ImageView delete;
+        public ImageView delete,edit;
 
         public MyViewHolder(View view) {
             super(view);
@@ -91,6 +104,7 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyView
             date = (TextView) view.findViewById(R.id.date);
             cardView = (CardView) view.findViewById(R.id.card);
             delete = (ImageView) view.findViewById(R.id.delete);
+            edit = (ImageView) view.findViewById(R.id.edit);
 
         }
     }

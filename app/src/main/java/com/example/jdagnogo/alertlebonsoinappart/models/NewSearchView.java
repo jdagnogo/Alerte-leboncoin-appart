@@ -26,6 +26,7 @@ public class NewSearchView implements Parcelable{
     SurfaceSwipeItem surface;
     String name;
     String query;
+    private Search search;
 
     public NewSearchView() {
         this.rent = new RentSwipeItem();

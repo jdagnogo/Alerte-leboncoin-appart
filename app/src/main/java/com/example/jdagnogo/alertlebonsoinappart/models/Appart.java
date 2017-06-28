@@ -1,8 +1,11 @@
 package com.example.jdagnogo.alertlebonsoinappart.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
 
-public class Appart {
+public class Appart implements Parcelable{
     private String image;
     private String price;
     private String title;
@@ -67,4 +70,38 @@ public class Appart {
     public void setPro(boolean pro) {
         isPro = pro;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.image);
+        dest.writeString(this.price);
+        dest.writeString(this.title);
+        dest.writeString(this.date);
+        dest.writeByte(this.isPro ? (byte) 1 : (byte) 0);
+    }
+
+    protected Appart(Parcel in) {
+        this.image = in.readString();
+        this.price = in.readString();
+        this.title = in.readString();
+        this.date = in.readString();
+        this.isPro = in.readByte() != 0;
+    }
+
+    public static final Creator<Appart> CREATOR = new Creator<Appart>() {
+        @Override
+        public Appart createFromParcel(Parcel source) {
+            return new Appart(source);
+        }
+
+        @Override
+        public Appart[] newArray(int size) {
+            return new Appart[size];
+        }
+    };
 }

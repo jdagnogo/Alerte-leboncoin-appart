@@ -1,10 +1,13 @@
 package com.example.jdagnogo.alertlebonsoinappart.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
 
 import java.util.Date;
 
-public class Search {
+public class Search implements Parcelable {
 
     private int id;
     private String title;
@@ -73,4 +76,41 @@ public class Search {
     public void setJobID(int jobID) {
         this.jobID = jobID;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.title);
+        dest.writeParcelable(this.requestItems, flags);
+        dest.writeLong(this.majDate != null ? this.majDate.getTime() : -1);
+        dest.writeParcelable(this.lastAppartRealm, flags);
+        dest.writeInt(this.jobID);
+    }
+
+    protected Search(Parcel in) {
+        this.id = in.readInt();
+        this.title = in.readString();
+        this.requestItems = in.readParcelable(RequestItems.class.getClassLoader());
+        long tmpMajDate = in.readLong();
+        this.majDate = tmpMajDate == -1 ? null : new Date(tmpMajDate);
+        this.lastAppartRealm = in.readParcelable(Appart.class.getClassLoader());
+        this.jobID = in.readInt();
+    }
+
+    public static final Creator<Search> CREATOR = new Creator<Search>() {
+        @Override
+        public Search createFromParcel(Parcel source) {
+            return new Search(source);
+        }
+
+        @Override
+        public Search[] newArray(int size) {
+            return new Search[size];
+        }
+    };
 }
