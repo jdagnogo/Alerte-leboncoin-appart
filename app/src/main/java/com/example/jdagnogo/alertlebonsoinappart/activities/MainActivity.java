@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.transition.TransitionInflater;
 
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
@@ -16,7 +20,6 @@ import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.DeleteSearchBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
-import com.example.jdagnogo.alertlebonsoinappart.services.jobs.GetLastAppartJob;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -67,16 +70,19 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupWindowAnimations();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         GlobalBus.getBus().register(this);
+
 
     }
 
     @OnClick(R.id.new_research)
     public void setOnNewResearchClick() {
         Intent intent = new Intent(this, NewSearchActivity.class);
-        startActivity(intent);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+        startActivity(intent,options.toBundle());
     }
 
     private void initRecycler() {
@@ -114,5 +120,9 @@ public class MainActivity extends Activity {
 
         getSearchesFromDB();
         initRecycler();
+    }
+    private void setupWindowAnimations() {
+        Explode anim = (Explode) TransitionInflater.from(this).inflateTransition(R.transition.activity_slide);
+        getWindow().setExitTransition(anim);
     }
 }

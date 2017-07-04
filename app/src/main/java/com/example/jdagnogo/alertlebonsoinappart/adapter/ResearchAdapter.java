@@ -3,6 +3,7 @@ package com.example.jdagnogo.alertlebonsoinappart.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -73,7 +74,8 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyView
                 Bundle args = new Bundle();
                 args.putParcelable(NEW_RESEARCH, data.get(position));
                 intent.putExtras(args);
-                activity.startActivity(intent);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity);
+                activity.startActivity(intent,options.toBundle());
             }
         });
     }

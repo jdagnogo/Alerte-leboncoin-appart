@@ -5,6 +5,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Explode;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -69,6 +71,7 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupWindowAnimations();
         setContentView(R.layout.activity_result);
         ButterKnife.bind(this);
 
@@ -187,5 +190,9 @@ public class ResultActivity extends AppCompatActivity {
             noResult.setVisibility(View.VISIBLE);
             alarm.setVisibility(View.GONE);
         }
+    }
+    private void setupWindowAnimations() {
+        Explode anim = (Explode) TransitionInflater.from(this).inflateTransition(R.transition.activity_slide);
+        getWindow().setExitTransition(anim);
     }
 }

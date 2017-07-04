@@ -1,0 +1,8 @@
+Reste à faire :
+
+- animations et transition
+- résumé de la recherche
+- les valeures des recherches (enum)
+- chargement
+- UI de main activity
+- redirection notif

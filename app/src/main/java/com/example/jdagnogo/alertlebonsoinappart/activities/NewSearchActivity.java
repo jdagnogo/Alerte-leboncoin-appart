@@ -3,7 +3,10 @@ package com.example.jdagnogo.alertlebonsoinappart.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -77,20 +80,24 @@ public class NewSearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupWindowAnimations();
         setContentView(R.layout.activity_new_search);
         ButterKnife.bind(this);
         GlobalBus.getBus().register(this);
+
         initLayout();
         initCheckBoxes();
         if (getIntent() != null) {
             search = getIntent().getParcelableExtra(RESEARCH);
-            name.setText(search.getTitle());
-            query.setText(search.getRequestItems().getKeyWord());
+            if (null!= search) {
+                name.setText(search.getTitle());
+                query.setText(search.getRequestItems().getKeyWord());
+            }
             // etc ....
-        }else {
+        }
             newSearchView = new NewSearchView();
             cities = new ArrayList<>();
-        }
+
 
     }
 
@@ -138,7 +145,8 @@ public class NewSearchActivity extends AppCompatActivity {
         args.putParcelable(NEW_RESEARCH, createRequestItem());
         args.putString(NAME_RESEARCH,newSearchView.getName());
         intent.putExtras(args);
-        startActivity(intent);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+        startActivity(intent,options.toBundle());
     }
 
     private RequestItems createRequestItem() {
@@ -239,5 +247,10 @@ public class NewSearchActivity extends AppCompatActivity {
         sb.delete(last, sb.length());
 
         addCitiesText.setText(sb);
+    }
+
+    private void setupWindowAnimations() {
+        Explode anim = (Explode) TransitionInflater.from(this).inflateTransition(R.transition.activity_slide);
+        getWindow().setExitTransition(anim);
     }
 }
