@@ -24,6 +24,7 @@ repositories {
     maven {url "https://clojars.org/repo/"}
     maven {url "https://clojars.org/repo/"}
     maven { url "https://jitpack.io" }
+    maven { url "https://github.com/uPhyca/stetho-realm/raw/master/maven-repo" }
 
 }
 dependencies {
@@ -64,5 +65,10 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 
+    //Stetho
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0' //network
+    compile 'com.facebook.stetho:stetho-js-rhino:1.5.0' //console
+    compile 'com.uphyca:stetho_realm:2.1.0' //realm
 
 }

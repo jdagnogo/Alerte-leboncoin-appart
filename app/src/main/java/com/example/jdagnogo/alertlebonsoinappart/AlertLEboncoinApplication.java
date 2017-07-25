@@ -10,6 +10,13 @@ import com.example.jdagnogo.alertlebonsoinappart.services.dagger.NetworkComponen
 import com.example.jdagnogo.alertlebonsoinappart.services.dagger.NetworkModule;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Constants;
+import com.facebook.stetho.DumperPluginsProvider;
+import com.facebook.stetho.InspectorModulesProvider;
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.dumpapp.DumperPlugin;
+import com.facebook.stetho.inspector.protocol.ChromeDevtoolsDomain;
+import com.facebook.stetho.rhino.JsRuntimeReplFactoryBuilder;
+import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -34,6 +41,21 @@ public class AlertLEboncoinApplication extends Application {
                 .build();
 
         demoJobCreator = new DemoJobCreator();
+
+        Stetho.initialize(Stetho.newInitializerBuilder(this)
+                .enableWebKitInspector(new InspectorModulesProvider() {
+                    @Override
+                    public Iterable<ChromeDevtoolsDomain> get() {
+                        return new Stetho.DefaultInspectorModulesBuilder(AlertLEboncoinApplication.this).runtimeRepl(
+                                new JsRuntimeReplFactoryBuilder(AlertLEboncoinApplication.this)
+                                        .importPackage("com.example.jdagnogo.alertlebonsoinappart")
+                                        .addVariable("help",com.example.jdagnogo.alertlebonsoinappart.StethoConsole.help())
+                                        .build()
+                        ).finish();
+                    }
+                })
+                .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+                .build());
     }
 
     public static Context getContext() {
