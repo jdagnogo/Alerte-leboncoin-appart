@@ -6,3 +6,4 @@ Reste à faire :
 - chargement
 - UI de main activity
 - redirection notif
+- rehcerhces en double

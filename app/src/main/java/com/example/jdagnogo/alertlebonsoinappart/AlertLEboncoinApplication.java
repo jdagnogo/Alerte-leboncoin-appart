@@ -15,8 +15,12 @@ import com.facebook.stetho.InspectorModulesProvider;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.dumpapp.DumperPlugin;
 import com.facebook.stetho.inspector.protocol.ChromeDevtoolsDomain;
+import com.facebook.stetho.inspector.protocol.module.Database;
+import com.facebook.stetho.inspector.protocol.module.HeapProfiler;
 import com.facebook.stetho.rhino.JsRuntimeReplFactoryBuilder;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
+
+import java.util.Map;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -57,6 +61,7 @@ public class AlertLEboncoinApplication extends Application {
                 .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
                 .build());
     }
+
 
     public static Context getContext() {
         return context;

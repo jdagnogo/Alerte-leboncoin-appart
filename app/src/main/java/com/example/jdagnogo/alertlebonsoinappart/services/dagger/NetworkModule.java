@@ -9,6 +9,8 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
+
+
 @Module
 public class NetworkModule {
     private String urlPath;
@@ -30,4 +32,7 @@ public class NetworkModule {
                 .build();
         return retrofit;
     }
+
+
+
 }

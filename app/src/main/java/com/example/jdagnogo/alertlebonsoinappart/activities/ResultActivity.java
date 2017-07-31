@@ -59,7 +59,7 @@ public class ResultActivity extends AppCompatActivity {
     private HashMap<String, String> map;
     private int jobId;
     private RequestItemsRealm requestItemsRealm;
-    private String searchName ="";
+    private String searchName = "";
     @Bind(R.id.alarm)
     FloatingActionButton alarm;
     @Bind(R.id.no_result)
@@ -108,7 +108,8 @@ public class ResultActivity extends AppCompatActivity {
         }
         Log.e("job : ", "nextID au job " + id);
         jobId = demoSyncJob.scheduleJob(id);
-
+        searchRealm.setJobID(jobId);
+        updateSearchInDb(searchRealm);
         alarm.setVisibility(View.GONE);
         realm.close();
     }
@@ -153,6 +154,12 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
+    private void updateSearchInDb(SearchRealm searchRealm) {
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(searchRealm);
+        realm.commitTransaction();
+    }
+
     private void addSearchToDb(SearchRealm searchRealm) {
         realm.beginTransaction();
         Number nextID = (realm.where(SearchRealm.class).max("id"));
@@ -161,11 +168,8 @@ public class ResultActivity extends AppCompatActivity {
             id = nextID.intValue();
         }
         searchRealm.setId(id + 1);
-        Log.e("job : ", "id dans la db " + id + 1);
-        realm.copyToRealm(searchRealm);
+        realm.copyToRealmOrUpdate(searchRealm);
         realm.commitTransaction();
-
-        Log.d("toto", "toto");
     }
 
     @Override
@@ -180,17 +184,18 @@ public class ResultActivity extends AppCompatActivity {
 
     @Subscribe
     public void getMessage(UpdateAppartsBus updateSwipeViewBus) {
-        if (updateSwipeViewBus.getApparts().size()!=0) {
+        if (updateSwipeViewBus.getApparts().size() != 0) {
             appart = updateSwipeViewBus.getApparts();
             initRecycler();
             noResult.setVisibility(View.GONE);
             alarm.setVisibility(View.VISIBLE);
 
-        }else {
+        } else {
             noResult.setVisibility(View.VISIBLE);
             alarm.setVisibility(View.GONE);
         }
     }
+
     private void setupWindowAnimations() {
         Explode anim = (Explode) TransitionInflater.from(this).inflateTransition(R.transition.activity_slide);
         getWindow().setExitTransition(anim);
