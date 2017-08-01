@@ -21,7 +21,17 @@ public class Surface extends MinMaxItemAbstract {
         this.positionMin = surfaceRealm.getPositionMin();
 
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this==obj) return true;
+        if (this == null) return false;
+        if (this.getClass() != obj.getClass()) return false;
+        // Class name is Employ & have lastname
+        Surface surface = (Surface) obj ;
+        return (this.positionMin.equals(surface.getPositionMin())
+                &&
+                this.positionMax.equals(surface.getPositionMax()));
+    }
     @Override
     public int describeContents() {
         return 0;

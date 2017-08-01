@@ -182,6 +182,23 @@ public class RequestItems  implements Parcelable  {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this==obj) return true;
+        if (this == null) return false;
+        if (this.getClass() != obj.getClass()) return false;
+        // Class name is Employ & have lastname
+        RequestItems t1 = (RequestItems) obj ;
+        return (getMeuble().equals(t1.getMeuble())
+                && getKeyWord().equals(t1.getKeyWord())
+                && getCities().equals(t1.getCities())
+                && getNbRoom().equals(t1.getNbRoom())
+                && getRent().equals(t1.getRent())
+                && getSurface().equals(t1.getSurface())
+                && getType().equals(t1.getType()));
+    }
+
+
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeList(this.cities);
         dest.writeParcelable(this.rent, flags);

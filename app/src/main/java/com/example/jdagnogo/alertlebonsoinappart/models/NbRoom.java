@@ -17,12 +17,25 @@ public class NbRoom extends MinMaxItemAbstract {
     public NbRoom(String min, String max) {
         super(min, max);
     }
-    public NbRoom(){
+
+    public NbRoom() {
 
     }
 
-    public NbRoom(NbRoomRealm nbRoomRealm){
-        this.positionMax= nbRoomRealm.getPositionMax();
+    @Override
+    public boolean equals(Object obj) {
+        if (this==obj) return true;
+        if (this == null) return false;
+        if (this.getClass() != obj.getClass()) return false;
+        // Class name is Employ & have lastname
+        NbRoom nbRoom = (NbRoom) obj ;
+        return (this.positionMin.equals(nbRoom.getPositionMin())
+                &&
+                this.positionMax.equals(nbRoom.getPositionMax()));
+    }
+
+    public NbRoom(NbRoomRealm nbRoomRealm) {
+        this.positionMax = nbRoomRealm.getPositionMax();
         this.positionMin = nbRoomRealm.getPositionMin();
 
     }

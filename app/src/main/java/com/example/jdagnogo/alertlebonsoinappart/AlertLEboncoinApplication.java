@@ -58,7 +58,7 @@ public class AlertLEboncoinApplication extends Application {
                         ).finish();
                     }
                 })
-                .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+                //.enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
                 .build());
     }
 

@@ -30,6 +30,9 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +43,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -94,6 +98,24 @@ public class ResultActivity extends AppCompatActivity {
 
 
         }
+
+    }
+
+    private void hideOrDisplayAlarm() {
+        realm = ((AlertLEboncoinApplication) getApplication()).getRealm();
+        realm.beginTransaction();
+        RealmResults<SearchRealm> results =
+                realm.where(SearchRealm.class).findAll();
+
+        for (int i = 0; i < results.size(); i++) {
+            RequestItems r1 = results.get(i).getRequestItemsRealm().getRequestItem();
+            if (requestItemsRealm.getRequestItem().equals(r1)) {
+                alarm.setVisibility(View.GONE);
+                break;
+            }
+        }
+        realm.commitTransaction();
+        realm.close();
     }
 
     @OnClick(R.id.alarm)
@@ -189,6 +211,7 @@ public class ResultActivity extends AppCompatActivity {
             initRecycler();
             noResult.setVisibility(View.GONE);
             alarm.setVisibility(View.VISIBLE);
+            hideOrDisplayAlarm();
 
         } else {
             noResult.setVisibility(View.VISIBLE);

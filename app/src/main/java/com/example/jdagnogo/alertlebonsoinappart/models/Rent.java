@@ -24,7 +24,17 @@ public class Rent extends MinMaxItemAbstract implements Parcelable {
     public static String getDescription(){
         return "";
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this==obj) return true;
+        if (this == null) return false;
+        if (this.getClass() != obj.getClass()) return false;
+        // Class name is Employ & have lastname
+        Rent rent = (Rent) obj ;
+        return (this.positionMin.equals(rent.getPositionMin())
+                &&
+                this.positionMax.equals(rent.getPositionMax()));
+    }
 
     @Override
     public int describeContents() {
