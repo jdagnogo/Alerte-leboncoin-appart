@@ -1,9 +1,7 @@
 Reste à faire :
 
-- animations et transition
+- animations et transition (ca lagge trop !)
 - résumé de la recherche
 - les valeures des recherches (enum)
-- chargement
 - UI de main activity
 - redirection notif
-- rehcerhces en double

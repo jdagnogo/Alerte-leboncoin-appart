@@ -10,6 +10,7 @@ import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
@@ -71,6 +72,8 @@ public class ResultActivity extends AppCompatActivity {
     @Inject
     Retrofit retrofit;
     GetLastAppartJob demoSyncJob;
+    @Bind(R.id.progressBar)
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +81,7 @@ public class ResultActivity extends AppCompatActivity {
         setupWindowAnimations();
         setContentView(R.layout.activity_result);
         ButterKnife.bind(this);
-
+        progressBar.setVisibility(View.VISIBLE);
         appart = new ArrayList<>();
         realm = ((AlertLEboncoinApplication) getApplication()).getRealm();
 
@@ -206,6 +209,7 @@ public class ResultActivity extends AppCompatActivity {
 
     @Subscribe
     public void getMessage(UpdateAppartsBus updateSwipeViewBus) {
+        progressBar.setVisibility(View.GONE);
         if (updateSwipeViewBus.getApparts().size() != 0) {
             appart = updateSwipeViewBus.getApparts();
             initRecycler();

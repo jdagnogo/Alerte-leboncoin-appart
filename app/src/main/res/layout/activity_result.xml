@@ -39,20 +39,20 @@
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
+        android:id="@+id/no_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/no_result"
-        android:visibility="gone"
         android:layout_centerInParent="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:gravity="center"
             android:layout_marginBottom="20dp"
-            android:text="Aucun résultat..." />
+            android:gravity="center"
+            android:text="Aucun résultat..."
+            android:textSize="30sp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -60,6 +60,14 @@
             android:layout_gravity="center"
             android:src="@drawable/appart" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/alarm"
