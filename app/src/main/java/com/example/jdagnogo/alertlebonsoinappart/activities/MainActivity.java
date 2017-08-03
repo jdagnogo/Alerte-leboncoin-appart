@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
 import android.transition.Slide;
 import android.transition.TransitionInflater;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
@@ -42,6 +44,8 @@ public class MainActivity extends Activity {
     private ResearchAdapter adapter;
     private List<Search> searches;
     private Realm realm;
+    @Bind(R.id.no_search)
+    LinearLayout noSearch;
 
     @Override
     protected void onResume() {
@@ -93,6 +97,12 @@ public class MainActivity extends Activity {
         recycleListView.setAdapter(adapter);
         adapter.setData(searches);
         adapter.notifyDataSetChanged();
+
+        if (0==searches.size()){
+            noSearch.setVisibility(View.VISIBLE);
+        }else {
+            noSearch.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -125,6 +125,7 @@ public class GetLastAppartJob extends Job {
                                 resultRealm.get(0).getTitle(),
                                 resultRealm.get(0).getRequestItemsRealm()
                                 ,new Date(), new AppartRealm(appartsFromHtml.get(0)));
+                        searchRealm.setJobID(resultRealm.get(0).getJobID());
                         try { // I could use try-with-resources here
                             realm.executeTransaction(new Realm.Transaction() {
                                 @Override
