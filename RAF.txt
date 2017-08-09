@@ -1,7 +1,8 @@
-Reste à faire :
+Reste Ã  faire :
 
 - animations et transition (ca lagge trop !)
-- résumé de la recherche
+- rÃ©sumÃ© de la recherche
 - les valeures des recherches (enum)
 - UI de main activity
 - redirection notif
+-dÃ©tails des appart
