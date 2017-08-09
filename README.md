@@ -4,18 +4,18 @@ An android app that sends you a notification when new appartments are available.
 
 # Techno used : 
 
--eventBus
--Butter knife
--android job
--dagger 2
--retrofit
--auto-value
--okhttps3
--stetho
--okio
--jsoup
--realm
--glide
+  * eventBus
+  * Butter knife
+  * android job
+  * dagger 2
+  * retrofit
+  * auto-value
+  * okhttps3
+  * stetho
+  * okio
+  * jsoup
+  * realm
+  * glide
 
 -----------------------------------------------------------------------------------------------------------------------------
 
