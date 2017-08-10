@@ -50,8 +50,6 @@ public class ResultResearchAppartAdapter extends RecyclerView.Adapter<ResultRese
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        Log.e("toto","from mémory :" + isFromMemoryCache);
-                        Log.e("toto","frist ressourese :" + isFirstResource);
                         return false;
                     }
                 })

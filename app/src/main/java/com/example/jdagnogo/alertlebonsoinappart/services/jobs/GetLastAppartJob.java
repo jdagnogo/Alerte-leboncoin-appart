@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.evernote.android.job.JobRequest;
 import com.evernote.android.job.util.support.PersistableBundleCompat;
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
+import com.example.jdagnogo.alertlebonsoinappart.activities.ResultActivity;
 import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
@@ -39,6 +41,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NAME_RESEARCH;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
 
 public class GetLastAppartJob extends Job {
 
@@ -102,7 +106,11 @@ public class GetLastAppartJob extends Job {
                 try {
                     List<Appart> appartsFromHtml = Parser.parseHtml(response);
                     if (!resultRealm.get(0).getLastAppartRealm().getTitle().equals(appartsFromHtml.get(0).getTitle())) {
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(getContext(), ResultActivity.class);
+                        Bundle args = new Bundle();
+                        args.putParcelable(NEW_RESEARCH, resultRealm.get(0).getRequestItemsRealm().getRequestItem());
+                        args.putString(NAME_RESEARCH,resultRealm.get(0).getSearch().getTitle());
+                        intent.putExtras(args);
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
 
                         Notification n = new Notification.Builder(context)
