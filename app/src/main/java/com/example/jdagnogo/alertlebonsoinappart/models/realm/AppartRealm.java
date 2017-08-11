@@ -14,23 +14,36 @@ public class AppartRealm extends RealmObject {
     private String title;
     private String date;
     private boolean isPro;
+    private String urlDesc;
 
     public AppartRealm(){
 
     }
-    public AppartRealm(String image, String price, String title, String date, boolean isPro) {
+
+    public AppartRealm(String image, String price, String title, String date, boolean isPro, String urlDesc) {
         this.image = image;
         this.price = price;
         this.title = title;
         this.date = date;
         this.isPro = isPro;
+        this.urlDesc = urlDesc;
     }
+
+    public String getUrlDesc() {
+        return urlDesc;
+    }
+
+    public void setUrlDesc(String urlDesc) {
+        this.urlDesc = urlDesc;
+    }
+
     public AppartRealm(Appart appart){
         this.image = appart.getImage();
         this.price = appart.getPrice();
         this.title = appart.getTitle();
         this.date = appart.getDate();
         this.isPro = appart.isPro();
+        this.urlDesc = appart.getUrlDesc();
     }
 
     public Appart getAppart(){
@@ -40,6 +53,7 @@ public class AppartRealm extends RealmObject {
         appart.setPrice(price);
         appart.setPro(isPro);
         appart.setTitle(title);
+        appart.setUrlDesc(urlDesc);
         return appart;
     }
 

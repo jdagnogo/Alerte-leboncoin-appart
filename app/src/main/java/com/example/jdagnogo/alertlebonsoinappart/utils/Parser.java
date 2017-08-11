@@ -21,7 +21,7 @@ public class Parser {
         Document document = Jsoup.parse(response.body().string());
         Elements ensemble = document.getElementsByClass("list_item");
         List<Appart> apparts = new ArrayList<Appart>();
-        if (ensemble.size()>0) {
+        if (ensemble.size() > 0) {
             for (int i = 0; i < MAX_NB_APPART; i++) {
 
                 String title = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_title").get(0).text();
@@ -36,8 +36,8 @@ public class Parser {
                     continue;
                 }
                 String date = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_absolute").get(0).getElementsByClass("item_supp").get(0).text();
-
-                Appart appart = new Appart(imageUrl, price, title, date, false);
+                String urlDesc = ensemble.get(i).getElementsByAttribute("href").attr("href");
+                Appart appart = new Appart(imageUrl, price, title, date, false,urlDesc);
                 apparts.add(appart);
             }
         }

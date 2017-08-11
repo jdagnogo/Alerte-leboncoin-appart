@@ -149,7 +149,7 @@ public class ResultActivity extends AppCompatActivity {
         recycleListView = (RecyclerView) findViewById(R.id.recycler);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recycleListView.setLayoutManager(mLayoutManager);
-        adapter = new ResultResearchAppartAdapter();
+        adapter = new ResultResearchAppartAdapter(this);
         recycleListView.setAdapter(adapter);
         adapter.setData(appart);
         adapter.notifyDataSetChanged();
@@ -178,7 +178,6 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
     }
-
     private void updateSearchInDb(SearchRealm searchRealm) {
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(searchRealm);

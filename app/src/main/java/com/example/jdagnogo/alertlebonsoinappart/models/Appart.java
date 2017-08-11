@@ -11,17 +11,19 @@ public class Appart implements Parcelable{
     private String title;
     private String date;
     private boolean isPro;
+    private String urlDesc;
 
 
     public Appart() {
     }
 
-    public Appart(String image, String price, String title, String date, boolean isPro) {
+    public Appart(String image, String price, String title, String date, boolean isPro,String urlDesc) {
         this.image = image;
         this.price = price;
         this.title = title;
         this.date = date;
         this.isPro = isPro;
+        this.urlDesc = urlDesc;
     }
 
     public Appart(AppartRealm appartRealm) {
@@ -30,9 +32,18 @@ public class Appart implements Parcelable{
         this.title = appartRealm.getTitle();
         this.date = appartRealm.getDate();
         this.isPro = appartRealm.isPro();
+        this.urlDesc = appartRealm.getUrlDesc();
     }
     public String getImage() {
         return image;
+    }
+
+    public String getUrlDesc() {
+        return urlDesc;
+    }
+
+    public void setUrlDesc(String urlDesc) {
+        this.urlDesc = urlDesc;
     }
 
     public void setImage(String image) {
@@ -83,6 +94,7 @@ public class Appart implements Parcelable{
         dest.writeString(this.title);
         dest.writeString(this.date);
         dest.writeByte(this.isPro ? (byte) 1 : (byte) 0);
+        dest.writeString(this.urlDesc);
     }
 
     protected Appart(Parcel in) {
@@ -91,6 +103,7 @@ public class Appart implements Parcelable{
         this.title = in.readString();
         this.date = in.readString();
         this.isPro = in.readByte() != 0;
+        this.urlDesc = in.readString();
     }
 
     public static final Creator<Appart> CREATOR = new Creator<Appart>() {
