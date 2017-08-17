@@ -4,5 +4,5 @@ Reste à faire :
 - résumé de la recherche
 - les valeures des recherches (enum)
 - UI de main activity
-- redirection notif
--détails des appart
+- Plus de detail quand on montre les photos
+- webview? ou navigateur vers l appart

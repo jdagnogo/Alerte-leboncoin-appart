@@ -1,6 +1,6 @@
 package com.example.jdagnogo.alertlebonsoinappart.services.eventbus;
 
-import com.example.jdagnogo.alertlebonsoinappart.enums.*;
+import com.example.jdagnogo.alertlebonsoinappart.enums.SwipeItemEnum;
 
 /**
  * Created by Jeff on 02/05/2017.

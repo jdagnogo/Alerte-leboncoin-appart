@@ -1,8 +1,6 @@
 package com.example.jdagnogo.alertlebonsoinappart.models.realm;
 
 import com.example.jdagnogo.alertlebonsoinappart.enums.City;
-import com.example.jdagnogo.alertlebonsoinappart.enums.Meuble;
-import com.example.jdagnogo.alertlebonsoinappart.enums.Type;
 import com.example.jdagnogo.alertlebonsoinappart.enums.realm.CityRealm;
 import com.example.jdagnogo.alertlebonsoinappart.enums.realm.MeubleRealm;
 import com.example.jdagnogo.alertlebonsoinappart.enums.realm.TypeRealm;
@@ -12,27 +10,10 @@ import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
 import com.example.jdagnogo.alertlebonsoinappart.models.Surface;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
-
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_CODE_POSTAL;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_MAX;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_MIN;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_SURFACE_MAX;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_SURFACE_MIN;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.LOCATION_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.MEUBLE_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.MORE_CITIES_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.RENT_MAX_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.RENT_MIN_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.ROOM_MAX_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.ROOM_MIN_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.SURFACE_MAX_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.SURFACE_MIN_KEY;
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.TYPE_KEY;
 
 public class RequestItemsRealm extends RealmObject {
 

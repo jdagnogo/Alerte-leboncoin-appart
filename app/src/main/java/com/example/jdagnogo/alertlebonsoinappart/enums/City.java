@@ -1,8 +1,6 @@
 package com.example.jdagnogo.alertlebonsoinappart.enums;
 
 
-import io.realm.RealmObject;
-
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_CODE_POSTAL;
 
 public enum City {

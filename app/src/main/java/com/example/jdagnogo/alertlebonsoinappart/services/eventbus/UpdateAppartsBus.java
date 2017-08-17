@@ -1,7 +1,6 @@
 package com.example.jdagnogo.alertlebonsoinappart.services.eventbus;
 
 import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
-import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
 
 import java.util.List;
 

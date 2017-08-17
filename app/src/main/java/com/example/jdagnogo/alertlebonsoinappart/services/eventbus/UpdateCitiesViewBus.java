@@ -1,6 +1,6 @@
 package com.example.jdagnogo.alertlebonsoinappart.services.eventbus;
 
-import com.example.jdagnogo.alertlebonsoinappart.enums.*;
+import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 
 import java.util.List;
 

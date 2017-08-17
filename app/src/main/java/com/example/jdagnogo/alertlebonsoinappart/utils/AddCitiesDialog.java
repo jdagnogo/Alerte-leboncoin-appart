@@ -12,7 +12,6 @@ import com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox;
 import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateCitiesViewBus;
-import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateSwipeViewBus;
 
 import java.util.ArrayList;
 import java.util.List;

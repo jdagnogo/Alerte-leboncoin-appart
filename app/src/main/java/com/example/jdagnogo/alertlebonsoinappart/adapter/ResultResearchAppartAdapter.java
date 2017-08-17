@@ -1,32 +1,29 @@
 package com.example.jdagnogo.alertlebonsoinappart.adapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.support.v4.view.PagerAdapter;
-import android.support.v7.app.AlertDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
+import com.example.jdagnogo.alertlebonsoinappart.activities.AppartDetailedActivity;
 import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
 
 import java.util.List;
+
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.APPART;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
 
 /**
  * Created by Jeff on 10/06/2017.
@@ -95,15 +92,11 @@ public class ResultResearchAppartAdapter extends RecyclerView.Adapter<ResultRese
                 @Override
                 public void onClick(View view) {
                     int itemPosition = getLayoutPosition();
-                    final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-                    LayoutInflater inflater = activity.getLayoutInflater();
-                    View dialogView = inflater.inflate(R.layout.detail_appar_dialog, null);
-                    TextView appartName = (TextView) dialogView.findViewById(R.id.appart_name);
-                    appartName.setText(data.get(itemPosition).getTitle());
-                    dialogBuilder.setView(dialogView);
-                    // dialog fragment !
-                    final AlertDialog alertDialog = dialogBuilder.create();
-                    alertDialog.show();
+                    Intent intent = new Intent(activity,AppartDetailedActivity.class);
+                    Bundle args = new Bundle();
+                    args.putParcelable(APPART, data.get(itemPosition));
+                    intent.putExtras(args);
+                    activity.startActivity(intent);
                 }
             });
 

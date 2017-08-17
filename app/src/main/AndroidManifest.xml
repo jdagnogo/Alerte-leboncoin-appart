@@ -20,6 +20,9 @@
         <activity android:name=".activities.ResultActivity">
 
         </activity>
+        <activity android:name=".activities.AppartDetailedActivity">
+
+        </activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

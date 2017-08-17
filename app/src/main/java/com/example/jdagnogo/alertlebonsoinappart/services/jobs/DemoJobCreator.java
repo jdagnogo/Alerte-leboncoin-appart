@@ -1,12 +1,8 @@
 package com.example.jdagnogo.alertlebonsoinappart.services.jobs;
 
-import android.util.Log;
-
 import com.evernote.android.job.Job;
 import com.evernote.android.job.JobCreator;
 import com.evernote.android.job.JobManager;
-
-import java.util.Set;
 
 public class DemoJobCreator implements JobCreator {
 

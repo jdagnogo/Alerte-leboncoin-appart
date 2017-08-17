@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.activities.NewSearchActivity;
 import com.example.jdagnogo.alertlebonsoinappart.activities.ResultActivity;
-import com.example.jdagnogo.alertlebonsoinappart.models.NewSearchView;
 import com.example.jdagnogo.alertlebonsoinappart.models.Search;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.DeleteSearchBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
@@ -24,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NAME_RESEARCH;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
 
 /**

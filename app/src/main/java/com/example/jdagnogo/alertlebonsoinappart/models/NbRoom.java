@@ -7,8 +7,6 @@ import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.NbRoomRealm;
 import com.roughike.swipeselector.SwipeItem;
 
-import io.realm.RealmObject;
-
 /**
  * Created by Jeff on 02/05/2017.
  */

@@ -1,21 +1,30 @@
 package com.example.jdagnogo.alertlebonsoinappart.utils;
 
 import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
-import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
+import com.example.jdagnogo.alertlebonsoinappart.models.AppartDetails;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 public class Parser {
     private final static int MAX_NB_APPART = 10;
+    private final static String ITEM_IMAGE = "item_image";
+    private final static String ITEM_INFO = "item_infos";
+    private final static String ITEM_ABSOLUTE = "item_absolute";
+    private final static String LAZYLOAD = "lazyload";
 
     public static List<Appart> parseHtml(Response<ResponseBody> response) throws IOException {
         Document document = Jsoup.parse(response.body().string());
@@ -24,23 +33,53 @@ public class Parser {
         if (ensemble.size() > 0) {
             for (int i = 0; i < MAX_NB_APPART; i++) {
 
-                String title = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_title").get(0).text();
+                String title = ensemble.get(i).getElementsByClass(ITEM_INFO).get(0).getElementsByClass("item_title").get(0).text();
                 String imageUrl = "";
-                if (0 == ensemble.get(i).getElementsByClass("item_image").get(0).getElementsByClass("lazyload").size()) {
+                if (0 == ensemble.get(i).getElementsByClass(ITEM_IMAGE).get(0).getElementsByClass(LAZYLOAD).size()) {
                     continue;
                 } else {
-                    imageUrl = ensemble.get(i).getElementsByClass("item_image").get(0).getElementsByClass("lazyload").get(0).attr("data-imgsrc");
+                    imageUrl = ensemble.get(i).getElementsByClass(ITEM_IMAGE).get(0).getElementsByClass(LAZYLOAD).get(0).attr("data-imgsrc");
                 }
-                String price = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_price").get(0).text();
-                if (0 == ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_absolute").size()) {
+                String price = ensemble.get(i).getElementsByClass(ITEM_INFO).get(0).getElementsByClass("item_price").get(0).text();
+                if (0 == ensemble.get(i).getElementsByClass(ITEM_INFO).get(0).getElementsByClass(ITEM_ABSOLUTE).size()) {
                     continue;
                 }
-                String date = ensemble.get(i).getElementsByClass("item_infos").get(0).getElementsByClass("item_absolute").get(0).getElementsByClass("item_supp").get(0).text();
-                String urlDesc = ensemble.get(i).getElementsByAttribute("href").attr("href");
-                Appart appart = new Appart(imageUrl, price, title, date, false,urlDesc);
+                String date = ensemble.get(i).getElementsByClass(ITEM_INFO).get(0).getElementsByClass(ITEM_ABSOLUTE).get(0).getElementsByClass("item_supp").get(0).text();
+                String dataInfo = ensemble.get(i).getElementsByAttribute("href").attr("data-info");
+                String appartId = "";
+                try {
+                    JSONObject jObject = new JSONObject(dataInfo);
+                    appartId = jObject.getString("ad_listid");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Appart appart = new Appart(imageUrl, price, title, date, false, appartId);
                 apparts.add(appart);
             }
         }
         return apparts;
+    }
+
+
+    public static AppartDetails parseAppartDetailed(Response<ResponseBody> response, Appart appart) throws IOException {
+        AppartDetails appartDetails = new AppartDetails(appart);
+
+        Document document = Jsoup.parse(response.body().string());
+//// TODO: 17/08/2017 check if it contains images
+        String allImagesString = document.getElementsByTag("script").get(11).toString();
+        Pattern pattern = Pattern.compile("(\\//)(.*?)(\\.jpg)");
+        Matcher matcher = pattern.matcher(allImagesString);
+        List<String> listMatches = new ArrayList<String>();
+
+        while (matcher.find()) {
+            String toto = matcher.group(2);
+            if (toto.contains("ad-large")){
+                listMatches.add(String.format("http:%s.jpg",toto));
+            }
+
+        }
+        appartDetails.setImgsUrl(listMatches);
+
+        return appartDetails;
     }
 }

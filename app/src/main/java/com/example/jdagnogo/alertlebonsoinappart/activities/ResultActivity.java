@@ -1,8 +1,9 @@
 package com.example.jdagnogo.alertlebonsoinappart.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
@@ -16,24 +17,23 @@ import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.adapter.ResultResearchAppartAdapter;
 import com.example.jdagnogo.alertlebonsoinappart.models.Appart;
-import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
 import com.example.jdagnogo.alertlebonsoinappart.models.RequestItems;
-import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.AppartRealm;
 import com.example.jdagnogo.alertlebonsoinappart.models.realm.RequestItemsRealm;
+import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateAppartsBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.GetLastAppartJob;
 import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Parser;
+import com.veinhorn.scrollgalleryview.ScrollGalleryView;
 
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +54,7 @@ import retrofit2.Retrofit;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NAME_RESEARCH;
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends FragmentActivity {
     private final static String TAG = ResultActivity.class.getCanonicalName();
 
     private List<Appart> appart;
@@ -178,6 +178,7 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
     }
+
     private void updateSearchInDb(SearchRealm searchRealm) {
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(searchRealm);
@@ -195,6 +196,7 @@ public class ResultActivity extends AppCompatActivity {
         realm.copyToRealmOrUpdate(searchRealm);
         realm.commitTransaction();
     }
+
 
     @Override
     protected void onDestroy() {
@@ -215,6 +217,7 @@ public class ResultActivity extends AppCompatActivity {
             noResult.setVisibility(View.GONE);
             alarm.setVisibility(View.VISIBLE);
             hideOrDisplayAlarm();
+            //showAppartDetails();
 
         } else {
             noResult.setVisibility(View.VISIBLE);

@@ -34,6 +34,11 @@ public class Appart implements Parcelable{
         this.isPro = appartRealm.isPro();
         this.urlDesc = appartRealm.getUrlDesc();
     }
+
+    public Appart(Appart appart) {
+        this (appart.getImage(),appart.getPrice(),appart.getTitle(),appart.getDate(),appart.isPro(),appart.getUrlDesc());
+    }
+
     public String getImage() {
         return image;
     }
