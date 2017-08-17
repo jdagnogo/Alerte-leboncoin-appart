@@ -23,6 +23,7 @@ public class GlideImageLoader implements MediaLoader {
                 .with( context )
                 .load( url)
                 .asBitmap()
+                .centerCrop()
                 .thumbnail( 0.1f )
                 .into( imageView );
     }
@@ -33,6 +34,7 @@ public class GlideImageLoader implements MediaLoader {
                 .with( context )
                 .load( url)
                 .asBitmap()
+                .centerCrop()
                 .thumbnail( 0.1f )
                 .into( thumbnailView );
     }

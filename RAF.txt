@@ -4,5 +4,6 @@ Reste à faire :
 - résumé de la recherche
 - les valeures des recherches (enum)
 - UI de main activity
-- Plus de detail quand on montre les photos
+- Plus de detail quand on montre les photos (description)
 - webview? ou navigateur vers l appart
+- lenteur : retrofit dasn un thread ?

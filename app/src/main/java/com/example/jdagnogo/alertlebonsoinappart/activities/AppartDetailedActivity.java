@@ -40,9 +40,16 @@ public class AppartDetailedActivity extends FragmentActivity {
     Appart appart;
     @Bind(R.id.title)
     TextView title;
+    @Bind(R.id.price)
+    TextView price;
+    @Bind(R.id.nb_room)
+    TextView nbRoom;
+    @Bind(R.id.surface)
+    TextView surface;
     @Inject
     Retrofit retrofit;
     private ScrollGalleryView scrollGalleryView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,7 @@ public class AppartDetailedActivity extends FragmentActivity {
         GlobalBus.getBus().register(this);
         if (getIntent() != null) {
             appart = getIntent().getParcelableExtra(APPART);
-            title.setText(appart.getTitle());
+
             ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(AppartDetailedActivity.this);
             getAppartDetailed();
         }
@@ -83,6 +90,13 @@ public class AppartDetailedActivity extends FragmentActivity {
         });
     }
 
+    private void initView() {
+        title.setText(appartDetails.getTitle());
+        surface.setText(appartDetails.getSurface());
+        price.setText(appartDetails.getPrice());
+        nbRoom.setText(appartDetails.getNbRoom());
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -92,7 +106,7 @@ public class AppartDetailedActivity extends FragmentActivity {
     @Subscribe
     public void getAppartDetailed(UpdateAppartDetailedBus updateAppartDetailedBus) {
         List<MediaInfo> infos = new ArrayList<>(appartDetails.getImgsUrl().size());
-
+        initView();
         for (String url : appartDetails.getImgsUrl()) {
             infos.add(MediaInfo.mediaLoader(new GlideImageLoader(url)));
         }

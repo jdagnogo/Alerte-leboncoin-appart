@@ -65,6 +65,16 @@ public class Parser {
         AppartDetails appartDetails = new AppartDetails(appart);
 
         Document document = Jsoup.parse(response.body().string());
+        Elements allInformation = document.getElementsByClass("value");
+        String nbPiece = allInformation.get(3).toString();
+        nbPiece = nbPiece.substring(nbPiece.indexOf("\">") + 2, nbPiece.indexOf("</"));
+        appartDetails.setNbRoom(String.format("%s pièce(s)", nbPiece));
+
+
+        String surface = allInformation.get(5).toString();
+        surface = surface.substring(surface.indexOf("\">") + 2, surface.indexOf("<su"));
+        appartDetails.setSurface(String.format("%s²", surface));
+
 //// TODO: 17/08/2017 check if it contains images
         String allImagesString = document.getElementsByTag("script").get(11).toString();
         Pattern pattern = Pattern.compile("(\\//)(.*?)(\\.jpg)");
@@ -72,9 +82,9 @@ public class Parser {
         List<String> listMatches = new ArrayList<String>();
 
         while (matcher.find()) {
-            String toto = matcher.group(2);
-            if (toto.contains("ad-large")){
-                listMatches.add(String.format("http:%s.jpg",toto));
+            String group = matcher.group(2);
+            if (group.contains("ad-large")) {
+                listMatches.add(String.format("http:%s.jpg", group));
             }
 
         }
