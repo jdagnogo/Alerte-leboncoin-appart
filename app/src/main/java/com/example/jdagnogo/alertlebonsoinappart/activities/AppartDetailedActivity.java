@@ -105,16 +105,27 @@ public class AppartDetailedActivity extends FragmentActivity {
 
     @Subscribe
     public void getAppartDetailed(UpdateAppartDetailedBus updateAppartDetailedBus) {
-        List<MediaInfo> infos = new ArrayList<>(appartDetails.getImgsUrl().size());
-        initView();
-        for (String url : appartDetails.getImgsUrl()) {
-            infos.add(MediaInfo.mediaLoader(new GlideImageLoader(url)));
-        }
+
         scrollGalleryView = (ScrollGalleryView) findViewById(R.id.scroll_gallery_view);
-        scrollGalleryView
-                .setThumbnailSize(100)
-                .setZoom(true)
-                .setFragmentManager(getSupportFragmentManager())
-                .addMedia(infos);
+        initView();
+        if (0<appartDetails.getImgsUrl().size()) {
+            List<MediaInfo> infos = new ArrayList<>(appartDetails.getImgsUrl().size());
+            for (String url : appartDetails.getImgsUrl()) {
+                infos.add(MediaInfo.mediaLoader(new GlideImageLoader(url)));
+            }
+
+            scrollGalleryView
+                    .setThumbnailSize(100)
+                    .setZoom(true)
+                    .setFragmentManager(getSupportFragmentManager())
+                    .addMedia(infos);
+        }else {
+            MediaInfo info = MediaInfo.mediaLoader(new GlideImageLoader("http:"+appartDetails.getImage()));
+            scrollGalleryView
+                    .setThumbnailSize(100)
+                    .setZoom(true)
+                    .setFragmentManager(getSupportFragmentManager())
+                    .addMedia(info);
+        }
     }
 }

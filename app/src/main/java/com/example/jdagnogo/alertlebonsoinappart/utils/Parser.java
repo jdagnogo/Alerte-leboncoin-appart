@@ -72,8 +72,13 @@ public class Parser {
 
 
         String surface = allInformation.get(5).toString();
-        surface = surface.substring(surface.indexOf("\">") + 2, surface.indexOf("<su"));
-        appartDetails.setSurface(String.format("%s²", surface));
+        if(0<surface.indexOf("<su") && 0<surface.indexOf("\">")){
+            surface = surface.substring(surface.indexOf("\">") + 2, surface.indexOf("<su"));
+            appartDetails.setSurface(String.format("%s²", surface));
+        }else {
+            appartDetails.setSurface("???");
+        }
+
 
 //// TODO: 17/08/2017 check if it contains images
         String allImagesString = document.getElementsByTag("script").get(11).toString();
