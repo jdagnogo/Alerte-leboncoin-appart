@@ -1,14 +1,10 @@
 ﻿Reste à faire :
 
-- UI de main activity / résumé de la recherche
-- webview? ou navigateur vers l appart
-- UI notif
-
-- animations et transition (ca lagge trop !)
-
+- tuto début
 - les valeures des recherches (enum)
 
+------------------------------------Pour après --------------------------------------
+
+- animations et transition (ca lagge trop !)
 - Plus de detail quand on montre les photos (description)
-
-
 - lenteur : retrofit dasn un thread ?

@@ -78,6 +78,15 @@ public abstract class SwipeItemAbstract implements Parcelable{
         return positionMax;
     }
 
+    public String getDescription(int position){
+        if (position == 0 || position == map.size()) {
+            return map.get(position);
+        }
+        else {
+            return map.get(position)+getUnite();
+        }
+    }
+
     public String getDescriptionMinWithUnity() {
         if (postitonMin != 0) {
 

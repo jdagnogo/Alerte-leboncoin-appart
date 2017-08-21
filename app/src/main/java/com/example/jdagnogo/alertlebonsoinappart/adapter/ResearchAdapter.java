@@ -16,6 +16,9 @@ import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.activities.NewSearchActivity;
 import com.example.jdagnogo.alertlebonsoinappart.activities.ResultActivity;
 import com.example.jdagnogo.alertlebonsoinappart.models.Search;
+import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.NbRoomSwipeItem;
+import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.RentSwipeItem;
+import com.example.jdagnogo.alertlebonsoinappart.models.swipeItem.SurfaceSwipeItem;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.DeleteSearchBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 
@@ -44,7 +47,10 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyView
 
     @Override
     public void onBindViewHolder(ResearchAdapter.MyViewHolder holder, final int position) {
-        holder.title.setText(data.get(position).getTitle());
+        if (data.get(position).getTitle().isEmpty()) {
+            holder.title.setText("Aucun titre");
+        } else
+            holder.title.setText(data.get(position).getTitle());
         String dateString = String.format("Dernière maj : %s",
                 hourFormatter.format(data.get(position).getMajDate()));
         holder.date.setText(dateString);
@@ -58,22 +64,21 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyView
                 activity.startActivity(intent);
             }
         });
-      holder.delete.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              DeleteSearchBus deleteSearchBus = new DeleteSearchBus(data.get(position));
-              GlobalBus.getBus().post(deleteSearchBus);
-          }
-      });
-        holder.edit.setOnClickListener(new View.OnClickListener() {
+        RentSwipeItem rentSwipeItem = new RentSwipeItem();
+        holder.rentMin.setText(rentSwipeItem.getDescription(Integer.valueOf(data.get(position).getRequestItems().getSurface().getPositionMin())));
+        holder.rentMax.setText(rentSwipeItem.getDescription(Integer.valueOf(data.get(position).getRequestItems().getSurface().getPositionMax())));
+
+        SurfaceSwipeItem surfaceSwipeItem = new SurfaceSwipeItem();
+        holder.surfaceMin.setText(surfaceSwipeItem.getDescription(Integer.valueOf(data.get(position).getRequestItems().getSurface().getPositionMin())));
+        holder.surfaceMax.setText(surfaceSwipeItem.getDescription(Integer.valueOf(data.get(position).getRequestItems().getSurface().getPositionMax())));
+
+        holder.nbRoomMin.setText(data.get(position).getRequestItems().getNbRoom().getPositionMin());
+        holder.nbRoomMax.setText(data.get(position).getRequestItems().getNbRoom().getPositionMax());
+        holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, NewSearchActivity.class);
-                Bundle args = new Bundle();
-                args.putParcelable(NEW_RESEARCH, data.get(position));
-                intent.putExtras(args);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity);
-                activity.startActivity(intent,options.toBundle());
+                DeleteSearchBus deleteSearchBus = new DeleteSearchBus(data.get(position));
+                GlobalBus.getBus().post(deleteSearchBus);
             }
         });
     }
@@ -94,9 +99,9 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView title, date;
+        public TextView title, date, rentMin, rentMax, surfaceMin, surfaceMax, nbRoomMin, nbRoomMax;
         public CardView cardView;
-        public ImageView delete,edit;
+        public ImageView delete;
 
         public MyViewHolder(View view) {
             super(view);
@@ -104,7 +109,12 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyView
             date = (TextView) view.findViewById(R.id.date);
             cardView = (CardView) view.findViewById(R.id.card);
             delete = (ImageView) view.findViewById(R.id.delete);
-            edit = (ImageView) view.findViewById(R.id.edit);
+            rentMin = (TextView) view.findViewById(R.id.rent_min);
+            rentMax = (TextView) view.findViewById(R.id.rent_max);
+            surfaceMin = (TextView) view.findViewById(R.id.surface_min);
+            surfaceMax = (TextView) view.findViewById(R.id.surface_max);
+            nbRoomMax = (TextView) view.findViewById(R.id.nb_room_max);
+            nbRoomMin = (TextView) view.findViewById(R.id.nb_room_min);
 
         }
     }

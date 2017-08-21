@@ -114,7 +114,7 @@ public class GetLastAppartJob extends Job {
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
 
                         Notification n = new Notification.Builder(context)
-                                .setContentTitle("Un appartement vient d'être publié !")
+                                .setContentTitle("Nouvel appartement!")
                                 .setContentText(appartsFromHtml.get(0).getTitle())
                                 .setSmallIcon(R.drawable.appart)
                                 .setContentIntent(pIntent)

@@ -25,4 +25,8 @@
     <string name="nb_room_title_max">Nombre de pièces maximal</string>
     <string name="name_search">Nom de votre recherche</string>
     <string name="query">Que recherchez-vous?</string>
+    <string name="rent_between"><![CDATA[< Loyer    <]]></string>
+    <string name="surface_between"><![CDATA[< Surface   <]]></string>
+    <string name="nbroom_between"><![CDATA[< nb pièces <]]></string>
+    <string name="key_word">Mots clés</string>
 </resources>
