@@ -1,5 +1,7 @@
 package com.example.jdagnogo.alertlebonsoinappart.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -27,6 +29,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +37,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.APPART;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.BASE_URL;
+import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.SITE_URL;
 
 public class AppartDetailedActivity extends FragmentActivity {
     AppartDetails appartDetails;
@@ -46,6 +51,8 @@ public class AppartDetailedActivity extends FragmentActivity {
     TextView nbRoom;
     @Bind(R.id.surface)
     TextView surface;
+    @Bind(R.id.redirection)
+    TextView redirection;
     @Inject
     Retrofit retrofit;
     private ScrollGalleryView scrollGalleryView;
@@ -103,12 +110,19 @@ public class AppartDetailedActivity extends FragmentActivity {
         GlobalBus.getBus().unregister(this);
     }
 
+    @OnClick(R.id.redirection)
+    public void onRedirectionClick() {
+        String url = String.format("%s%s.htm?ca=2_s",SITE_URL,appartDetails.getUrlDesc());
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
+    }
+
     @Subscribe
     public void getAppartDetailed(UpdateAppartDetailedBus updateAppartDetailedBus) {
 
         scrollGalleryView = (ScrollGalleryView) findViewById(R.id.scroll_gallery_view);
         initView();
-        if (0<appartDetails.getImgsUrl().size()) {
+        if (0 < appartDetails.getImgsUrl().size()) {
             List<MediaInfo> infos = new ArrayList<>(appartDetails.getImgsUrl().size());
             for (String url : appartDetails.getImgsUrl()) {
                 infos.add(MediaInfo.mediaLoader(new GlideImageLoader(url)));
@@ -119,8 +133,8 @@ public class AppartDetailedActivity extends FragmentActivity {
                     .setZoom(true)
                     .setFragmentManager(getSupportFragmentManager())
                     .addMedia(infos);
-        }else {
-            MediaInfo info = MediaInfo.mediaLoader(new GlideImageLoader("http:"+appartDetails.getImage()));
+        } else {
+            MediaInfo info = MediaInfo.mediaLoader(new GlideImageLoader("http:" + appartDetails.getImage()));
             scrollGalleryView
                     .setThumbnailSize(100)
                     .setZoom(true)

@@ -72,6 +72,7 @@
             android:layout_width="match_parent"
             android:text="Accéder au site"
             android:padding="16dp"
+            android:id="@+id/redirection"
             android:textSize="18dp"
             android:textColor="@android:color/white"
             android:gravity="center"

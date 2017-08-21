@@ -88,6 +88,7 @@ public class ResultResearchAppartAdapter extends RecyclerView.Adapter<ResultRese
             price = (TextView) view.findViewById(R.id.price);
             imageView = (ImageView) view.findViewById(R.id.image);
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

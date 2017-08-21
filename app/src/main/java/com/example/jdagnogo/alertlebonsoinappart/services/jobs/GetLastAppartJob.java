@@ -114,14 +114,11 @@ public class GetLastAppartJob extends Job {
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
 
                         Notification n = new Notification.Builder(context)
-                                .setContentTitle("alerte lebon coin")
-                                .setContentText("new appart !!  " + appartsFromHtml.get(0).getTitle())
-                                .setSmallIcon(R.drawable.test)
+                                .setContentTitle("Un appartement vient d'être publié !")
+                                .setContentText(appartsFromHtml.get(0).getTitle())
+                                .setSmallIcon(R.drawable.appart)
                                 .setContentIntent(pIntent)
-                                .setAutoCancel(true)
-                                .addAction(R.drawable.test, "Call", pIntent)
-                                .addAction(R.drawable.test, "More", pIntent)
-                                .addAction(R.drawable.test, "And more", pIntent).build();
+                                .setAutoCancel(true).build();
 
 
                         NotificationManager notificationManager =
