@@ -93,6 +93,10 @@ public class Parser {
             }
 
         }
+        if (listMatches.isEmpty()){
+            if (null!= document.getElementsByClass("lazyload"))
+            listMatches.add("http:"+document.getElementsByClass("lazyload").get(0).attr("data-imgsrc"));
+        }
         appartDetails.setImgsUrl(listMatches);
 
         return appartDetails;

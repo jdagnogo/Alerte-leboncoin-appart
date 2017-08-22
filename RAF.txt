@@ -1,10 +1,10 @@
 ﻿Reste à faire :
 
 - tuto début
+- save state (new search activity)
 - les valeures des recherches (enum)
 
 ------------------------------------Pour après --------------------------------------
 
 - animations et transition (ca lagge trop !)
-- Plus de detail quand on montre les photos (description)
 - lenteur : retrofit dasn un thread ?

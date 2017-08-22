@@ -37,7 +37,14 @@ public class RentSwipeItem extends SwipeItemAbstract {
                 put(11, "700");
                 put(12, "750");
                 put(13, "800");
-                put(14, "Max");
+                put(14, "850");
+                put(15, "900");
+                put(16, "950");
+                put(17, "1000");
+                put(18, "1100");
+                put(19, "1200");
+                put(20, "Max");
+
             }
         };
         this.positionMax =map.size()-1;

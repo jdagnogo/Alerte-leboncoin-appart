@@ -34,7 +34,11 @@ public class SurfaceSwipeItem extends SwipeItemAbstract implements Parcelable{
                 put(7, "70");
                 put(8, "80");
                 put(9, "90");
-                put(10, "Max");
+                put(10, "100");
+                put(11, "110");
+                put(12, "120");
+                put(13, "150");
+                put(14, "Max");
             }
         };
         this.positionMax =map.size()-1;
