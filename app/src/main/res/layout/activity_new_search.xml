@@ -107,7 +107,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:nestedScrollingEnabled="false"
-                    android:layout_height="150dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/add_cities_text"
@@ -120,9 +120,11 @@
 
                     <android.support.design.widget.FloatingActionButton
                         android:id="@+id/add_cities_button"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="5dp"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:layout_margin="5dp"
                         android:background="@color/colorPrimary"

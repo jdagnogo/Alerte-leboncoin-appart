@@ -1,10 +1,14 @@
-﻿Reste à faire :
+﻿Reste à faire avant de faire la pub:
 
 - tuto début
+- crashlytics
+- une pop up pour dire aux gens de m aimer xD (a la fin du tuto ?)
 - save state (new search activity)
-- les valeures des recherches (enum)
+- site internet
+- animations et transition (ca lagge trop !)
 
 ------------------------------------Pour après --------------------------------------
 
-- animations et transition (ca lagge trop !)
+
 - lenteur : retrofit dasn un thread ?
+- pub?

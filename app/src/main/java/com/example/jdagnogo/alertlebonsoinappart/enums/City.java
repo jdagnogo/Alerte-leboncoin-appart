@@ -5,12 +5,13 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_
 
 public enum City {
 
-    BORDEAUX_CENTRE("Bordeaux centre","Bordeaux ",  "33000"),
-    TALENCE("Talence", "Talence ", "33400"),
+    BORDEAUX_33000("Bordeaux centre","Bordeaux ",  "33000"),
+    BORDEAUX_33800("Bordeaux ( 33800 )","Bordeaux ",  "33800"),
+    TALENCE_33400("Talence", "Talence ", "33400"),
     //BEGLE("Bègles",  33130),
-    MERIGNAC("Mérignac", "Mérignac ", "33700"),
-    PESSAC("Pessac", "Pessac ", "33600"),
-    BORDEAUX_ALL("Bordeaux (Toute la ville) ","Bordeaux",  DEFAULT_CODE_POSTAL), // 0 means don t put it in the request
+    MERIGNAC_33700("Mérignac", "Mérignac ", "33700"),
+    PESSAC_33600("Pessac", "Pessac ", "33600"),
+    BORDEAUX_0("Bordeaux (Toute la ville) ","Bordeaux",  DEFAULT_CODE_POSTAL), // 0 means don t put it in the request
     //TOULOUSE_ALL("Toulouse (Toute la ville)",  0),
     ;
 

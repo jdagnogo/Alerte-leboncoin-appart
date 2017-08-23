@@ -4,28 +4,30 @@ import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.jdagnogo.alertlebonsoinappart.R;
+import com.example.jdagnogo.alertlebonsoinappart.adapter.CityArrayListAdapter;
 import com.example.jdagnogo.alertlebonsoinappart.customlibs.SmoothCheckBox;
 import com.example.jdagnogo.alertlebonsoinappart.enums.City;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateCitiesViewBus;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 public class AddCitiesDialog {
-    private Activity activity;
-    static SmoothCheckBox bdxCentre, talence, merignac, pessac;
+    private static AutoCompleteTextView city;
+    private static City citySelected;
 
-    public static void createDialog(final Activity activity, List<City> citiesAlreadychecked) {
+    public static void createDialog(final Activity activity, List<City> cityAlreadychecked) {
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.add_cities_dialog, null);
-        initCheckBoxes(dialogView);
-        checkCitiesAlreadySelected(citiesAlreadychecked);
         dialogBuilder.setView(dialogView);
         final AlertDialog alertDialog = dialogBuilder.create();
         Button cancel = (Button) dialogView.findViewById(R.id.cancel);
@@ -36,60 +38,54 @@ public class AddCitiesDialog {
             }
         });
         Button ok = (Button) dialogView.findViewById(R.id.ok);
+
+        // auto complete
+        city = (AutoCompleteTextView) dialogView.findViewById(R.id.city_autocomplete_view);
+        CityArrayListAdapter adapter = new CityArrayListAdapter
+                (activity, android.R.layout.simple_list_item_1, getAllCities());
+        city.setAdapter(adapter);
+
+        //validation
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (!bdxCentre.isChecked() && !talence.isChecked() && !pessac.isChecked() && !merignac.isChecked()) {
-                    Toast.makeText(activity, "Veuillez choisir au moins une ville",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    List<City> cities = new ArrayList<City>();
-                    if (bdxCentre.isChecked()) {
-                        cities.add(City.BORDEAUX_CENTRE);
-                    }
-                    if (talence.isChecked()) {
-                        cities.add(City.TALENCE);
-                    }
-                    if (pessac.isChecked()) {
-                        cities.add(City.PESSAC);
-                    }
-                    if (merignac.isChecked()) {
-                        cities.add(City.MERIGNAC);
-                    }
-                    UpdateCitiesViewBus updateCitiesViewBus = new UpdateCitiesViewBus(cities);
+                if (isValidCity(city.getText().toString())) {
+                    UpdateCitiesViewBus updateCitiesViewBus = new UpdateCitiesViewBus(citySelected);
                     GlobalBus.getBus().post(updateCitiesViewBus);
                     alertDialog.dismiss();
+                } else {
+                    Toast.makeText(activity, "La ville choisie n'est pas reconnue",
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });
         alertDialog.show();
     }
 
-    private static void checkCitiesAlreadySelected(List<City> citiesAlreadychecked) {
-        for (int i = 0; i < citiesAlreadychecked.size(); i++) {
-            switch (citiesAlreadychecked.get(i)) {
-                case BORDEAUX_CENTRE:
-                    bdxCentre.setChecked(true);
-                    break;
-                case TALENCE:
-                    talence.setChecked(true);
-                    break;
-                case PESSAC:
-                    pessac.setChecked(true);
-                    break;
-                case MERIGNAC:
-                    merignac.setChecked(true);
-                    break;
-            }
+    private static List<String> getAllCities() {
+        List<String> data = new ArrayList<>();
+        List<City> citiesAsCity =
+                new ArrayList<City>(EnumSet.allOf(City.class));
+        for (int i = 0; i < citiesAsCity.size(); i++) {
+            data.add(String.format("%s( %s ) ", citiesAsCity.get(i).getCode(), citiesAsCity.get(i).getCodePostal()));
         }
+        return data;
     }
 
-    private static void initCheckBoxes(View view) {
-        bdxCentre = (SmoothCheckBox) view.findViewById(R.id.bdx_centre);
-        talence = (SmoothCheckBox) view.findViewById(R.id.talence);
-        merignac = (SmoothCheckBox) view.findViewById(R.id.merignac);
-        pessac = (SmoothCheckBox) view.findViewById(R.id.pessac);
-
+    private static boolean isValidCity(String cityAsString) {
+        String[] parts = cityAsString.split("\\(");
+        if (parts.length<2){
+            return false;
+        }
+        String cityName = parts[0];
+        cityName = cityName.substring(0, cityName.length() - 1).toUpperCase();
+        String postalCode = parts[1].split(" ")[1];
+        try {
+            citySelected = City.valueOf(String.format("%s_%s",cityName,postalCode));
+        } catch(IllegalArgumentException e) {
+            System.out.println("Caught an IllegalArgumentException..." + e.getMessage());
+            return  false;
+        }
+        return true;
     }
 }

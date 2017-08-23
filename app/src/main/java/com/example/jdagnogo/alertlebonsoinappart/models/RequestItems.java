@@ -54,7 +54,7 @@ public class RequestItems  implements Parcelable  {
         HashMap<String, String> maps = new HashMap<>();
         //cities
         if (0 == cities.size()) {
-            cities.add(City.BORDEAUX_ALL);
+            cities.add(City.BORDEAUX_0);
         }
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < cities.size(); i++) {

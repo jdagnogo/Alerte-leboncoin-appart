@@ -65,8 +65,8 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyView
             }
         });
         RentSwipeItem rentSwipeItem = new RentSwipeItem();
-        holder.rentMin.setText(rentSwipeItem.getDescription(Integer.valueOf(data.get(position).getRequestItems().getSurface().getPositionMin())));
-        holder.rentMax.setText(rentSwipeItem.getDescription(Integer.valueOf(data.get(position).getRequestItems().getSurface().getPositionMax())));
+        holder.rentMin.setText(data.get(position).getRequestItems().getRent().getPositionMin());
+        holder.rentMax.setText(data.get(position).getRequestItems().getRent().getPositionMax());
 
         SurfaceSwipeItem surfaceSwipeItem = new SurfaceSwipeItem();
         holder.surfaceMin.setText(surfaceSwipeItem.getDescription(Integer.valueOf(data.get(position).getRequestItems().getSurface().getPositionMin())));

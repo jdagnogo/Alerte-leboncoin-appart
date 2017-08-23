@@ -9,18 +9,18 @@ import java.util.List;
  */
 
 public class UpdateCitiesViewBus {
-    public List<City> getCities() {
-        return cities;
+    public City getcity() {
+        return city;
     }
 
-    public void setCities(List<City> cities) {
-        this.cities = cities;
+    public void setcity(City city) {
+        this.city = city;
     }
 
-    private List<City> cities;
+    private City city;
 
-    public UpdateCitiesViewBus(List<City> cities) {
-        this.cities =cities;
+    public UpdateCitiesViewBus(City city) {
+        this.city =city;
     }
 
 

@@ -236,7 +236,9 @@ public class NewSearchActivity extends AppCompatActivity {
 
     @Subscribe
     public void getCities(UpdateCitiesViewBus updateCitiesViewBus) {
-        cities = updateCitiesViewBus.getCities();
+        List<City> citys = new ArrayList<>();
+        citys.add(updateCitiesViewBus.getcity());
+        cities = citys;
         newSearchView.setCities(cities);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < cities.size(); i++) {
