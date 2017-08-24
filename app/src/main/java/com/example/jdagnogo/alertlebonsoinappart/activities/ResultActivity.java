@@ -27,6 +27,7 @@ import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.GetLastAppartJob;
 import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Parser;
+import com.example.jdagnogo.alertlebonsoinappart.utils.TransitionUtils;
 import com.veinhorn.scrollgalleryview.ScrollGalleryView;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -78,7 +79,7 @@ public class ResultActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupWindowAnimations();
+        TransitionUtils.doTranstion(getWindow());
         setContentView(R.layout.activity_result);
         ButterKnife.bind(this);
         progressBar.setVisibility(View.VISIBLE);
@@ -225,8 +226,4 @@ public class ResultActivity extends FragmentActivity {
         }
     }
 
-    private void setupWindowAnimations() {
-        Explode anim = (Explode) TransitionInflater.from(this).inflateTransition(R.transition.activity_slide);
-        getWindow().setExitTransition(anim);
-    }
 }

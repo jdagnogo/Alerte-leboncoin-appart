@@ -34,6 +34,7 @@ import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateCitiesV
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateSwipeViewBus;
 import com.example.jdagnogo.alertlebonsoinappart.utils.AddCitiesDialog;
 import com.example.jdagnogo.alertlebonsoinappart.utils.MinMaxAlertDialog;
+import com.example.jdagnogo.alertlebonsoinappart.utils.TransitionUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -80,7 +81,8 @@ public class NewSearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupWindowAnimations();
+        TransitionUtils.doTranstion(getWindow());
+
         setContentView(R.layout.activity_new_search);
         ButterKnife.bind(this);
         GlobalBus.getBus().register(this);
@@ -251,8 +253,4 @@ public class NewSearchActivity extends AppCompatActivity {
         addCitiesText.setText(sb);
     }
 
-    private void setupWindowAnimations() {
-        Explode anim = (Explode) TransitionInflater.from(this).inflateTransition(R.transition.activity_slide);
-        getWindow().setExitTransition(anim);
-    }
 }

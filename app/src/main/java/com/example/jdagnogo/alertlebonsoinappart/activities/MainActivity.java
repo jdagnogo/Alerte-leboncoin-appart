@@ -9,6 +9,8 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,6 +23,7 @@ import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.DeleteSearchBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
+import com.example.jdagnogo.alertlebonsoinappart.utils.TransitionUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -73,7 +76,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupWindowAnimations();
+        TransitionUtils.doTranstion(getWindow());
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         GlobalBus.getBus().register(this);
@@ -130,8 +133,5 @@ public class MainActivity extends Activity {
         getSearchesFromDB();
         initRecycler();
     }
-    private void setupWindowAnimations() {
-        Explode anim = (Explode) TransitionInflater.from(this).inflateTransition(R.transition.activity_slide);
-        getWindow().setExitTransition(anim);
-    }
+
 }
