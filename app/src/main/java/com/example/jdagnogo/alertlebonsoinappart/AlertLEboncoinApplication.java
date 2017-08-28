@@ -18,6 +18,7 @@ import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import jonathanfinerty.once.Once;
 
 public class AlertLEboncoinApplication extends Application {
     private static Context context;
@@ -31,6 +32,7 @@ public class AlertLEboncoinApplication extends Application {
         super.onCreate();
         instance = this;
         context = this;
+        Once.initialise(this);
         ViewTarget.setTagId(R.id.glide_tag);
         JobManager.create(this).addJobCreator(new DemoJobCreator());
 

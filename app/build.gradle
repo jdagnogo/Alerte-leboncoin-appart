@@ -75,4 +75,10 @@ dependencies {
     //thumbnail
     compile 'com.veinhorn.scrollgalleryview:library:1.0.5'
 
+    //Taptarget
+    compile 'com.getkeepsafe.taptargetview:taptargetview:1.9.1'
+
+    //Once
+    compile 'com.jonathanfinerty.once:once:1.2.2'
+
 }

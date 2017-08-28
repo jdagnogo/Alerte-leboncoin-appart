@@ -29,4 +29,8 @@
     <string name="surface_between"><![CDATA[< Surface   <]]></string>
     <string name="nbroom_between"><![CDATA[< nb pièces <]]></string>
     <string name="key_word">Mots clés</string>
+    <string name="titre_newsearch_tuto">Ajouter une recherche</string>
+    <string name="sub_newsearch_tuto">Cliquez ici pour commencer une nouvelle recherche</string>
+    <string name="titre_alarm_tuto">Lancer le système de notification</string>
+    <string name="sub_alarm_tuto">Chaque 15 min, l\'application va récupérer les dernières annonces et vous prévenir via une notification si une nouvelle offre est disponible</string>
 </resources>

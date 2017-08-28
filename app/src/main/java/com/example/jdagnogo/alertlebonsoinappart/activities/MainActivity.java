@@ -8,10 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Explode;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -23,6 +19,7 @@ import com.example.jdagnogo.alertlebonsoinappart.models.realm.SearchRealm;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.DeleteSearchBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.GlobalBus;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
+import com.example.jdagnogo.alertlebonsoinappart.utils.TapViewUtils;
 import com.example.jdagnogo.alertlebonsoinappart.utils.TransitionUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -48,6 +45,8 @@ public class MainActivity extends Activity {
     private Realm realm;
     @Bind(R.id.no_search)
     LinearLayout noSearch;
+    @Bind(R.id.new_research)
+    FloatingActionButton newResearch;
 
     @Override
     protected void onResume() {
@@ -55,6 +54,8 @@ public class MainActivity extends Activity {
 
         getSearchesFromDB();
         initRecycler();
+        TapViewUtils tapViewUtils = new TapViewUtils(this, getString(R.string.titre_newsearch_tuto), getString(R.string.sub_newsearch_tuto), findViewById(R.id.new_research));
+        tapViewUtils.doAnimation();
     }
 
     private void getSearchesFromDB() {
@@ -70,8 +71,6 @@ public class MainActivity extends Activity {
         realm.close();
     }
 
-    @Bind(R.id.new_research)
-    FloatingActionButton newResearch;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,7 +87,7 @@ public class MainActivity extends Activity {
     public void setOnNewResearchClick() {
         Intent intent = new Intent(this, NewSearchActivity.class);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-        startActivity(intent,options.toBundle());
+        startActivity(intent, options.toBundle());
     }
 
     private void initRecycler() {
@@ -100,9 +99,9 @@ public class MainActivity extends Activity {
         adapter.setData(searches);
         adapter.notifyDataSetChanged();
 
-        if (0==searches.size()){
+        if (0 == searches.size()) {
             noSearch.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             noSearch.setVisibility(View.GONE);
         }
     }

@@ -16,6 +16,8 @@ An android app that sends you a notification when new appartments are available.
   * jsoup
   * realm
   * glide
+  * TapTargetView
+  * Once
 
 -----------------------------------------------------------------------------------------------------------------------------
 

@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -72,33 +71,38 @@ public class Parser {
 
 
         String surface = allInformation.get(5).toString();
-        if(0<surface.indexOf("<su") && 0<surface.indexOf("\">")){
+        if (0 < surface.indexOf("<su") && 0 < surface.indexOf("\">")) {
             surface = surface.substring(surface.indexOf("\">") + 2, surface.indexOf("<su"));
             appartDetails.setSurface(String.format("%s²", surface));
-        }else {
+        } else {
             appartDetails.setSurface("???");
         }
-
-
-//// TODO: 17/08/2017 check if it contains images
-        String allImagesString = document.getElementsByTag("script").get(11).toString();
-        Pattern pattern = Pattern.compile("(\\//)(.*?)(\\.jpg)");
-        Matcher matcher = pattern.matcher(allImagesString);
         List<String> listMatches = new ArrayList<String>();
 
-        while (matcher.find()) {
-            String group = matcher.group(2);
-            if (group.contains("ad-large")) {
-                listMatches.add(String.format("http:%s.jpg", group));
-            }
+//// TODO: 17/08/2017 check if it contains images
+        if (document.getElementsByTag("script") != null) {
+            for (int i = 0; i < document.getElementsByTag("script").size(); i++) {
+                String allImagesString = document.getElementsByTag("script").get(i).toString();
+                Pattern pattern = Pattern.compile("(\\//)(.*?)(\\.jpg)");
+                Matcher matcher = pattern.matcher(allImagesString);
 
+
+                while (matcher.find()) {
+                    String group = matcher.group(2);
+                    if (group.contains("ad-large")) {
+                        listMatches.add(String.format("http:%s.jpg", group));
+                    }
+
+                }
+            }
         }
-        if (listMatches.isEmpty()){
-            if (null!= document.getElementsByClass("lazyload"))
-            listMatches.add("http:"+document.getElementsByClass("lazyload").get(0).attr("data-imgsrc"));
+        if (listMatches.isEmpty()) {
+            if (null != document.getElementsByClass("lazyload")) {
+                listMatches.add("http:" + document.getElementsByClass("lazyload").get(0).attr("data-imgsrc"));
+
+            }
         }
         appartDetails.setImgsUrl(listMatches);
-
         return appartDetails;
     }
 }

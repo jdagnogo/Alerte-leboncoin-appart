@@ -1,13 +1,10 @@
 package com.example.jdagnogo.alertlebonsoinappart.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Explode;
-import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -27,14 +24,13 @@ import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.GetLastAppartJob;
 import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Parser;
+import com.example.jdagnogo.alertlebonsoinappart.utils.TapViewUtils;
 import com.example.jdagnogo.alertlebonsoinappart.utils.TransitionUtils;
-import com.veinhorn.scrollgalleryview.ScrollGalleryView;
 
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -217,6 +213,8 @@ public class ResultActivity extends FragmentActivity {
             initRecycler();
             noResult.setVisibility(View.GONE);
             alarm.setVisibility(View.VISIBLE);
+            TapViewUtils tapViewUtils = new TapViewUtils(this, getString(R.string.titre_alarm_tuto), getString(R.string.sub_alarm_tuto), findViewById(R.id.alarm));
+            tapViewUtils.doAnimation();
             hideOrDisplayAlarm();
             //showAppartDetails();
 
