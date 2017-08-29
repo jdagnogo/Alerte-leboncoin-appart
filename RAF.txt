@@ -1,14 +1,10 @@
 ﻿Reste à faire avant de faire la pub:
 
-- tuto début
 - crashlytics
-- une pop up pour dire aux gens de m aimer xD (a la fin du tuto ?)
-- save state (new search activity)
 - site internet
-- animations et transition (ca lagge trop !)
+- enum des villes
+- vidéo présentation youtube
 
 ------------------------------------Pour après --------------------------------------
 
-
-- lenteur : retrofit dasn un thread ?
 - pub?
