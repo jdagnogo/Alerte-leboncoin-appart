@@ -30,7 +30,13 @@ public class Parser {
         Elements ensemble = document.getElementsByClass("list_item");
         List<Appart> apparts = new ArrayList<Appart>();
         if (ensemble.size() > 0) {
-            for (int i = 0; i < MAX_NB_APPART; i++) {
+            int nbAppart ;
+            if (ensemble.size()<MAX_NB_APPART){
+                nbAppart = ensemble.size();
+            }else {
+                nbAppart = MAX_NB_APPART;
+            }
+            for (int i = 0; i < nbAppart; i++) {
 
                 String title = ensemble.get(i).getElementsByClass(ITEM_INFO).get(0).getElementsByClass("item_title").get(0).text();
                 String imageUrl = "";
