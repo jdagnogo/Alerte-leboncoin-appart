@@ -39,6 +39,19 @@ public class RequestItems  implements Parcelable  {
     String keyWord;
     boolean urgente;
 
+    @Override
+    public String toString() {
+        return "RequestItems{" +
+                "\ncities=" + cities +
+                ", \nrent=" + rent +
+                ", \nsurface=" + surface +
+                ", \nnbRoom=" + nbRoom +
+                ", \ntype=" + type +
+                ", \nmeuble=" + meuble +
+                ", \nkeyWord='" + keyWord + '\'' +
+                ", \nurgente=" + urgente +
+                '}';
+    }
 
     public RequestItems() {
         this.cities = new ArrayList<>();

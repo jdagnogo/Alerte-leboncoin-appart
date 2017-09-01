@@ -47,10 +47,8 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.MyView
 
     @Override
     public void onBindViewHolder(ResearchAdapter.MyViewHolder holder, final int position) {
-        if (data.get(position).getTitle().isEmpty()) {
-            holder.title.setText("Aucun titre");
-        } else
-            holder.title.setText(data.get(position).getTitle());
+
+            holder.title.setText(data.get(position).getRequestItems().getCities().get(0).getCityName());
         String dateString = String.format("Dernière maj : %s",
                 hourFormatter.format(data.get(position).getMajDate()));
         holder.date.setText(dateString);

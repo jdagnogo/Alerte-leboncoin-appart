@@ -72,8 +72,6 @@ public class NewSearchActivity extends AppCompatActivity {
     FloatingActionButton addCitiesButton;
     @Bind(R.id.input_query)
     EditText query;
-    @Bind(R.id.input_name)
-    EditText name;
     SmoothCheckBox appart, house, meuble, nonMeuble;
     List<City> cities;
     private Search search;
@@ -91,14 +89,13 @@ public class NewSearchActivity extends AppCompatActivity {
         initCheckBoxes();
         if (getIntent() != null) {
             search = getIntent().getParcelableExtra(RESEARCH);
-            if (null!= search) {
-                name.setText(search.getTitle());
+            if (null != search) {
                 query.setText(search.getRequestItems().getKeyWord());
             }
             // etc ....
         }
-            newSearchView = new NewSearchView();
-            cities = new ArrayList<>();
+        newSearchView = new NewSearchView();
+        cities = new ArrayList<>();
 
 
     }
@@ -138,17 +135,16 @@ public class NewSearchActivity extends AppCompatActivity {
         } else {
             newSearchView.setMeuble(Meuble.MEUBLE);
         }
-        newSearchView.setName(name.getText().toString());
+
         newSearchView.setQuery(query.getText().toString());
         Log.d(TAG, "résultat : " + newSearchView);
 
         Intent intent = new Intent(this, ResultActivity.class);
         Bundle args = new Bundle();
         args.putParcelable(NEW_RESEARCH, createRequestItem());
-        args.putString(NAME_RESEARCH,newSearchView.getName());
         intent.putExtras(args);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-        startActivity(intent,options.toBundle());
+        startActivity(intent, options.toBundle());
     }
 
     private RequestItems createRequestItem() {
@@ -180,8 +176,11 @@ public class NewSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RentSwipeItem rentSwipeItem = new RentSwipeItem();
+
+                int min = newSearchView.getRent().getPostitonMin();
+                int max = newSearchView.getRent().getPositionMax();
                 MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(rentSwipeItem.createBeans(), NewSearchActivity.this, SwipeItemEnum.RENT, newSearchView.getRent(),
-                        rentSwipeItem.getPostitonMin(), rentSwipeItem.getPositionMax());
+                        min, max);
                 minMaxAlertDialog.createDialog();
             }
         });
@@ -191,8 +190,10 @@ public class NewSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SurfaceSwipeItem surfaceSwipeItem = new SurfaceSwipeItem();
+                int min = newSearchView.getSurface().getPostitonMin();
+                int max = newSearchView.getSurface().getPositionMax();
                 MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(surfaceSwipeItem.createBeans(), NewSearchActivity.this, SwipeItemEnum.SURFACE, newSearchView.getSurface()
-                        , surfaceSwipeItem.getPostitonMin(), surfaceSwipeItem.getPositionMax());
+                        , min, max);
                 minMaxAlertDialog.createDialog();
             }
         });
@@ -202,8 +203,10 @@ public class NewSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 NbRoomSwipeItem nbRoomSwipeItem = new NbRoomSwipeItem();
+                int min = newSearchView.getNbRoom().getPostitonMin();
+                int max = newSearchView.getNbRoom().getPositionMax();
                 MinMaxAlertDialog minMaxAlertDialog = new MinMaxAlertDialog(nbRoomSwipeItem.createBeans(), NewSearchActivity.this, SwipeItemEnum.NB_ROOM, newSearchView.getNbRoom(),
-                        nbRoomSwipeItem.getPostitonMin(), nbRoomSwipeItem.getPositionMax());
+                        min, max);
                 minMaxAlertDialog.createDialog();
             }
         });

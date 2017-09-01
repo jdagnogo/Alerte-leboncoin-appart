@@ -109,7 +109,6 @@ public class GetLastAppartJob extends Job {
                         Intent intent = new Intent(getContext(), ResultActivity.class);
                         Bundle args = new Bundle();
                         args.putParcelable(NEW_RESEARCH, resultRealm.get(0).getRequestItemsRealm().getRequestItem());
-                        args.putString(NAME_RESEARCH,resultRealm.get(0).getSearch().getTitle());
                         intent.putExtras(args);
                         PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
 
@@ -127,7 +126,6 @@ public class GetLastAppartJob extends Job {
                         notificationManager.notify(0, n);
 
                        final SearchRealm searchRealm = new SearchRealm(resultRealm.get(0).getId(),
-                                resultRealm.get(0).getTitle(),
                                 resultRealm.get(0).getRequestItemsRealm()
                                 ,new Date(), new AppartRealm(appartsFromHtml.get(0)));
                         searchRealm.setJobID(resultRealm.get(0).getJobID());

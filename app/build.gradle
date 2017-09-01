@@ -2,6 +2,19 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: "net.ltgt.apt"
 apply plugin: 'realm-android'
+apply plugin: 'io.fabric'
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url 'https://maven.google.com' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha1'
+    }
+}
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -25,6 +38,7 @@ repositories {
     maven {url "https://clojars.org/repo/"}
     maven { url "https://jitpack.io" }
     maven { url "https://github.com/uPhyca/stetho-realm/raw/master/maven-repo" }
+    maven { url 'https://maven.fabric.io/public' }
 
 }
 dependencies {
@@ -80,5 +94,10 @@ dependencies {
 
     //Once
     compile 'com.jonathanfinerty.once:once:1.2.2'
+
+    //crashitics
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
 
 }

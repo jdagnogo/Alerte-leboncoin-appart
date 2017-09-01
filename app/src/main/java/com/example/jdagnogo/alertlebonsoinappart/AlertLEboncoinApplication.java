@@ -15,6 +15,8 @@ import com.facebook.stetho.Stetho;
 import com.facebook.stetho.inspector.protocol.ChromeDevtoolsDomain;
 import com.facebook.stetho.rhino.JsRuntimeReplFactoryBuilder;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -31,6 +33,7 @@ public class AlertLEboncoinApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Fabric.with(this, new Crashlytics());
         context = this;
         Once.initialise(this);
         ViewTarget.setTagId(R.id.glide_tag);

@@ -1,9 +1,7 @@
-﻿Reste à faire avant de faire la pub:
+﻿﻿Reste à faire avant de faire la pub:
 
-- crashlytics
+
 - site internet
-- enum des villes
-- vidéo présentation youtube
 
 ------------------------------------Pour après --------------------------------------
 

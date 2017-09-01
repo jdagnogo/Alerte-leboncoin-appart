@@ -10,7 +10,6 @@ import io.realm.annotations.PrimaryKey;
 public class SearchRealm extends RealmObject {
     @PrimaryKey
     private int id;
-    private String title;
     private RequestItemsRealm requestItems;
     private Date majDate;
     private AppartRealm lastAppartRealm;
@@ -26,13 +25,11 @@ public class SearchRealm extends RealmObject {
         search.setLastAppartRealm(lastAppartRealm.getAppart());
         search.setMajDate(majDate);
         search.setRequestItems(requestItems.getRequestItem());
-        search.setTitle(title);
         return search;
     }
 
-    public SearchRealm(int id, String title, RequestItemsRealm requestItems, Date majDate, AppartRealm lastAppartRealm) {
+    public SearchRealm(int id, RequestItemsRealm requestItems, Date majDate, AppartRealm lastAppartRealm) {
         this.id = id;
-        this.title = title;
         this.requestItems = requestItems;
         this.majDate = majDate;
         this.lastAppartRealm = lastAppartRealm;
@@ -62,20 +59,13 @@ public class SearchRealm extends RealmObject {
         this.requestItems = requestItems;
     }
 
-    public SearchRealm(String title, Date majDate, AppartRealm lastAppartRealm, RequestItemsRealm requestItemsRealm) {
-        this.title = title;
+    public SearchRealm( Date majDate, AppartRealm lastAppartRealm, RequestItemsRealm requestItemsRealm) {
+
         this.requestItems = requestItemsRealm;
         this.majDate = majDate;
         this.lastAppartRealm = lastAppartRealm;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
 
     public Date getMajDate() {

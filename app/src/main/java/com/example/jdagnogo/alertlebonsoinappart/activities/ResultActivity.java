@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
+import com.crashlytics.android.answers.SearchEvent;
 import com.example.jdagnogo.alertlebonsoinappart.AlertLEboncoinApplication;
 import com.example.jdagnogo.alertlebonsoinappart.R;
 import com.example.jdagnogo.alertlebonsoinappart.adapter.ResultResearchAppartAdapter;
@@ -23,6 +26,7 @@ import com.example.jdagnogo.alertlebonsoinappart.services.eventbus.UpdateApparts
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.DemoJobCreator;
 import com.example.jdagnogo.alertlebonsoinappart.services.jobs.GetLastAppartJob;
 import com.example.jdagnogo.alertlebonsoinappart.services.retrofit.RetrofitNetworkInterface;
+import com.example.jdagnogo.alertlebonsoinappart.utils.Constants;
 import com.example.jdagnogo.alertlebonsoinappart.utils.Parser;
 import com.example.jdagnogo.alertlebonsoinappart.utils.TapViewUtils;
 import com.example.jdagnogo.alertlebonsoinappart.utils.TransitionUtils;
@@ -75,6 +79,8 @@ public class ResultActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         TransitionUtils.doTranstion(getWindow());
         setContentView(R.layout.activity_result);
         ButterKnife.bind(this);
@@ -88,11 +94,14 @@ public class ResultActivity extends FragmentActivity {
 
         if (getIntent() != null) {
             requestItems = getIntent().getParcelableExtra(NEW_RESEARCH);
-            searchName = getIntent().getExtras().getString(NAME_RESEARCH);
+
 
             ((AlertLEboncoinApplication) getApplication()).getNetworkComponent().inject(ResultActivity.this);
             map = requestItems.createHashMap();
+            // report to crashlytics
 
+            Answers.getInstance().logSearch(new SearchEvent()
+                    .putQuery(requestItems.toString()));
             requestItemsRealm = new RequestItemsRealm(requestItems);
             getAppart(map);
 
@@ -120,7 +129,7 @@ public class ResultActivity extends FragmentActivity {
 
     @OnClick(R.id.alarm)
     public void setOnAlarmClick() {
-        SearchRealm searchRealm = new SearchRealm(searchName, new Date(), new AppartRealm(appart.get(0)), requestItemsRealm);
+        SearchRealm searchRealm = new SearchRealm( new Date(), new AppartRealm(appart.get(0)), requestItemsRealm);
         //searchRealm.setJobID(jobId);
         addSearchToDb(searchRealm);
         Number nextID = (realm.where(SearchRealm.class).max("id"));
@@ -132,6 +141,9 @@ public class ResultActivity extends FragmentActivity {
         jobId = demoSyncJob.scheduleJob(id);
         searchRealm.setJobID(jobId);
         updateSearchInDb(searchRealm);
+        Answers.getInstance().logCustom(new CustomEvent("Alerte demandé").putCustomAttribute(Constants.NEW_RESEARCH,
+                searchRealm.getRequestItemsRealm().getRequestItem().toString()));
+
         alarm.setVisibility(View.GONE);
         realm.close();
     }

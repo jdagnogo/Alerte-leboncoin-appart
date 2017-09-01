@@ -8,8 +8,16 @@ public enum City {
     BORDEAUX_33000("Bordeaux centre","Bordeaux ",  "33000"),
     BORDEAUX_33800("Bordeaux ( 33800 )","Bordeaux ",  "33800"),
     TALENCE_33400("Talence", "Talence ", "33400"),
-    //BEGLE("Bègles",  33130),
-    MERIGNAC_33700("Mérignac", "Mérignac ", "33700"),
+    BRUGES_33520("Bruges", "Bruges ", "33520"),
+    LORMONT_33310("Lormont", "Lormont ", "33310"),
+    FLORAC_33270("Florac", "Florac ", "33270"),
+    EYSINES_33220("Eysines", "Eysines ", "33320"),
+
+    BLANQUEFORT_33290("Blanquefort", "Blanquefort ", "33290"),
+    CENON_33150("Cenon", "Cenon ", "33150"),
+    //LEHAILLAN_33185("LeHaillan", "Le%20Haillan ", "33185"),
+
+    //MERIGNAC_33700("Mérignac", "M%E9rignac ", "33700"),
     PESSAC_33600("Pessac", "Pessac ", "33600"),
     BORDEAUX_0("Bordeaux (Toute la ville) ","Bordeaux",  DEFAULT_CODE_POSTAL), // 0 means don t put it in the request
     //TOULOUSE_ALL("Toulouse (Toute la ville)",  0),

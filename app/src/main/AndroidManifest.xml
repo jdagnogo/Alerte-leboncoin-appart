@@ -33,6 +33,10 @@
         <activity android:name=".activities.NewSearchActivity">
 
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4a6b6987d026a7b7318429694ed37d841db6282c"
+            />
     </application>
 
 </manifest>
