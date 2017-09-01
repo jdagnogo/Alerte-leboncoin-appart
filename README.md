@@ -2,7 +2,16 @@
 
 An android app that sends you a notification when new appartments are available.
 Feel free to send me suggestion or amelioration  : jdagnogo11@gmail.com
+
 -----------------------------------------------------------------------------------------------------------------------------
+
+# Presentation : 
+
+This application allow you to :
+  * search appart with all critera available in LeBoncoin's app.
+  * monitoring a specific search : each 15 min, the app will check if new appart are available and then send you back a notification.
+  * see all images for a appartment
+  * redirection into LebonCoin web site or app (I strongly recommand to dowload their app and use it with mine)      https://play.google.com/store/apps/details?id=fr.leboncoin&hl=fr 
 
 # Techno used : 
 
