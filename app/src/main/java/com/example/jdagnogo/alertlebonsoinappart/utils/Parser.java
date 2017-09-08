@@ -19,7 +19,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 public class Parser {
-    private final static int MAX_NB_APPART = 10;
+    private final static int MAX_NB_APPART = 20;
     private final static String ITEM_IMAGE = "item_image";
     private final static String ITEM_INFO = "item_infos";
     private final static String ITEM_ABSOLUTE = "item_absolute";

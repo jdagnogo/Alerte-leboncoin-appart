@@ -133,7 +133,11 @@ public class NewSearchActivity extends AppCompatActivity {
                 newSearchView.setMeuble(Meuble.NON_MEUBLE);
             }
         } else {
-            newSearchView.setMeuble(Meuble.MEUBLE);
+            if (meuble.isChecked()) {
+                newSearchView.setMeuble(Meuble.NON_MEUBLE);
+            } else {
+                newSearchView.setMeuble(Meuble.MEUBLE_DEFAULT);
+            }
         }
 
         newSearchView.setQuery(query.getText().toString());

@@ -2,7 +2,7 @@ package com.example.jdagnogo.alertlebonsoinappart.enums;
 
 public enum Meuble {
 
-    MEUBLE("Meublé",1),
+    MEUBLE("Meublé et non meublé",1),
     MEUBLE_DEFAULT("Meublé",0),
     NON_MEUBLE("Non meublé", 2);
 

@@ -11,7 +11,7 @@ public enum City {
     BRUGES_33520("Bruges", "Bruges ", "33520"),
     LORMONT_33310("Lormont", "Lormont ", "33310"),
     FLORAC_33270("Florac", "Florac ", "33270"),
-    EYSINES_33220("Eysines", "Eysines ", "33320"),
+    EYSINES_33320("Eysines", "Eysines ", "33320"),
 
     BLANQUEFORT_33290("Blanquefort", "Blanquefort ", "33290"),
     CENON_33150("Cenon", "Cenon ", "33150"),

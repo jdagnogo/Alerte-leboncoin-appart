@@ -101,7 +101,7 @@ public class ResultActivity extends FragmentActivity {
             // report to crashlytics
 
             Answers.getInstance().logSearch(new SearchEvent()
-                    .putQuery(requestItems.toString()));
+                    .putQuery(requestItems.getCities().get(0).getCityName()));
             requestItemsRealm = new RequestItemsRealm(requestItems);
             getAppart(map);
 
@@ -142,7 +142,7 @@ public class ResultActivity extends FragmentActivity {
         searchRealm.setJobID(jobId);
         updateSearchInDb(searchRealm);
         Answers.getInstance().logCustom(new CustomEvent("Alerte demandé").putCustomAttribute(Constants.NEW_RESEARCH,
-                searchRealm.getRequestItemsRealm().getRequestItem().toString()));
+                searchRealm.getRequestItemsRealm().getRequestItem().getCities().get(0).getCityName()));
 
         alarm.setVisibility(View.GONE);
         realm.close();

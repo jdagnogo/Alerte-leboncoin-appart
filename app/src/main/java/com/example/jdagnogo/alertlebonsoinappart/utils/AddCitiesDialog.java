@@ -1,11 +1,13 @@
 package com.example.jdagnogo.alertlebonsoinappart.utils;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.jdagnogo.alertlebonsoinappart.R;
@@ -57,6 +59,23 @@ public class AddCitiesDialog {
                     Toast.makeText(activity, "La ville choisie n'est pas reconnue",
                             Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        ImageView info = (ImageView)dialogView.findViewById(R.id.info) ;
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                dialogBuilder.setTitle("Liste des villes disponible");
+                final CharSequence[] cities = getAllCities().toArray(new String[getAllCities().size()]);
+                dialogBuilder.setItems(cities, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                    }
+                });
+                //Create alert dialog object via builder
+                AlertDialog alertDialogObject = dialogBuilder.create();
+                //Show the dialog
+                alertDialogObject.show();
             }
         });
         alertDialog.show();

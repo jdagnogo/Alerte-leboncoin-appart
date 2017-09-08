@@ -82,7 +82,7 @@ public class RequestItems  implements Parcelable  {
         maps.put(LOCATION_KEY,c);
 
         //meuble
-        if (!meuble.getMeubleName().equals(Meuble.MEUBLE_DEFAULT)) {
+        if (!meuble.getMeubleName().equals(Meuble.MEUBLE_DEFAULT.getMeubleName())) {
             maps.put(MEUBLE_KEY, String.valueOf(meuble.getValue()));
         }
         // Type
