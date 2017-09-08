@@ -5,8 +5,11 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.DEFAULT_
 
 public enum City {
 
-    BORDEAUX_33000("Bordeaux centre","Bordeaux ",  "33000"),
+    BORDEAUX_33000("Bordeaux","Bordeaux ",  "33000"),
+    BORDEAUX_33200("Bordeaux ( 33200 )","Bordeaux ",  "33200"),
+    BORDEAUX_33300("Bordeaux ( 33300 )","Bordeaux ",  "33300"),
     BORDEAUX_33800("Bordeaux ( 33800 )","Bordeaux ",  "33800"),
+    BORDEAUX_33100("Bordeaux ( 33100 )","Bordeaux ",  "33100"),
     TALENCE_33400("Talence", "Talence ", "33400"),
     BRUGES_33520("Bruges", "Bruges ", "33520"),
     LORMONT_33310("Lormont", "Lormont ", "33310"),

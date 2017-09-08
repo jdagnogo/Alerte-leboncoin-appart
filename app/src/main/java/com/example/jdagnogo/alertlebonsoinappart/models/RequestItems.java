@@ -86,7 +86,7 @@ public class RequestItems  implements Parcelable  {
             maps.put(MEUBLE_KEY, String.valueOf(meuble.getValue()));
         }
         // Type
-        if (!type.getTypeName().equals(Type.APPARTEMENT_DEFAULT)) {
+        if (!type.getTypeName().equals(Type.APPARTEMENT_DEFAULT.getTypeName())) {
             maps.put(TYPE_KEY, String.valueOf(type.getValue()));
         }
         // Rent

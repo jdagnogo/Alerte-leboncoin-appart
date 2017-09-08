@@ -50,7 +50,7 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESE
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.RESEARCH;
 
 public class NewSearchActivity extends AppCompatActivity {
-    private final String TAG = NewSearchActivity.this.getPackageName();
+    private final String TAG = "NewSearchActivity";
     @Bind(R.id.rent_min)
     TextView rentMin;
     @Bind(R.id.rent_max)

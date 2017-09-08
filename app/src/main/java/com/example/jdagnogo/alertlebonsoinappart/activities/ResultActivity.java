@@ -56,7 +56,7 @@ import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NAME_RES
 import static com.example.jdagnogo.alertlebonsoinappart.utils.Constants.NEW_RESEARCH;
 
 public class ResultActivity extends FragmentActivity {
-    private final static String TAG = ResultActivity.class.getCanonicalName();
+    private final static String TAG = "ResultActivity";
 
     private List<Appart> appart;
     private RecyclerView recycleListView;
