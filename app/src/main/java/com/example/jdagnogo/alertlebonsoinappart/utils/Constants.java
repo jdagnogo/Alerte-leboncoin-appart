@@ -38,6 +38,8 @@ public class Constants {
     //...........// Activities   //....................//
 
     public final static String NEW_RESEARCH = "NEW_RESEARCH";
+    public final static String RATING = "RATING";
+    public final static String COMMENT = "COMMENT";
     public final static String APPART = "APPART";
     public final static String RESEARCH = "RESEARCH";
     public final static String NAME_RESEARCH = "NAME_RESEARCH";

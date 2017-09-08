@@ -100,4 +100,7 @@ dependencies {
         transitive = true;
     }
 
+    //rating
+    compile 'com.stepstone.apprating:app-rating:2.0.0'
+
 }
